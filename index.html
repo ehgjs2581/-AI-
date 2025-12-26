@@ -14,10 +14,18 @@
         @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
         @keyframes gradientBG { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
         @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        @keyframes glow { 0%,100%{box-shadow:0 0 20px rgba(79,70,229,0.3)} 50%{box-shadow:0 0 40px rgba(79,70,229,0.6)} }
+        @keyframes slideIn { from{opacity:0;transform:translateX(-30px)} to{opacity:1;transform:translateX(0)} }
+        @keyframes scaleIn { from{opacity:0;transform:scale(0.8)} to{opacity:1;transform:scale(1)} }
+        @keyframes rotateIn { from{opacity:0;transform:rotate(-10deg) scale(0.9)} to{opacity:1;transform:rotate(0) scale(1)} }
+        @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+        @keyframes borderGlow { 0%,100%{border-color:rgba(79,70,229,0.3)} 50%{border-color:rgba(79,70,229,0.8)} }
+        @keyframes iconPulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.15);opacity:0.8} }
+        @keyframes ripple { 0%{transform:scale(1);opacity:0.4} 100%{transform:scale(2.5);opacity:0} }
         
         .animate { opacity:0; transform:translateY(25px); transition:all 0.7s ease; }
         .animate.visible { opacity:1; transform:translateY(0); }
-        .delay-1{transition-delay:0.1s} .delay-2{transition-delay:0.2s} .delay-3{transition-delay:0.3s}
+        .delay-1{transition-delay:0.1s} .delay-2{transition-delay:0.2s} .delay-3{transition-delay:0.3s} .delay-4{transition-delay:0.4s}
 
         /* 히어로 */
         .hero {
@@ -30,14 +38,7 @@
             padding: 80px 24px;
             position: relative;
         }
-        .hero-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
+        .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
         .hero-text { color: #fff; }
         .brand { margin-bottom: 20px; }
         .brand-en { font-family:'Poppins',sans-serif; font-size:44px; font-weight:900; letter-spacing:3px; }
@@ -84,12 +85,188 @@
         .container { max-width: 1100px; margin: 0 auto; }
         .sec-head { text-align:center; margin-bottom:60px; }
         .sec-label { display:inline-block; padding:8px 18px; background:linear-gradient(135deg,rgba(79,70,229,0.1),rgba(6,182,212,0.1)); border-radius:50px; font-size:13px; font-weight:700; color:#4F46E5; letter-spacing:1px; margin-bottom:14px; }
-        .sec-title { font-size:36px; font-weight:800; color:#111827; margin-bottom:16px; line-height:1.35; }
+        .sec-title { font-size:36px; font-weight:800; color:#111827; margin-bottom:16px; line-height:1.35; word-break:keep-all; }
         .sec-title .gr { background:linear-gradient(135deg,#4F46E5,#06B6D4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
         .sec-desc { font-size:16px; color:#6B7280; max-width:500px; margin:0 auto; }
 
+        /* 후킹 섹션 - 프리미엄 모션그래픽 스타일 */
+        .hooking { 
+            background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%); 
+            padding: 120px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hooking::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(79,70,229,0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(236,72,153,0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(6,182,212,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hook-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+        .hook-card { 
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px; 
+            padding: 36px 28px; 
+            position: relative; 
+            overflow: hidden; 
+            transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .hook-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        }
+        .hook-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(79,70,229,0.1) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .hook-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(79,70,229,0.3);
+            box-shadow: 0 30px 80px rgba(79,70,229,0.2);
+        }
+        .hook-card:hover::after { opacity: 1; }
+        
+        .hook-bottom {
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+        .hook-card.highlight { 
+            background: linear-gradient(135deg, rgba(79,70,229,0.2), rgba(236,72,153,0.2));
+            border-color: rgba(255,255,255,0.15);
+            text-align: center;
+            padding: 48px 40px;
+            border-radius: 24px;
+        }
+        
+        .hook-icon-wrap {
+            position: relative;
+            width: 72px;
+            height: 72px;
+            margin-bottom: 24px;
+        }
+        .hook-card.highlight .hook-icon-wrap {
+            margin: 0 auto 28px;
+        }
+        .hook-icon-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4F46E5, #EC4899);
+            opacity: 0.2;
+            animation: iconPulse 3s ease-in-out infinite;
+        }
+        .hook-icon-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4F46E5, #06B6D4);
+            animation: ripple 2s ease-out infinite;
+        }
+        .hook-icon { 
+            position: relative;
+            z-index: 1;
+            width: 72px; 
+            height: 72px; 
+            border-radius: 50%;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 32px;
+            background: linear-gradient(135deg, #4F46E5, #7C3AED);
+            box-shadow: 0 16px 32px rgba(79,70,229,0.4);
+        }
+        .hook-card:nth-child(2) .hook-icon { background: linear-gradient(135deg, #06B6D4, #3B82F6); box-shadow: 0 16px 32px rgba(6,182,212,0.4); }
+        .hook-card:nth-child(3) .hook-icon { background: linear-gradient(135deg, #10B981, #059669); box-shadow: 0 16px 32px rgba(16,185,129,0.4); }
+        .hook-card.highlight .hook-icon { 
+            background: linear-gradient(135deg, #EC4899, #F59E0B); 
+            box-shadow: 0 16px 32px rgba(236,72,153,0.4);
+            width: 80px;
+            height: 80px;
+            font-size: 36px;
+        }
+        .hook-card.highlight .hook-icon-wrap {
+            width: 80px;
+            height: 80px;
+        }
+        
+        .hook-stat { 
+            font-family: 'Poppins', sans-serif; 
+            font-size: 42px; 
+            font-weight: 800; 
+            background: linear-gradient(135deg, #fff, rgba(255,255,255,0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px; 
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+        .hook-title { 
+            font-size: 17px; 
+            font-weight: 700; 
+            color: #fff;
+            margin-bottom: 12px; 
+            line-height: 1.5;
+            letter-spacing: -0.3px;
+        }
+        .hook-desc { 
+            font-size: 13px; 
+            color: rgba(255,255,255,0.55);
+            line-height: 1.6;
+        }
+        .hook-note { 
+            font-size: 10px; 
+            color: rgba(255,255,255,0.3);
+            margin-top: 14px;
+        }
+        .hook-card.highlight .hook-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .hook-quote { 
+            font-size: 28px; 
+            font-weight: 800;
+            background: linear-gradient(135deg, #F59E0B, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
         /* 신뢰 지표 */
-        .trust { background:linear-gradient(180deg,#fff,#f9fafb); }
+        .trust { background:linear-gradient(180deg,#f9fafb,#fff); }
         .trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
         .trust-card { background:#fff; border-radius:20px; padding:36px 24px; text-align:center; border:1px solid #f3f4f6; box-shadow:0 4px 20px rgba(0,0,0,0.03); transition:all 0.35s; }
         .trust-card:hover { transform:translateY(-8px); box-shadow:0 20px 50px rgba(79,70,229,0.1); }
@@ -101,20 +278,15 @@
         .trust-num { font-family:'Poppins',sans-serif; font-size:40px; font-weight:800; background:linear-gradient(135deg,#4F46E5,#06B6D4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
         .trust-label { font-size:14px; font-weight:600; color:#4b5563; margin-top:4px; }
 
-        /* 문제 제기 */
-        .problem { background:#f9fafb; }
-        .prob-wrap { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
-        .prob-text h2 { font-size:34px; font-weight:800; line-height:1.4; color:#111827; margin-bottom:20px; }
-        .prob-text h2 .rose { color:#F43F5E; }
-        .prob-text > p { font-size:16px; color:#4b5563; margin-bottom:28px; line-height:1.8; }
-        .pain { display:flex; flex-direction:column; gap:12px; }
-        .pain-item { display:flex; align-items:center; gap:14px; padding:16px 20px; background:#fff; border-radius:14px; box-shadow:0 3px 15px rgba(0,0,0,0.04); transition:all 0.3s; }
-        .pain-item:hover { transform:translateX(6px); }
-        .pain-item .ic { width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#fee2e2,#fecaca); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
-        .pain-item span { font-size:14px; font-weight:600; color:#374151; }
-        .illust { background:#fff; border-radius:28px; padding:50px; text-align:center; box-shadow:0 15px 50px rgba(0,0,0,0.05); }
-        .illust-icon { font-size:90px; display:block; margin-bottom:20px; animation:bounce 2.5s ease-in-out infinite; }
-        .illust-text { font-size:17px; font-weight:700; color:#374151; }
+        /* AI 작동원리 */
+        .how-it-works { background:#f9fafb; }
+        .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; position:relative; }
+        .steps::before { content:''; position:absolute; top:50px; left:10%; right:10%; height:3px; background:linear-gradient(90deg,#4F46E5,#06B6D4); border-radius:2px; z-index:0; }
+        .step { background:#fff; border-radius:20px; padding:32px 24px; text-align:center; position:relative; z-index:1; box-shadow:0 4px 20px rgba(0,0,0,0.04); transition:all 0.3s; }
+        .step:hover { transform:translateY(-6px); box-shadow:0 15px 40px rgba(79,70,229,0.1); }
+        .step-num { width:50px; height:50px; margin:0 auto 16px; background:linear-gradient(135deg,#4F46E5,#764ba2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:20px; font-weight:800; color:#fff; }
+        .step h4 { font-size:17px; font-weight:700; color:#111827; margin-bottom:8px; }
+        .step p { font-size:13px; color:#6b7280; line-height:1.6; }
 
         /* 솔루션 */
         .solution { background:#fff; }
@@ -127,6 +299,24 @@
         .sol-icon.y { background:linear-gradient(135deg,#fef3c7,#fcd34d); }
         .sol-card h3 { font-size:19px; font-weight:800; color:#111827; margin-bottom:12px; }
         .sol-card p { font-size:14px; color:#6b7280; line-height:1.7; }
+
+        /* 후기 슬라이더 */
+        .reviews { background:#f9fafb; overflow:hidden; }
+        .review-slider { position:relative; max-width:700px; margin:0 auto; }
+        .review-track { display:flex; transition:transform 0.5s ease; }
+        .review-card { min-width:100%; padding:36px; background:#fff; border-radius:24px; border:1px solid #f3f4f6; box-shadow:0 4px 20px rgba(0,0,0,0.03); }
+        .review-content { font-size:15px; color:#374151; line-height:1.85; margin-bottom:20px; position:relative; padding-left:20px; }
+        .review-content::before { content:'"'; position:absolute; left:0; top:-8px; font-size:40px; color:#4F46E5; opacity:0.3; font-family:Georgia,serif; }
+        .review-author { display:flex; align-items:center; gap:12px; }
+        .review-avatar { width:46px; height:46px; border-radius:50%; background:linear-gradient(135deg,#667eea,#764ba2); display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px; font-weight:700; }
+        .review-info h5 { font-size:14px; font-weight:700; color:#111827; }
+        .review-info span { font-size:12px; color:#6b7280; }
+        .review-nav { display:flex; justify-content:center; gap:6px; margin-top:28px; flex-wrap:wrap; }
+        .review-dot { width:8px; height:8px; border-radius:50%; background:#e5e7eb; cursor:pointer; transition:all 0.3s; }
+        .review-dot.active { background:linear-gradient(135deg,#4F46E5,#764ba2); width:24px; border-radius:4px; }
+        .review-arrows { display:flex; justify-content:center; gap:12px; margin-top:16px; }
+        .review-arrow { width:40px; height:40px; border-radius:50%; background:#fff; border:1px solid #e5e7eb; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.3s; font-size:16px; }
+        .review-arrow:hover { background:#4F46E5; color:#fff; border-color:#4F46E5; }
 
         /* 비교 */
         .compare { background:linear-gradient(135deg,#667eea,#764ba2); padding:100px 24px; }
@@ -151,7 +341,7 @@
         .comp-col.after .ck { background:#d1fae5; color:#10b981; }
 
         /* 가격 */
-        .pricing { background:linear-gradient(180deg,#f9fafb,#fff); }
+        .pricing { background:linear-gradient(180deg,#fff,#f9fafb); }
         .price-card { max-width:440px; margin:0 auto; background:#fff; border-radius:28px; padding:48px 40px; text-align:center; box-shadow:0 20px 60px rgba(79,70,229,0.1); border:1px solid #f3f4f6; position:relative; overflow:hidden; }
         .price-card::before { content:''; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg,#4F46E5,#06B6D4); }
         .price-badge { display:inline-block; padding:8px 18px; background:linear-gradient(135deg,#F59E0B,#F97316); border-radius:50px; font-size:12px; font-weight:700; color:#fff; margin-bottom:24px; }
@@ -167,7 +357,7 @@
 
         /* CTA */
         .cta { background:linear-gradient(135deg,#667eea,#764ba2); text-align:center; padding:100px 24px; }
-   .cta h2 { font-size:34px; font-weight:800; color:#fff; margin-bottom:14px; word-break:keep-all; }
+        .cta h2 { font-size:34px; font-weight:800; color:#fff; margin-bottom:14px; word-break:keep-all; }
         .cta > .container > p { font-size:16px; color:rgba(255,255,255,0.85); margin-bottom:40px; }
         .contact-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; max-width:600px; margin:0 auto; }
         .contact-card { background:#fff; border-radius:20px; padding:32px 24px; box-shadow:0 15px 45px rgba(0,0,0,0.15); transition:all 0.3s; }
@@ -192,8 +382,9 @@
             .hero-btns { justify-content:center; }
             .float-card { display:none; }
             .trust-grid { grid-template-columns:repeat(2,1fr); }
-            .prob-wrap { grid-template-columns:1fr; }
-            .prob-visual { order:-1; }
+            .hook-grid { grid-template-columns:1fr; }
+            .steps { grid-template-columns:repeat(2,1fr); }
+            .steps::before { display:none; }
             .sol-grid { grid-template-columns:1fr; }
             .comp-wrap { grid-template-columns:1fr; gap:16px; }
             .comp-vs { display:none; }
@@ -206,10 +397,22 @@
             .hero-btns { flex-direction:column; }
             .btn { width:100%; justify-content:center; }
             .trust-grid { grid-template-columns:1fr; }
+            .steps { grid-template-columns:1fr; }
             .sec-title { font-size:28px; }
+            .hook-stat { font-size:40px; }
+            .hook-title { font-size:18px; }
+            .hook-quote { font-size:22px; }
+            .hook-card { padding:32px 24px; }
+            .hook-card.highlight { padding:40px 28px; }
+            .hook-icon-wrap { width:70px; height:70px; }
+            .hook-icon { width:70px; height:70px; font-size:28px; }
+            .hook-card.highlight .hook-icon { width:80px; height:80px; font-size:34px; }
             .price-card { padding:36px 24px; }
             .price-amt .num { font-size:52px; }
             .contact-grid { grid-template-columns:1fr; }
+            .review-card { padding:28px 20px; }
+            .review-content { font-size:14px; }
+            .hooking { padding:80px 20px; }
         }
     </style>
 </head>
@@ -256,6 +459,40 @@
         </div>
     </section>
 
+    <!-- 후킹 섹션 -->
+    <section class="hooking">
+        <div class="container">
+            <div class="hook-grid">
+                <div class="hook-card animate">
+                    <div class="hook-icon-wrap"><div class="hook-icon">📈</div></div>
+                    <div class="hook-stat">76%↑</div>
+                    <div class="hook-title">보기만 하던 사람 → 결제하는 고객으로</div>
+                    <div class="hook-desc">관심만 있던 사람이 실제 구매 고객이 됩니다</div>
+                    <div class="hook-note">*실제 Meta 광고 컨설팅 진행 업체 사례</div>
+                </div>
+                <div class="hook-card animate delay-1">
+                    <div class="hook-icon-wrap"><div class="hook-icon">⚡</div></div>
+                    <div class="hook-stat">FIRST</div>
+                    <div class="hook-title">고객이 찾기 전에, 먼저 찾아갑니다</div>
+                    <div class="hook-desc">검색하기도 전에 이미 고객 앞에 노출됩니다</div>
+                </div>
+                <div class="hook-card animate delay-2">
+                    <div class="hook-icon-wrap"><div class="hook-icon">🔄</div></div>
+                    <div class="hook-stat">365일</div>
+                    <div class="hook-title">네이버에서 검색한 그 고객,<br>인스타에서 다시 만납니다</div>
+                    <div class="hook-desc">한 번 관심 보인 고객을 끝까지 따라갑니다</div>
+                </div>
+            </div>
+            <div class="hook-bottom">
+                <div class="hook-card highlight animate delay-3">
+                    <div class="hook-icon-wrap"><div class="hook-icon">🚨</div></div>
+                    <div class="hook-title">고객을 뺏기고 있습니다</div>
+                    <div class="hook-quote">" 지금 이 순간에도 "</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 신뢰 지표 -->
     <section class="trust">
         <div class="container">
@@ -268,41 +505,151 @@
         </div>
     </section>
 
-    <!-- 문제 제기 -->
-    <section class="problem">
+    <!-- AI 작동원리 -->
+    <section class="how-it-works" id="features">
         <div class="container">
-            <div class="prob-wrap">
-                <div class="prob-text animate">
-                    <h2>아직도 <span class="rose">손님 오길</span><br>기다리고만 계신가요?</h2>
-                    <p>경쟁 업체들은 이미 AI로 손님을 찾아가고 있습니다.<br>가만히 있으면 고객을 뺏기는 시대입니다.</p>
-                    <div class="pain">
-                        <div class="pain-item"><div class="ic">😰</div><span>광고해도 효과가 있는지 모르겠어요</span></div>
-                        <div class="pain-item"><div class="ic">💸</div><span>광고비만 나가고 매출은 그대로...</span></div>
-                        <div class="pain-item"><div class="ic">🤷</div><span>어디서부터 시작해야 할지 막막해요</span></div>
-                    </div>
+            <div class="sec-head animate">
+                <div class="sec-label">🤖 How it Works</div>
+                <h2 class="sec-title">AI 광고는 <span class="gr">이렇게</span> 작동합니다</h2>
+                <p class="sec-desc">복잡한 광고, 레브런이 알아서 다 해드립니다</p>
+            </div>
+            <div class="steps">
+                <div class="step animate">
+                    <div class="step-num">1</div>
+                    <h4>매장 분석</h4>
+                    <p>업종, 위치, 타겟 고객<br>분석 후 전략 수립</p>
                 </div>
-                <div class="prob-visual animate">
-                    <div class="illust">
-                        <span class="illust-icon">🤔</span>
-                        <p class="illust-text">이런 고민, 레브런이 해결해드립니다</p>
-                    </div>
+                <div class="step animate delay-1">
+                    <div class="step-num">2</div>
+                    <h4>AI 최적화</h4>
+                    <p>AI가 반응 좋은<br>고객층 자동 분석</p>
+                </div>
+                <div class="step animate delay-2">
+                    <div class="step-num">3</div>
+                    <h4>정밀 노출</h4>
+                    <p>분석된 데이터로<br>최적 고객에게 노출</p>
+                </div>
+                <div class="step animate delay-3">
+                    <div class="step-num">4</div>
+                    <h4>성과 분석</h4>
+                    <p>실시간 리포트로<br>성과 확인</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 솔루션 -->
-    <section class="solution" id="features">
+    <section class="solution">
         <div class="container">
             <div class="sec-head animate">
                 <div class="sec-label">✨ Solution</div>
                 <h2 class="sec-title">레브런이 <span class="gr">해결</span>해 드립니다</h2>
-                <p class="sec-desc">META AI가 대표님 매장에 관심 가질 고객을 자동으로 찾아갑니다</p>
+                <p class="sec-desc">META AI가 관심 가질 고객을 자동으로 찾아갑니다</p>
             </div>
             <div class="sol-grid">
-                <div class="sol-card animate"><div class="sol-icon p">🎯</div><h3>정밀 타겟팅</h3><p>반경 1km부터 설정 가능<br>원하는 지역의 고객만 공략</p></div>
-                <div class="sol-card animate delay-1"><div class="sol-icon b">🤖</div><h3>AI 자동 최적화</h3><p>메타 AI가 구매 확률 높은<br>고객을 자동으로 발굴</p></div>
-                <div class="sol-card animate delay-2"><div class="sol-icon y">🔄</div><h3>365일 리타겟팅</h3><p>한 번 관심 보인 고객에게<br>지속적으로 재노출</p></div>
+                <div class="sol-card animate"><div class="sol-icon p">🎯</div><h3>정밀 타겟팅</h3><p>반경 1km부터 설정 가능<br>원하는 지역 고객만 공략</p></div>
+                <div class="sol-card animate delay-1"><div class="sol-icon b">🤖</div><h3>AI 자동 최적화</h3><p>구매 확률 높은 고객을<br>AI가 자동으로 발굴</p></div>
+                <div class="sol-card animate delay-2"><div class="sol-icon y">🔄</div><h3>365일 리타겟팅</h3><p>관심 보인 고객에게<br>지속적으로 재노출</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 후기 -->
+    <section class="reviews">
+        <div class="container">
+            <div class="sec-head animate">
+                <div class="sec-label">💬 Reviews</div>
+                <h2 class="sec-title">실제 <span class="gr">광고주</span> 후기</h2>
+                <p class="sec-desc">레브런과 함께한 사장님들의 솔직한 이야기</p>
+            </div>
+            <div class="review-slider animate">
+                <div class="review-track" id="reviewTrack">
+                    <div class="review-card">
+                        <div class="review-content">처음엔 반신반의했어요.<br>근데 두 달차부터 인스타 DM 예약 문의가 확실히 늘었습니다.<br>이제 DM 확인하는 게 일상이 됐어요.</div>
+                        <div class="review-author"><div class="review-avatar">김</div><div class="review-info"><h5>김** 대표님</h5><span>수원 피부관리실</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">광고 세팅이나 관리에 신경 쓸 시간이 없었는데,<br>맡기고 나니까 편하더라고요.<br>리포트도 주기적으로 와서 좋았습니다.</div>
+                        <div class="review-author"><div class="review-avatar">이</div><div class="review-info"><h5>이** 원장님</h5><span>분당 필라테스</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">큰 기대 없이 시작했는데 재계약했습니다.<br>근처 고객한테만 노출되니까<br>실제 방문으로 이어지는 비율이 높아요.</div>
+                        <div class="review-author"><div class="review-avatar">박</div><div class="review-info"><h5>박** 대표님</h5><span>대구 네일샵</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">헤어샵은 단골이 중요한데,<br>광고로 온 신규 손님 중 단골 된 분들이 꽤 있어요.<br>계속 오시는 분들이 생기니까 뿌듯합니다.</div>
+                        <div class="review-author"><div class="review-avatar">최</div><div class="review-info"><h5>최** 실장님</h5><span>부산 헤어샵</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">시술 사진으로 광고 만들어주시니까<br>따로 준비할 것도 없었어요.<br>강남이라 경쟁 심한데도 문의가 꾸준합니다.</div>
+                        <div class="review-author"><div class="review-avatar">정</div><div class="review-info"><h5>정** 원장님</h5><span>강남 속눈썹</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">신규 고객 유치가 어려웠는데,<br>광고 시작하고 20대 고객이 많이 늘었어요.<br>인스타 보고 왔다는 분들이 확실히 많아졌습니다.</div>
+                        <div class="review-author"><div class="review-avatar">한</div><div class="review-info"><h5>한** 대표님</h5><span>인천 왁싱샵</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">PT샵은 가격대가 있어서 걱정했는데,<br>관심 있는 사람한테만 노출되니까<br>상담 전환율이 높아요. 헛돈 쓰는 느낌 없습니다.</div>
+                        <div class="review-author"><div class="review-avatar">강</div><div class="review-info"><h5>강** 트레이너</h5><span>일산 PT샵</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">골목 안쪽이라 홍보가 어려웠는데,<br>반경 타겟팅으로 동네 주민들한테 노출되니까<br>이제 위치 설명 안 해도 찾아오세요.</div>
+                        <div class="review-author"><div class="review-avatar">윤</div><div class="review-info"><h5>윤** 원장님</h5><span>대전 요가원</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">크로스핏은 마니아층이 있어서 타겟팅이 중요한데,<br>운동 관심사 타겟팅이 잘 맞았어요.<br>체험 신청이 늘고 등록률도 괜찮습니다.</div>
+                        <div class="review-author"><div class="review-avatar">조</div><div class="review-info"><h5>조** 코치님</h5><span>광주 크로스핏</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">골목에 있어서 유동인구가 적었는데,<br>인스타 광고 보고 일부러 찾아오시는 분들이 생겼어요.<br>예쁜 카페 찾는 분들한테 노출이 잘 되는 것 같아요.</div>
+                        <div class="review-author"><div class="review-avatar">서</div><div class="review-info"><h5>서** 사장님</h5><span>홍대 카페</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">음식 사진 잘 뽑아서 광고해주시니까 반응이 좋아요.<br>주말 예약이 늘었고,<br>인스타 태그하는 손님들도 많아졌습니다.</div>
+                        <div class="review-author"><div class="review-avatar">임</div><div class="review-info"><h5>임** 사장님</h5><span>이태원 맛집</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">술집은 저녁 시간대가 중요한데,<br>퇴근 시간에 집중 노출하니까 효율이 좋아요.<br>금요일 저녁 예약이 확실히 늘었습니다.</div>
+                        <div class="review-author"><div class="review-avatar">신</div><div class="review-info"><h5>신** 대표님</h5><span>강남 술집</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">동네 장사가 기본인데,<br>반경 2km 타겟팅 하니까 진짜 근처 분들만 오세요.<br>단골이 늘어나는 느낌이에요.</div>
+                        <div class="review-author"><div class="review-avatar">권</div><div class="review-info"><h5>권** 사장님</h5><span>판교 베이커리</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">기념일 수요가 많은데,<br>리타겟팅으로 한 번 본 사람한테 다시 노출되니까<br>기념일 때 생각나서 주문하시는 분들이 있어요.</div>
+                        <div class="review-author"><div class="review-avatar">오</div><div class="review-info"><h5>오** 대표님</h5><span>서울 꽃집</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">시험 시즌이 중요한데,<br>대학가 타겟팅으로 학생들한테 잘 노출되더라고요.<br>중간고사, 기말고사 시즌에 이용률이 확 올랐습니다.</div>
+                        <div class="review-author"><div class="review-avatar">장</div><div class="review-info"><h5>장** 대표님</h5><span>건대 스터디카페</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">동물병원은 신뢰가 중요한데,<br>꾸준히 노출되니까 동네에서 인지도가 생긴 것 같아요.<br>인스타에서 봤다고 하시는 분들이 많습니다.</div>
+                        <div class="review-author"><div class="review-avatar">유</div><div class="review-info"><h5>유** 원장님</h5><span>분당 동물병원</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">날씨 영향을 많이 받는데,<br>맑은 날 집중 노출 같은 세팅이 가능해서 좋았어요.<br>비 온 다음 날 예약이 많이 들어옵니다.</div>
+                        <div class="review-author"><div class="review-avatar">황</div><div class="review-info"><h5>황** 대표님</h5><span>용인 세차장</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">인테리어는 단가가 높아서<br>한 건만 성사돼도 광고비가 뽑히거든요.<br>3개월에 2건 계약, 충분히 만족합니다.</div>
+                        <div class="review-author"><div class="review-avatar">안</div><div class="review-info"><h5>안** 실장님</h5><span>서울 인테리어</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">사진관은 시즌이 있는데,<br>졸업 시즌 전에 미리 광고 돌리니까 예약이 빨리 찼어요.<br>타이밍 맞춰서 조절해주시는 것도 좋았습니다.</div>
+                        <div class="review-author"><div class="review-avatar">송</div><div class="review-info"><h5>송** 작가님</h5><span>부산 사진관</span></div></div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">학원은 학부모 타겟이 중요한데,<br>30~40대 학부모 타겟팅이 정확하더라고요.<br>상담 문의가 늘고 실제 등록도 많아졌습니다.</div>
+                        <div class="review-author"><div class="review-avatar">배</div><div class="review-info"><h5>배** 원장님</h5><span>대치동 학원</span></div></div>
+                    </div>
+                </div>
+                <div class="review-nav" id="reviewNav"></div>
+                <div class="review-arrows">
+                    <div class="review-arrow" onclick="prevReview()">←</div>
+                    <div class="review-arrow" onclick="nextReview()">→</div>
+                </div>
             </div>
         </div>
     </section>
@@ -376,7 +723,7 @@
                     <div class="contact-role">전문 마케터</div>
                     <div class="contact-num">010-5118-1498</div>
                     <div class="contact-btns">
-                        <a href="tel:010-5118-1498" onclick="window.location.href='tel:010-5118-1498'; return false;" class="c-btn call">📞 전화하기</a>
+                        <a href="tel:010-5118-1498" class="c-btn call">📞 전화하기</a>
                         <a href="https://open.kakao.com/o/g603Kp8h" target="_blank" class="c-btn kakao">💬 카톡상담</a>
                     </div>
                 </div>
@@ -384,7 +731,7 @@
                     <div class="contact-role">영상에 나온 담당자</div>
                     <div class="contact-num">010-2494-2581</div>
                     <div class="contact-btns">
-                        <a href="tel:010-2494-2581" onclick="window.location.href='tel:010-2494-2581'; return false;" class="c-btn call">📞 전화하기</a>
+                        <a href="tel:010-2494-2581" class="c-btn call">📞 전화하기</a>
                         <a href="https://open.kakao.com/o/g603Kp8h" target="_blank" class="c-btn kakao">💬 카톡상담</a>
                     </div>
                 </div>
@@ -401,12 +748,48 @@
     <script>
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+        let currentReview = 0;
+        const totalReviews = 20;
+        const track = document.getElementById('reviewTrack');
+        const nav = document.getElementById('reviewNav');
+
+        for(let i = 0; i < totalReviews; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'review-dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => goToReview(i);
+            nav.appendChild(dot);
+        }
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentReview * 100}%)`;
+            document.querySelectorAll('.review-dot').forEach((dot, i) => {
+                dot.className = 'review-dot' + (i === currentReview ? ' active' : '');
+            });
+        }
+
+        function nextReview() {
+            currentReview = (currentReview + 1) % totalReviews;
+            updateSlider();
+        }
+
+        function prevReview() {
+            currentReview = (currentReview - 1 + totalReviews) % totalReviews;
+            updateSlider();
+        }
+
+        function goToReview(index) {
+            currentReview = index;
+            updateSlider();
+        }
+
+        setInterval(nextReview, 5000);
     </script>
+</body>
+</html>
 </body>
 </html>
