@@ -309,18 +309,19 @@
     /* ===== CTA ===== */
     .cta{padding:60px 16px;text-align:center}
     .cta-title{font-size:clamp(22px,5vw,32px);font-weight:800;margin-bottom:10px}
-    .cta-desc{font-size:14px;color:var(--gray600);margin-bottom:28px;font-weight:500}
-    .cta-contacts-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:500px;margin:0 auto}
-    .cta-contact-box{padding:20px 16px;background:var(--white);border:1px solid var(--gray200);border-radius:14px;text-align:center}
-    .cta-contact-box .cta-contact-label{font-size:11px;color:var(--gray600);margin-bottom:4px}
-    .cta-contact-box .cta-contact-num{font-size:16px;font-weight:700;margin-bottom:12px}
-    .cta-contact-buttons{display:flex;gap:8px}
-    .cta-contact-buttons .cta-btn{flex:1;padding:10px 8px;font-size:13px}
-    .cta-btn{display:flex;align-items:center;justify-content:center;gap:6px;border-radius:10px;font-weight:700;text-decoration:none;transition:all .2s}
-    .cta-btn i{width:16px;height:16px;flex-shrink:0}
-    .cta-btn.primary{background:var(--primary);color:#fff}
-    .cta-btn.primary:hover{background:var(--primary-dark)}
-    .cta-btn.secondary{background:var(--gray100);color:var(--black)}
+    .cta-desc{font-size:14px;color:var(--gray600);margin-bottom:16px;font-weight:500}
+    .cta-notice{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;background:#fef3c7;border:1px solid #fcd34d;border-radius:8px;font-size:13px;font-weight:600;color:#92400e;margin-bottom:24px}
+    .cta-notice i{width:16px;height:16px;flex-shrink:0}
+    .cta-form{max-width:360px;margin:0 auto}
+    .form-group{margin-bottom:12px}
+    .form-group input{width:100%;padding:14px 16px;border:1px solid var(--gray200);border-radius:10px;font-size:15px;font-family:inherit;transition:border-color .2s}
+    .form-group input:focus{outline:none;border-color:var(--primary)}
+    .form-group input::placeholder{color:var(--gray400)}
+    .form-submit{width:100%;padding:16px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;transition:background .2s}
+    .form-submit:hover{background:var(--primary-dark)}
+    .form-success{max-width:360px;margin:0 auto;padding:32px 20px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px}
+    .form-success i{width:48px;height:48px;color:var(--green);margin-bottom:12px}
+    .form-success p{font-size:15px;color:var(--gray800);line-height:1.6}
 
     /* ===== FOOTER ===== */
     .footer{padding:32px 16px;text-align:center;border-top:1px solid var(--gray200);background:var(--white)}
@@ -667,25 +668,24 @@
 
   <!-- CTA -->
   <section class="cta">
-    <h2 class="cta-title">아직 고민 중이신가요?</h2>
-    <p class="cta-desc">무료 상담 먼저 받아보세요. 부담 없습니다.</p>
-    <div class="cta-contacts-wrap">
-      <div class="cta-contact-box">
-        <div class="cta-contact-label">전문 마케터</div>
-        <div class="cta-contact-num">010-5118-1498</div>
-        <div class="cta-contact-buttons">
-          <a href="tel:010-5118-1498" class="cta-btn secondary"><i data-lucide="phone"></i> 전화</a>
-          <a href="https://open.kakao.com/o/g603Kp8h" class="cta-btn primary" target="_blank"><i data-lucide="message-circle"></i> 카톡</a>
-        </div>
+    <h2 class="cta-title">무료 상담 신청</h2>
+    <p class="cta-desc">정보 남겨주시면 담당자가 연락드립니다</p>
+    <div class="cta-notice"><i data-lucide="shield-check"></i> 반경 3km 이내 동일 업종은 받지 않습니다</div>
+    <form class="cta-form" id="contactForm">
+      <div class="form-group">
+        <input type="text" name="storeName" placeholder="업체명" required>
       </div>
-      <div class="cta-contact-box">
-        <div class="cta-contact-label">영상에 나오는 담당자</div>
-        <div class="cta-contact-num">010-2494-2581</div>
-        <div class="cta-contact-buttons">
-          <a href="tel:010-2494-2581" class="cta-btn secondary"><i data-lucide="phone"></i> 전화</a>
-          <a href="https://open.kakao.com/o/g603Kp8h" class="cta-btn primary" target="_blank"><i data-lucide="message-circle"></i> 카톡</a>
-        </div>
+      <div class="form-group">
+        <input type="text" name="ownerName" placeholder="이름" required>
       </div>
+      <div class="form-group">
+        <input type="tel" name="phone" placeholder="전화번호" required>
+      </div>
+      <button type="submit" class="form-submit">상담 신청하기</button>
+    </form>
+    <div class="form-success" id="formSuccess" style="display:none;">
+      <i data-lucide="check-circle"></i>
+      <p>접수가 완료되었습니다.<br>담당자 배정 후 빠르게 연락드리겠습니다.</p>
     </div>
   </section>
 
@@ -693,6 +693,22 @@
 
   <script>
     lucide.createIcons();
+    
+    // 폼 제출 처리
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = this;
+      const formData = new FormData(form);
+      
+      // 여기에 실제 폼 전송 로직 추가 (예: Google Forms, Formspree 등)
+      // 지금은 UI만 보여줌
+      
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+      lucide.createIcons();
+    });
+    
+    // 후기 슬라이더
     const track=document.getElementById('reviewsTrack'),dotsWrap=document.getElementById('reviewsDots'),cards=track.querySelectorAll('.review-card');
     let idx=0,startX=0,autoSlide;
     function getVisible(){return Math.floor(track.parentElement.offsetWidth/(cards[0].offsetWidth+12))||1}
