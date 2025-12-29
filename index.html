@@ -25,7 +25,7 @@
     .hero-inner{max-width:700px}
     .hero-badge{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--white);border:1px solid var(--gray200);border-radius:50px;font-size:13px;font-weight:600;color:var(--gray600);margin-bottom:28px}
     .hero-badge-dot{width:6px;height:6px;background:var(--green);border-radius:50%}
-    .hero-eyebrow{font-size:15px;color:var(--primary);font-weight:600;margin-bottom:12px;letter-spacing:-0.3px}
+    .hero-eyebrow{font-size:15px;color:var(--primary);font-weight:700;margin-bottom:12px;letter-spacing:-0.3px}
     .hero-title{font-size:clamp(32px,7vw,56px);font-weight:800;line-height:1.2;margin-bottom:20px;letter-spacing:-1.5px;color:var(--black)}
     .hero-desc{font-size:17px;color:var(--gray600);margin-bottom:36px;line-height:1.7}
     .hero-cta{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;background:var(--primary);color:#fff;text-decoration:none;border-radius:12px;font-size:16px;font-weight:700;transition:all .2s;box-shadow:0 4px 14px rgba(37,99,235,.25)}
@@ -37,7 +37,7 @@
     .stats{padding:60px 20px;background:var(--white);border-top:1px solid var(--gray100);border-bottom:1px solid var(--gray100)}
     .stats-inner{max-width:800px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     .stat{text-align:center;padding:24px 16px}
-    .stat-label{font-size:13px;color:var(--gray400);margin-bottom:8px;letter-spacing:0.5px}
+    .stat-label{font-size:13px;color:var(--gray400);margin-bottom:8px;letter-spacing:0.5px;font-weight:600}
     .stat-value{font-size:clamp(36px,8vw,52px);font-weight:800;letter-spacing:-2px;line-height:1}
     .stat-value.blue{color:var(--primary)}
     .stat-value.green{color:var(--green)}
@@ -46,9 +46,9 @@
     /* 공통 섹션 */
     section{padding:80px 20px}
     .section-inner{max-width:1000px;margin:0 auto}
-    .section-eyebrow{font-size:13px;color:var(--primary);font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+    .section-eyebrow{font-size:13px;color:var(--primary);font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
     .section-title{font-size:clamp(24px,5vw,36px);font-weight:800;margin-bottom:16px;letter-spacing:-1px;line-height:1.3}
-    .section-desc{font-size:16px;color:var(--gray600);margin-bottom:48px;max-width:600px}
+    .section-desc{font-size:16px;color:var(--gray600);margin-bottom:48px;max-width:600px;font-weight:500}
 
     /* AI 설명 섹션 */
     .explain{background:var(--white)}
@@ -57,7 +57,7 @@
     .explain-header{text-align:center;margin-bottom:40px}
     .explain-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--primary);color:#fff;border-radius:50%;font-size:15px;font-weight:700;margin-bottom:16px}
     .explain-title{font-size:clamp(22px,4vw,30px);font-weight:800;margin-bottom:10px;letter-spacing:-0.5px}
-    .explain-desc{font-size:15px;color:var(--gray600)}
+    .explain-desc{font-size:15px;color:var(--gray600);font-weight:500}
     .explain-grid{display:grid;gap:32px;align-items:center}
     
     /* 폰 목업 */
@@ -80,7 +80,7 @@
     /* 플로우 스텝 */
     .flow{display:flex;flex-direction:column;gap:12px}
     .flow-step{display:flex;align-items:center;gap:14px;padding:16px;background:var(--gray50);border-radius:12px;border:1px solid var(--gray100)}
-    .flow-icon{width:44px;height:44px;background:var(--white);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+    .flow-icon{width:44px;height:44px;background:var(--white);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.04);flex-shrink:0}
     .flow-icon i{width:20px;height:20px;color:var(--primary)}
     .flow-text h4{font-size:15px;font-weight:700;margin-bottom:2px}
     .flow-text p{font-size:13px;color:var(--gray600)}
@@ -100,7 +100,7 @@
     .target-person:nth-child(6){top:45%;right:0}
     .target-person:nth-child(7){bottom:20px;left:20px}
     .target-person:nth-child(8){top:60%;left:5px}
-    .target-label{text-align:center;margin-top:20px;font-size:14px;font-weight:600;color:var(--gray800)}
+    .target-label{text-align:center;margin-top:20px;font-size:14px;font-weight:700;color:var(--gray800)}
 
     /* 리타겟팅 타임라인 */
     .timeline{position:relative;padding-left:28px}
@@ -122,37 +122,39 @@
     .problem .section-eyebrow{color:var(--orange)}
     .problem .section-title{color:#fff}
     .problem .section-desc{color:var(--gray400)}
-    .problem-grid{display:grid;gap:12px}
-    .problem-card{display:flex;align-items:flex-start;gap:14px;padding:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px}
-    .problem-icon{width:44px;height:44px;background:rgba(239,68,68,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .problem-icon i{width:20px;height:20px;color:#fca5a5}
-    .problem-text h3{font-size:15px;font-weight:700;margin-bottom:4px}
-    .problem-text p{font-size:13px;color:var(--gray400);line-height:1.5}
+    .problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .problem-card{display:flex;align-items:flex-start;gap:12px;padding:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px}
+    .problem-icon{width:40px;height:40px;background:rgba(239,68,68,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .problem-icon i{width:18px;height:18px;color:#fca5a5}
+    .problem-text h3{font-size:14px;font-weight:700;margin-bottom:4px}
+    .problem-text p{font-size:12px;color:var(--gray400);line-height:1.5}
 
-    /* 솔루션 */
+    /* 솔루션 - 항상 2열 유지 */
     .solution{background:var(--white)}
-    .solution-grid{display:grid;gap:16px}
-    .solution-card{padding:28px;background:var(--gray50);border:1px solid var(--gray100);border-radius:16px}
-    .solution-icon{width:52px;height:52px;background:var(--white);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-    .solution-icon i{width:24px;height:24px;color:var(--primary)}
-    .solution-card h3{font-size:18px;font-weight:700;margin-bottom:8px}
-    .solution-card p{font-size:14px;color:var(--gray600);line-height:1.6}
+    .solution-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .solution-card{padding:20px;background:var(--gray50);border:1px solid var(--gray100);border-radius:16px}
+    .solution-icon{width:44px;height:44px;background:var(--white);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+    .solution-icon i{width:22px;height:22px;color:var(--primary)}
+    .solution-card h3{font-size:16px;font-weight:700;margin-bottom:6px}
+    .solution-card p{font-size:13px;color:var(--gray600);line-height:1.5}
+    /* 3번째 카드는 2열 병합 */
+    .solution-card:nth-child(3){grid-column:1/-1}
 
-    /* 비교 */
+    /* 비교 - 항상 2열 유지 */
     .compare{background:var(--gray50)}
-    .compare-grid{display:grid;gap:16px}
-    .compare-card{padding:28px;border-radius:16px}
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .compare-card{padding:20px;border-radius:16px}
     .compare-card.bad{background:#fef2f2;border:1px solid #fecaca}
     .compare-card.good{background:#f0fdf4;border:1px solid #bbf7d0}
-    .compare-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-    .compare-badge{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700}
+    .compare-header{margin-bottom:16px}
+    .compare-badge{display:inline-block;padding:4px 10px;border-radius:6px;font-size:10px;font-weight:700;margin-bottom:8px}
     .compare-card.bad .compare-badge{background:#fee2e2;color:#dc2626}
     .compare-card.good .compare-badge{background:#dcfce7;color:#16a34a}
-    .compare-title{font-size:17px;font-weight:700}
+    .compare-title{font-size:14px;font-weight:700}
     .compare-list{list-style:none}
-    .compare-list li{display:flex;align-items:flex-start;gap:10px;padding:10px 0;font-size:14px;border-bottom:1px solid rgba(0,0,0,.05)}
+    .compare-list li{display:flex;align-items:flex-start;gap:8px;padding:8px 0;font-size:12px;border-bottom:1px solid rgba(0,0,0,.05)}
     .compare-list li:last-child{border:none}
-    .compare-list li i{width:18px;height:18px;flex-shrink:0;margin-top:1px}
+    .compare-list li i{width:16px;height:16px;flex-shrink:0;margin-top:1px}
     .compare-card.bad li i{color:#ef4444}
     .compare-card.good li i{color:#22c55e}
 
@@ -186,7 +188,7 @@
     /* CTA */
     .cta{padding:80px 20px;text-align:center}
     .cta-title{font-size:clamp(24px,5vw,32px);font-weight:800;margin-bottom:12px;letter-spacing:-0.5px}
-    .cta-desc{font-size:15px;color:var(--gray600);margin-bottom:32px}
+    .cta-desc{font-size:15px;color:var(--gray600);margin-bottom:32px;font-weight:500}
     .cta-buttons{display:flex;flex-direction:column;gap:10px;max-width:360px;margin:0 auto}
     .cta-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:16px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;transition:all .2s}
     .cta-btn i{width:18px;height:18px}
@@ -203,18 +205,31 @@
 
     @keyframes pulse-ring{0%,100%{opacity:.3}50%{opacity:.6}}
 
+    /* 반응형 - PC */
     @media(min-width:768px){
       .explain-grid{grid-template-columns:1fr 1fr}
       .explain-grid.reverse{direction:rtl}
       .explain-grid.reverse>*{direction:ltr}
-      .problem-grid{grid-template-columns:repeat(2,1fr)}
+      .problem-grid{grid-template-columns:repeat(4,1fr)}
       .solution-grid{grid-template-columns:repeat(3,1fr)}
-      .compare-grid{grid-template-columns:repeat(2,1fr)}
+      .solution-card:nth-child(3){grid-column:auto}
+      .compare-grid{gap:20px}
+      .compare-card{padding:28px}
+      .compare-title{font-size:17px}
+      .compare-list li{font-size:14px;padding:10px 0}
       .cta-buttons{flex-direction:row}
       .cta-btn{flex:1}
     }
-    @media(min-width:1024px){
-      .problem-grid{grid-template-columns:repeat(4,1fr)}
+
+    /* 모바일 미세 조정 */
+    @media(max-width:480px){
+      .problem-text h3{font-size:13px}
+      .problem-text p{font-size:11px}
+      .solution-card h3{font-size:14px}
+      .solution-card p{font-size:12px}
+      .compare-list li{font-size:11px;padding:6px 0}
+      .review-card{flex:0 0 260px;padding:20px}
+      .review-text{font-size:13px;min-height:70px}
     }
   </style>
 </head>
@@ -358,25 +373,25 @@
       <div class="problem-grid">
         <div class="problem-card">
           <div class="problem-icon"><i data-lucide="help-circle"></i></div>
-          <div class="problem-text"><h3>광고 설정이 어려워요</h3><p>복잡한 시스템, 뭘 어떻게 해야 할지 모르겠어요</p></div>
+          <div class="problem-text"><h3>광고 설정이 어려워요</h3><p>복잡한 시스템, 뭘 어떻게 해야 할지</p></div>
         </div>
         <div class="problem-card">
           <div class="problem-icon"><i data-lucide="wallet"></i></div>
-          <div class="problem-text"><h3>돈만 날리는 것 같아요</h3><p>광고비는 나가는데 효과가 있는지 모르겠어요</p></div>
+          <div class="problem-text"><h3>돈만 날리는 것 같아요</h3><p>광고비는 나가는데 효과를 모르겠어요</p></div>
         </div>
         <div class="problem-card">
           <div class="problem-icon"><i data-lucide="clock"></i></div>
-          <div class="problem-text"><h3>시간이 없어요</h3><p>가게 운영하기도 바빠서 신경 쓸 여유가 없어요</p></div>
+          <div class="problem-text"><h3>시간이 없어요</h3><p>가게 운영하기도 바빠서 여유가 없어요</p></div>
         </div>
         <div class="problem-card">
           <div class="problem-icon"><i data-lucide="trending-down"></i></div>
-          <div class="problem-text"><h3>손님이 줄었어요</h3><p>예전만큼 안 오는데 뭘 해야 할지 모르겠어요</p></div>
+          <div class="problem-text"><h3>손님이 줄었어요</h3><p>예전만큼 안 오는데 뭘 해야 할지</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 솔루션 -->
+  <!-- 솔루션 - 2열 유지 -->
   <section class="solution">
     <div class="section-inner">
       <p class="section-eyebrow">Solution</p>
@@ -386,7 +401,7 @@
         <div class="solution-card">
           <div class="solution-icon"><i data-lucide="target"></i></div>
           <h3>정밀 타겟팅</h3>
-          <p>반경 1km부터 해외까지 설정 가능. 원하는 지역 고객만 정확히 공략합니다.</p>
+          <p>반경 1km~해외까지 설정 가능. 원하는 지역 고객만 정확히 공략합니다.</p>
         </div>
         <div class="solution-card">
           <div class="solution-icon"><i data-lucide="cpu"></i></div>
@@ -402,7 +417,7 @@
     </div>
   </section>
 
-  <!-- 비교 -->
+  <!-- 비교 - 항상 2열 -->
   <section class="compare">
     <div class="section-inner">
       <p class="section-eyebrow">Compare</p>
@@ -412,10 +427,10 @@
         <div class="compare-card bad">
           <div class="compare-header">
             <span class="compare-badge">직접 운영</span>
-            <span class="compare-title">인스타 앱으로 할 때</span>
+            <div class="compare-title">인스타 앱으로 할 때</div>
           </div>
           <ul class="compare-list">
-            <li><i data-lucide="x"></i> 지역 설정 '시' 단위만 가능</li>
+            <li><i data-lucide="x"></i> 지역 '시' 단위만 가능</li>
             <li><i data-lucide="x"></i> 관심사 타겟팅 불가</li>
             <li><i data-lucide="x"></i> 리타겟팅 기능 없음</li>
             <li><i data-lucide="x"></i> 유사 타겟 설정 불가</li>
@@ -425,14 +440,14 @@
         <div class="compare-card good">
           <div class="compare-header">
             <span class="compare-badge">REVRUN</span>
-            <span class="compare-title">레브런에 맡기면</span>
+            <div class="compare-title">레브런에 맡기면</div>
           </div>
           <ul class="compare-list">
-            <li><i data-lucide="check"></i> 반경 <strong>1km ~ 해외까지</strong></li>
-            <li><i data-lucide="check"></i> 매장 관련 <strong>관심사 타겟팅</strong></li>
-            <li><i data-lucide="check"></i> <strong>365일</strong> 맞춤 리타겟팅</li>
-            <li><i data-lucide="check"></i> <strong>유사 고객</strong> 자동 발굴</li>
-            <li><i data-lucide="check"></i> 원하는 <strong>시간/요일</strong> 설정</li>
+            <li><i data-lucide="check"></i> 반경 1km ~ 해외까지</li>
+            <li><i data-lucide="check"></i> 관심사 정밀 타겟팅</li>
+            <li><i data-lucide="check"></i> 365일 맞춤 리타겟팅</li>
+            <li><i data-lucide="check"></i> 유사 고객 자동 발굴</li>
+            <li><i data-lucide="check"></i> 시간/요일 자유 설정</li>
           </ul>
         </div>
       </div>
@@ -497,7 +512,7 @@
     </div>
     <div class="cta-contacts">
       <div class="cta-contact"><div class="cta-contact-label">전문 마케터</div><div class="cta-contact-num">010-5118-1498</div></div>
-      <div class="cta-contact"><div class="cta-contact-label">영상 담당자</div><div class="cta-contact-num">010-2494-2581</div></div>
+      <div class="cta-contact"><div class="cta-contact-label">영상에 나오는 담당자</div><div class="cta-contact-num">010-2494-2581</div></div>
     </div>
   </section>
 
@@ -505,60 +520,21 @@
 
   <script>
     lucide.createIcons();
-    
-    // 후기 슬라이더
-    const track = document.getElementById('reviewsTrack');
-    const dotsWrap = document.getElementById('reviewsDots');
-    const cards = track.querySelectorAll('.review-card');
-    let idx = 0, startX = 0, autoSlide;
-    
-    function getVisible() {
-      return Math.floor(track.parentElement.offsetWidth / (cards[0].offsetWidth + 16)) || 1;
-    }
-    function makeDots() {
-      dotsWrap.innerHTML = '';
-      const total = Math.ceil(cards.length / getVisible());
-      for (let i = 0; i < Math.min(total, 8); i++) {
-        const dot = document.createElement('div');
-        dot.className = 'reviews-dot' + (i === 0 ? ' active' : '');
-        dot.onclick = () => goTo(i);
-        dotsWrap.appendChild(dot);
-      }
-    }
-    function updateDots() {
-      dotsWrap.querySelectorAll('.reviews-dot').forEach((d, i) => 
-        d.classList.toggle('active', i === Math.min(idx, dotsWrap.children.length - 1))
-      );
-    }
-    function goTo(i) {
-      const cardW = cards[0].offsetWidth + 16;
-      idx = Math.max(0, Math.min(i, cards.length - getVisible()));
-      track.style.transform = 'translateX(-' + (idx * cardW) + 'px)';
-      updateDots();
-    }
-    function next() {
-      idx = idx >= cards.length - getVisible() ? 0 : idx + 1;
-      goTo(idx);
-    }
-    function startAuto() { autoSlide = setInterval(next, 4000); }
-    function stopAuto() { clearInterval(autoSlide); }
-    
-    track.onmousedown = e => { startX = e.pageX; stopAuto(); };
-    track.onmouseup = e => { 
-      const diff = startX - e.pageX;
-      if (Math.abs(diff) > 50) diff > 0 ? next() : idx > 0 && goTo(idx - 1);
-      startAuto();
-    };
-    track.ontouchstart = e => { startX = e.touches[0].pageX; stopAuto(); };
-    track.ontouchend = e => {
-      const diff = startX - e.changedTouches[0].pageX;
-      if (Math.abs(diff) > 50) diff > 0 ? next() : idx > 0 && goTo(idx - 1);
-      startAuto();
-    };
-    
-    makeDots();
-    startAuto();
-    window.onresize = () => { makeDots(); goTo(idx); };
+    const track=document.getElementById('reviewsTrack'),dotsWrap=document.getElementById('reviewsDots'),cards=track.querySelectorAll('.review-card');
+    let idx=0,startX=0,autoSlide;
+    function getVisible(){return Math.floor(track.parentElement.offsetWidth/(cards[0].offsetWidth+16))||1}
+    function makeDots(){dotsWrap.innerHTML='';const total=Math.ceil(cards.length/getVisible());for(let i=0;i<Math.min(total,8);i++){const dot=document.createElement('div');dot.className='reviews-dot'+(i===0?' active':'');dot.onclick=()=>goTo(i);dotsWrap.appendChild(dot)}}
+    function updateDots(){dotsWrap.querySelectorAll('.reviews-dot').forEach((d,i)=>d.classList.toggle('active',i===Math.min(idx,dotsWrap.children.length-1)))}
+    function goTo(i){const cardW=cards[0].offsetWidth+16;idx=Math.max(0,Math.min(i,cards.length-getVisible()));track.style.transform='translateX(-'+(idx*cardW)+'px)';updateDots()}
+    function next(){idx=idx>=cards.length-getVisible()?0:idx+1;goTo(idx)}
+    function startAuto(){autoSlide=setInterval(next,4000)}
+    function stopAuto(){clearInterval(autoSlide)}
+    track.onmousedown=e=>{startX=e.pageX;stopAuto()};
+    track.onmouseup=e=>{const diff=startX-e.pageX;if(Math.abs(diff)>50)diff>0?next():idx>0&&goTo(idx-1);startAuto()};
+    track.ontouchstart=e=>{startX=e.touches[0].pageX;stopAuto()};
+    track.ontouchend=e=>{const diff=startX-e.changedTouches[0].pageX;if(Math.abs(diff)>50)diff>0?next():idx>0&&goTo(idx-1);startAuto()};
+    makeDots();startAuto();
+    window.onresize=()=>{makeDots();goTo(idx)};
   </script>
 </body>
 </html>
