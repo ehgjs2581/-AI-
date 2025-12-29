@@ -14,7 +14,7 @@
     
     :root{--bg:#fafafa;--white:#fff;--gray50:#f8f8f8;--gray100:#f0f0f0;--gray200:#e4e4e4;--gray400:#a0a0a0;--gray600:#666;--gray800:#333;--black:#111;--primary:#2563eb;--primary-dark:#1d4ed8;--green:#10b981;--orange:#f59e0b}
     
-    body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--black);line-height:1.6;word-break:keep-all;overflow-wrap:break-word}
+    body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--black);line-height:1.7;word-break:keep-all;overflow-wrap:break-word;font-weight:500}
 
     /* NAV */
     .nav{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);z-index:1000;padding:14px 20px;border-bottom:1px solid var(--gray200)}
@@ -35,7 +35,7 @@
     @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 
     /* STATS */
-    .stats{padding:50px 16px;background:var(--white);border-top:1px solid var(--gray100);border-bottom:1px solid var(--gray100)}
+    .stats{padding:60px 16px;background:linear-gradient(180deg, #eef4ff 0%, #e0ebff 100%);border-top:none;border-bottom:none}
     .stats-inner{max-width:800px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
     .stat{text-align:center;padding:20px 8px;min-width:0}
     .stat-label{font-size:12px;color:var(--gray400);margin-bottom:8px;letter-spacing:0.3px;font-weight:600;white-space:nowrap}
@@ -46,13 +46,14 @@
 
     /* SECTION COMMON */
     section{padding:80px 16px}
-    .section-inner{max-width:1000px;margin:0 auto;width:100%}
+    .section-inner{max-width:1200px;margin:0 auto;width:100%}
     .section-eyebrow{font-size:12px;color:var(--primary);font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
     .section-title{font-size:clamp(24px,5vw,40px);font-weight:800;margin-bottom:16px;letter-spacing:-0.5px;line-height:1.3}
     .section-desc{font-size:16px;color:var(--gray600);margin-bottom:40px;max-width:600px;font-weight:500}
 
     /* EXPLAIN */
-    .explain{background:var(--white)}
+    .explain{background:#fff;position:relative}
+    .explain::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(180deg, transparent 0%, #1e293b 100%);pointer-events:none}
     .explain-block{margin-bottom:80px}
     .explain-block:last-child{margin-bottom:0}
     .explain-header{text-align:center;margin-bottom:40px}
@@ -131,7 +132,7 @@
     .problem-text p{font-size:12px;color:var(--gray400);line-height:1.5;word-break:keep-all}
 
     /* SOLUTION - 모바일 줄바꿈 개선 */
-    .solution{background:var(--white)}
+    .solution{background:linear-gradient(180deg, #eef4ff 0%, #e8f1ff 100%)}
     .solution-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
     .solution-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 16px;background:var(--gray50);border:1px solid var(--gray100);border-radius:16px;min-width:0}
     .solution-card:nth-child(3){grid-column:1/-1}
@@ -141,7 +142,7 @@
     .solution-card p{font-size:13px;color:var(--gray600);line-height:1.5;word-break:keep-all}
 
     /* COMPARE - 줄바꿈 개선 */
-    .compare{background:var(--gray50)}
+    .compare{background:linear-gradient(180deg, #fffcf5 0%, #fef8eb 100%)}
     .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .compare-card{padding:20px 14px;border-radius:16px;min-width:0}
     .compare-card.bad{background:#fef2f2;border:1px solid #fecaca}
@@ -169,7 +170,7 @@
     .notice-hook strong{color:var(--primary)}
 
     /* REVIEWS - 제목 가운데 정렬, 줄바꿈 개선 */
-    .reviews{background:var(--white);overflow:hidden}
+    .reviews{background:linear-gradient(180deg, #f0f7ff 0%, #e8f1ff 100%);overflow:hidden}
     .reviews .section-inner{text-align:center}
     .reviews .section-desc{margin-left:auto;margin-right:auto}
     .reviews-track-wrap{overflow:hidden;margin:0 -16px;padding:0 16px}
@@ -186,7 +187,7 @@
     .reviews-dot.active{width:24px;border-radius:5px;background:var(--primary)}
 
     /* PRICING - 포트폴리오 삭제, 가격만 가운데 */
-    .pricing{background:var(--gray50)}
+    .pricing{background:#fff}
     .pricing-inner{max-width:500px;margin:0 auto;text-align:center}
     .pricing-card{background:var(--white);border:2px solid var(--primary);border-radius:16px;padding:32px 24px;text-align:center;position:relative}
     .pricing-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;padding:6px 16px;border-radius:50px;font-size:11px;font-weight:700;white-space:nowrap}
@@ -198,7 +199,7 @@
     .pricing-features li i{width:18px;height:18px;color:var(--green);flex-shrink:0}
 
     /* CTA */
-    .cta{padding:80px 16px;text-align:center;background:var(--white)}
+    .cta{padding:80px 16px;text-align:center;background:linear-gradient(180deg, #eef4ff 0%, #dbeafe 100%)}
     .cta-title{font-size:clamp(24px,5vw,36px);font-weight:800;margin-bottom:12px}
     .cta-desc{font-size:15px;color:var(--gray600);margin-bottom:20px;font-weight:500}
     .cta-notice{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:#fef3c7;border:1px solid #fcd34d;border-radius:10px;font-size:14px;font-weight:600;color:#92400e;margin-bottom:28px;word-break:keep-all}
@@ -218,6 +219,16 @@
     .footer-text{font-size:13px;color:var(--gray600)}
 
     @keyframes pulse-ring{0%,100%{opacity:.3}50%{opacity:.6}}
+
+    /* 스크롤 애니메이션 */
+    .fade-up{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease, transform 0.7s ease}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+    
+    /* 섹션 배경색 강화 */
+    .section-light{background:#fff}
+    .section-blue{background:linear-gradient(180deg, #eef4ff 0%, #e0ebff 100%)}
+    .section-cream{background:linear-gradient(180deg, #fefcf8 0%, #faf5eb 100%)}
+    .section-dark{background:linear-gradient(180deg, #1e293b 0%, #0f172a 100%)}
 
     /* 반응형 - PC */
     @media(min-width:768px){
@@ -244,8 +255,14 @@
       .solution-grid{grid-template-columns:1fr;gap:12px}
       .solution-card:nth-child(3){grid-column:auto}
       
-      .compare-grid{grid-template-columns:1fr;gap:14px}
-      .compare-card{padding:20px}
+      /* 모바일 비교표 2열 유지 + 자세하게 */
+      .compare-grid{grid-template-columns:1fr 1fr;gap:10px}
+      .compare-card{padding:16px 12px}
+      .compare-header{margin-bottom:12px}
+      .compare-badge{font-size:9px;padding:3px 8px}
+      .compare-title{font-size:12px}
+      .compare-list li{font-size:11px;padding:6px 0;gap:6px}
+      .compare-list li i{width:14px;height:14px}
       
       .notice-quote{font-size:14px}
       .notice-explain{font-size:14px}
@@ -257,6 +274,110 @@
     
     @media(min-width:1024px){
       section{padding:120px 32px}
+    }
+    
+    /* PC 대화면 - 시원하게 */
+    @media(min-width:768px){
+      /* 네비게이션 */
+      .nav{padding:20px 40px}
+      .nav-logo{font-size:28px}
+      
+      /* 히어로 */
+      .hero{padding:160px 40px 120px}
+      .hero-inner{max-width:900px}
+      .hero-badge{font-size:15px;padding:12px 24px}
+      .hero-eyebrow{font-size:20px}
+      .hero-title{font-size:clamp(40px,6vw,64px)}
+      .hero-desc{font-size:20px}
+      
+      /* 스탯 */
+      .stats{padding:70px 40px}
+      .stats-inner{max-width:1000px}
+      .stat-label{font-size:15px}
+      .stat-value{font-size:clamp(48px,8vw,72px)}
+      
+      /* 섹션 공통 */
+      section{padding:120px 40px}
+      .section-eyebrow{font-size:14px;margin-bottom:12px}
+      .section-title{font-size:clamp(32px,5vw,52px);margin-bottom:24px}
+      .section-desc{font-size:20px;margin-bottom:60px;max-width:700px}
+      
+      /* Explain 섹션 */
+      .explain-block{margin-bottom:120px}
+      .explain-num{width:52px;height:52px;font-size:20px}
+      .explain-title{font-size:clamp(28px,4vw,42px)}
+      .explain-desc{font-size:18px}
+      .phone{width:300px}
+      .flow-step{padding:24px}
+      .flow-icon{width:56px;height:56px}
+      .flow-icon i{width:26px;height:26px}
+      .flow-text h4{font-size:18px}
+      .flow-text p{font-size:15px}
+      .target-map{width:280px;height:280px}
+      .target-label{font-size:17px;margin-top:28px}
+      .timeline-item{padding:24px}
+      .timeline-title{font-size:17px}
+      .timeline-desc{font-size:14px}
+      .result-box{padding:36px}
+      .result-box i{width:44px;height:44px}
+      .result-box h4{font-size:24px}
+      .result-box p{font-size:16px}
+      
+      /* Problem 섹션 */
+      .problem-card{padding:28px}
+      .problem-icon{width:56px;height:56px;margin-right:18px}
+      .problem-icon i{width:26px;height:26px}
+      .problem-text h3{font-size:18px}
+      .problem-text p{font-size:15px}
+      
+      /* Solution 섹션 */
+      .solution-card{padding:36px 28px}
+      .solution-icon{width:64px;height:64px}
+      .solution-icon i{width:30px;height:30px}
+      .solution-card h3{font-size:22px;margin-bottom:12px}
+      .solution-card p{font-size:16px}
+      
+      /* Compare 섹션 */
+      .compare-grid{gap:32px}
+      .compare-card{padding:36px 28px;border-radius:20px}
+      .compare-badge{font-size:12px;padding:6px 14px}
+      .compare-title{font-size:20px}
+      .compare-list li{font-size:16px;padding:14px 0}
+      .compare-list li i{width:22px;height:22px}
+      .compare-notice{margin-top:60px;padding:48px 40px;border-radius:24px}
+      .notice-intro{font-size:18px}
+      .notice-quote{font-size:20px}
+      .notice-explain{font-size:18px}
+      .notice-hook{font-size:26px}
+      
+      /* Reviews 섹션 */
+      .review-card{flex:0 0 380px;padding:32px}
+      .review-text{font-size:17px;min-height:90px}
+      .review-avatar{width:52px;height:52px;font-size:18px}
+      .review-info h4{font-size:17px}
+      .review-info span{font-size:14px}
+      
+      /* Pricing 섹션 */
+      .pricing-inner{max-width:550px}
+      .pricing-card{padding:48px 36px;border-radius:24px}
+      .pricing-tag{font-size:13px;padding:8px 20px}
+      .pricing-amount{font-size:clamp(48px,8vw,64px)}
+      .pricing-period{font-size:17px;margin-bottom:32px}
+      .pricing-features li{font-size:17px;padding:14px 0}
+      .pricing-features li i{width:22px;height:22px}
+      
+      /* CTA 섹션 */
+      .cta{padding:120px 40px}
+      .cta-title{font-size:clamp(32px,5vw,48px)}
+      .cta-desc{font-size:18px}
+      .cta-notice{font-size:16px;padding:16px 28px}
+      .cta-form{max-width:480px}
+      .form-group input{padding:20px 22px;font-size:17px}
+      .form-submit{padding:22px;font-size:19px}
+      
+      /* Footer */
+      .footer{padding:60px 40px}
+      .footer-text{font-size:15px}
     }
   </style>
 </head>
@@ -275,7 +396,7 @@
     </div>
   </section>
 
-  <section class="stats">
+  <section class="stats fade-up">
     <div class="stats-inner">
       <div class="stat"><div class="stat-label">정밀 타겟팅</div><div class="stat-value blue">1km~</div></div>
       <div class="stat"><div class="stat-label">자진 연장률</div><div class="stat-value green">82%</div></div>
@@ -283,13 +404,13 @@
     </div>
   </section>
 
-  <section class="explain" id="how">
+  <section class="explain fade-up" id="how">
     <div class="section-inner">
       <div class="explain-block">
         <div class="explain-header">
           <div class="explain-num">1</div>
           <h2 class="explain-title">검색하는 고객에게 실시간 노출</h2>
-          <p class="explain-desc">고객이 찾기 전에, AI가 먼저 찾아갑니다</p>
+          <p class="explain-desc">고객이 찾기 전에, AI가 먼저 찾아갑니다.</p>
         </div>
         <div class="explain-grid">
           <div class="phone-wrap">
@@ -306,9 +427,9 @@
             </div></div>
           </div>
           <div class="flow">
-            <div class="flow-step"><div class="flow-icon"><i data-lucide="search"></i></div><div class="flow-text"><h4>고객이 검색</h4><p>"근처 맛집" 검색하면</p></div></div>
-            <div class="flow-step"><div class="flow-icon"><i data-lucide="cpu"></i></div><div class="flow-text"><h4>AI가 감지</h4><p>관심사 + 위치 분석</p></div></div>
-            <div class="flow-step"><div class="flow-icon"><i data-lucide="smartphone"></i></div><div class="flow-text"><h4>즉시 노출</h4><p>인스타 피드에 광고 노출</p></div></div>
+            <div class="flow-step"><div class="flow-icon"><i data-lucide="search"></i></div><div class="flow-text"><h4>고객이 검색</h4><p>"근처 맛집" 검색하면.</p></div></div>
+            <div class="flow-step"><div class="flow-icon"><i data-lucide="cpu"></i></div><div class="flow-text"><h4>AI가 감지</h4><p>관심사 + 위치 분석.</p></div></div>
+            <div class="flow-step"><div class="flow-icon"><i data-lucide="smartphone"></i></div><div class="flow-text"><h4>즉시 노출</h4><p>인스타 피드에 광고 노출.</p></div></div>
           </div>
         </div>
       </div>
@@ -317,7 +438,7 @@
         <div class="explain-header">
           <div class="explain-num">2</div>
           <h2 class="explain-title">1km부터 해외까지 정밀 타겟팅</h2>
-          <p class="explain-desc">원하는 지역의 고객에게만 광고비를 씁니다</p>
+          <p class="explain-desc">원하는 지역의 고객에게만 광고비를 씁니다.</p>
         </div>
         <div class="explain-grid reverse">
           <div>
@@ -331,12 +452,12 @@
                 <div class="target-person"><i data-lucide="user"></i></div>
               </div>
             </div>
-            <p class="target-label">반경 1km ~ 해외까지 설정 가능</p>
+            <p class="target-label">반경 1km ~ 해외까지 설정 가능.</p>
           </div>
           <div class="flow">
-            <div class="flow-step"><div class="flow-icon"><i data-lucide="map-pin"></i></div><div class="flow-text"><h4>위치 설정</h4><p>매장 반경 1km부터 해외까지</p></div></div>
-            <div class="flow-step"><div class="flow-icon"><i data-lucide="users"></i></div><div class="flow-text"><h4>관심사 필터</h4><p>업종 관련 관심사만 타겟팅</p></div></div>
-            <div class="flow-step"><div class="flow-icon"><i data-lucide="clock"></i></div><div class="flow-text"><h4>시간대 설정</h4><p>영업시간에 집중 노출</p></div></div>
+            <div class="flow-step"><div class="flow-icon"><i data-lucide="map-pin"></i></div><div class="flow-text"><h4>위치 설정</h4><p>매장 반경 1km부터 해외까지.</p></div></div>
+            <div class="flow-step"><div class="flow-icon"><i data-lucide="users"></i></div><div class="flow-text"><h4>관심사 필터</h4><p>업종 관련 관심사만 타겟팅.</p></div></div>
+            <div class="flow-step"><div class="flow-icon"><i data-lucide="clock"></i></div><div class="flow-text"><h4>시간대 설정</h4><p>영업시간에 집중 노출.</p></div></div>
           </div>
         </div>
       </div>
@@ -345,19 +466,19 @@
         <div class="explain-header">
           <div class="explain-num">3</div>
           <h2 class="explain-title">한 번 본 고객, 끝까지 따라갑니다</h2>
-          <p class="explain-desc">네이버에서 검색한 고객, 인스타에서 다시 만납니다</p>
+          <p class="explain-desc">네이버에서 검색한 고객, 인스타에서 다시 만납니다.</p>
         </div>
         <div class="explain-grid">
           <div class="timeline">
             <div class="timeline-item">
               <div class="timeline-platform"><i data-lucide="search"></i> 네이버</div>
               <h4 class="timeline-title">고객이 "강남 맛집" 검색</h4>
-              <p class="timeline-desc">우리 가게에 관심을 보임</p>
+              <p class="timeline-desc">우리 가게에 관심을 보임.</p>
             </div>
             <div class="timeline-item">
               <div class="timeline-platform"><i data-lucide="instagram"></i> 인스타그램</div>
               <h4 class="timeline-title">피드에서 우리 광고 발견</h4>
-              <p class="timeline-desc">AI가 관심 고객에게 재노출</p>
+              <p class="timeline-desc">AI가 관심 고객에게 재노출.</p>
             </div>
             <div class="timeline-item">
               <div class="timeline-platform"><i data-lucide="facebook"></i> 페이스북</div>
@@ -368,14 +489,14 @@
           <div class="result-box">
             <i data-lucide="refresh-cw"></i>
             <h4>365일 리타겟팅</h4>
-            <p>관심 보인 고객을 끝까지 따라갑니다</p>
+            <p>관심 보인 고객을 끝까지 따라갑니다.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="problem">
+  <section class="problem fade-up">
     <div class="section-inner">
       <p class="section-eyebrow">지금 이 순간에도</p>
       <h2 class="section-title">경쟁 업체에 고객을 뺏기고 있습니다</h2>
@@ -389,11 +510,11 @@
     </div>
   </section>
 
-  <section class="solution">
+  <section class="solution fade-up">
     <div class="section-inner">
       <p class="section-eyebrow">Solution</p>
       <h2 class="section-title">레브런이 전부 해결해 드립니다</h2>
-      <p class="section-desc">META AI가 관심 있는 고객을 자동으로 찾아 광고합니다</p>
+      <p class="section-desc">META AI가 관심 있는 고객을 자동으로 찾아 광고합니다.</p>
       <div class="solution-grid">
         <div class="solution-card"><div class="solution-icon"><i data-lucide="target"></i></div><h3>정밀 타겟팅</h3><p>반경 1km~해외까지 설정 가능.<br>원하는 지역 고객만 공략합니다.</p></div>
         <div class="solution-card"><div class="solution-icon"><i data-lucide="cpu"></i></div><h3>AI 자동 최적화</h3><p>구매 확률 높은 고객을<br>AI가 자동으로 발굴합니다.</p></div>
@@ -402,36 +523,38 @@
     </div>
   </section>
 
-  <section class="compare">
+  <section class="compare fade-up">
     <div class="section-inner">
       <p class="section-eyebrow">Compare</p>
       <h2 class="section-title">직접 운영 vs 레브런</h2>
-      <p class="section-desc">전문가에게 맡기면 이렇게 달라집니다</p>
+      <p class="section-desc">전문가에게 맡기면 이렇게 달라집니다.</p>
       <div class="compare-grid">
         <div class="compare-card bad">
           <div class="compare-header"><span class="compare-badge">직접 운영</span><div class="compare-title">인스타 앱으로 할 때</div></div>
           <ul class="compare-list">
-            <li><i data-lucide="x"></i> 지역 '시' 단위만 가능</li>
-            <li><i data-lucide="x"></i> 관심사 타겟팅 불가</li>
-            <li><i data-lucide="x"></i> 리타겟팅 기능 없음</li>
-            <li><i data-lucide="x"></i> 유사 타겟 설정 불가</li>
-            <li><i data-lucide="x"></i> 시간/요일 설정 불가</li>
+            <li><i data-lucide="x"></i> 지역 설정이 '시' 단위만 가능</li>
+            <li><i data-lucide="x"></i> 관심사 기반 타겟팅 불가</li>
+            <li><i data-lucide="x"></i> 방문자 리타겟팅 기능 없음</li>
+            <li><i data-lucide="x"></i> 유사 고객 자동 발굴 불가</li>
+            <li><i data-lucide="x"></i> 시간대/요일 설정 불가</li>
+            <li><i data-lucide="x"></i> 상세 성과 분석 제한적</li>
           </ul>
         </div>
         <div class="compare-card good">
           <div class="compare-header"><span class="compare-badge">REVRUN</span><div class="compare-title">레브런에 맡기면</div></div>
           <ul class="compare-list">
-            <li><i data-lucide="check"></i> 반경 1km ~ 해외까지</li>
-            <li><i data-lucide="check"></i> 관심사 정밀 타겟팅</li>
-            <li><i data-lucide="check"></i> 365일 맞춤 리타겟팅</li>
-            <li><i data-lucide="check"></i> 유사 고객 자동 발굴</li>
-            <li><i data-lucide="check"></i> 시간/요일 자유 설정</li>
+            <li><i data-lucide="check"></i> 반경 1km ~ 해외까지 설정</li>
+            <li><i data-lucide="check"></i> 관심사 기반 정밀 타겟팅</li>
+            <li><i data-lucide="check"></i> 365일 자동 리타겟팅</li>
+            <li><i data-lucide="check"></i> AI가 유사 고객 자동 발굴</li>
+            <li><i data-lucide="check"></i> 시간/요일 자유롭게 설정</li>
+            <li><i data-lucide="check"></i> 실시간 리포트 무료 제공</li>
           </ul>
         </div>
       </div>
       <div class="compare-notice">
         <p class="notice-intro">간혹 이런 사장님들이 계십니다.</p>
-        <p class="notice-quote">"저 그거 다 할 줄 알아요."<br>"하루에 5천명, 2만명 들어와요.<br>플레이스도 몇천명 들어오는데요?"</p>
+        <p class="notice-quote">"저 그거 다 할 줄 알아요."<br>"하루에 5천명, 2만명 도 봐요.<br>플레이스도 몇천명 들어오는데요?"</p>
         <div class="notice-divider"></div>
         <p class="notice-explain">사장님이 하시는 방식은<br><strong>사장님 업체가 필요 없는 사람들</strong>에게까지<br>전부 보여지는 겁니다.<br><br>레브런이 하는 방식은<br><strong>정말 필요로 하는 사람들</strong>에게만<br>보여지는 겁니다.</p>
         <p class="notice-hook">"노출 100만 vs 구매 0명"<br>"노출 1만 vs 실제 방문 10명"<br><strong>뭐가 더 나을까요?</strong></p>
@@ -439,11 +562,11 @@
     </div>
   </section>
 
-  <section class="reviews">
+  <section class="reviews fade-up">
     <div class="section-inner">
       <p class="section-eyebrow">Reviews</p>
       <h2 class="section-title">82%가 자진 연장하는 이유</h2>
-      <p class="section-desc">실제 사장님들의 솔직한 후기입니다</p>
+      <p class="section-desc">실제 사장님들의 솔직한 후기입니다.</p>
       <div class="reviews-track-wrap">
         <div class="reviews-track" id="reviewsTrack">
           <div class="review-card"><p class="review-text">"처음엔 반신반의했어요. 근데 두 달차부터 인스타 DM 예약 문의가 확실히 늘었습니다."</p><div class="review-author"><div class="review-avatar">김</div><div class="review-info"><h4>김** 대표님</h4><span>수원 피부관리실</span></div></div></div>
@@ -464,11 +587,11 @@
     </div>
   </section>
 
-  <section class="pricing">
+  <section class="pricing fade-up">
     <div class="section-inner pricing-inner">
       <p class="section-eyebrow">Pricing</p>
       <h2 class="section-title">단순하고 투명한 가격</h2>
-      <p class="section-desc">숨겨진 비용 없이 월 정액으로 운영합니다</p>
+      <p class="section-desc">숨겨진 비용 없이 월 정액으로 운영합니다.</p>
       <div class="pricing-card">
         <div class="pricing-tag">ALL INCLUSIVE</div>
         <div class="pricing-amount">20만원</div>
@@ -484,7 +607,7 @@
     </div>
   </section>
 
-  <section class="cta">
+  <section class="cta fade-up">
     <h2 class="cta-title">무료 상담 신청</h2>
     <p class="cta-desc">정보 남겨주시면 담당자가 연락드립니다</p>
     <div class="cta-notice"><i data-lucide="shield-check"></i> 반경 3km 이내 동일 업종은 받지 않습니다</div>
@@ -525,6 +648,17 @@
     track.ontouchend=e=>{const diff=startX-e.changedTouches[0].pageX;if(Math.abs(diff)>50)diff>0?next():idx>0&&goTo(idx-1);startAuto()};
     makeDots();startAuto();
     window.onresize=()=>{makeDots();goTo(idx)};
+    
+    // 스크롤 애니메이션
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+    fadeEls.forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
