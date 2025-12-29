@@ -4,403 +4,356 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>REVRUN | AI가 손님을 데려옵니다</title>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
     
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
     html,body{overflow-x:hidden;width:100%;max-width:100%}
     img,video,svg{max-width:100%;height:auto;display:block}
     
-    :root{--bg:#fafafa;--white:#fff;--gray50:#f8f8f8;--gray100:#f0f0f0;--gray200:#e4e4e4;--gray400:#a0a0a0;--gray600:#666;--gray800:#333;--black:#111;--primary:#2563eb;--primary-dark:#1d4ed8;--green:#10b981;--orange:#f59e0b}
+    :root{
+      --white:#fff;
+      --gray100:#f5f5f5;
+      --gray200:#e5e5e5;
+      --gray400:#a3a3a3;
+      --gray600:#525252;
+      --gray800:#262626;
+      --black:#0a0a0a;
+      --blue:#2563eb;
+      --blue-dark:#1d4ed8;
+      --blue-light:#dbeafe;
+      --green:#059669;
+      --green-light:#d1fae5;
+      --orange:#ea580c;
+      --orange-light:#ffedd5;
+      --red:#dc2626;
+      --red-light:#fee2e2;
+      --purple:#7c3aed;
+      --purple-light:#ede9fe;
+      --pink:#db2777;
+      --navy:#0f172a;
+    }
     
-    body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--black);line-height:1.7;word-break:keep-all;overflow-wrap:break-word;font-weight:500}
+    body{
+      font-family:'Pretendard',-apple-system,BlinkMacSystemFont,sans-serif;
+      background:var(--white);
+      color:var(--black);
+      line-height:1.7;
+      word-break:keep-all;
+      overflow-wrap:break-word;
+      font-weight:500;
+    }
 
     /* NAV */
-    .nav{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);z-index:1000;padding:14px 20px;border-bottom:1px solid var(--gray200)}
-    .nav-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:center;align-items:center}
-    .nav-logo{font-size:22px;font-weight:800;color:var(--black);text-decoration:none;letter-spacing:-0.5px}
+    .nav{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);z-index:1000;padding:16px 24px;border-bottom:1px solid var(--gray200)}
+    .nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:center;align-items:center}
+    .nav-logo{font-size:26px;font-weight:800;color:var(--black);text-decoration:none;letter-spacing:-1px}
+    .nav-logo span{color:var(--blue)}
 
     /* HERO */
-    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 20px 80px;background:linear-gradient(180deg,#fff 0%,var(--gray50) 100%)}
-    .hero-inner{max-width:700px;width:100%}
-    .hero-badge{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--white);border:1px solid var(--gray200);border-radius:50px;font-size:13px;font-weight:600;color:var(--gray600);margin-bottom:28px}
-    .hero-badge-dot{width:6px;height:6px;background:var(--green);border-radius:50%;flex-shrink:0}
-    .hero-eyebrow{font-size:15px;color:var(--primary);font-weight:700;margin-bottom:12px}
-    .hero-title{font-size:clamp(28px,6vw,56px);font-weight:800;line-height:1.2;margin-bottom:20px;letter-spacing:-1px;color:var(--black)}
-    .hero-desc{font-size:clamp(15px,4vw,17px);color:var(--gray600);line-height:1.7}
-    /* 히어로 스크롤 가운데 정렬 */
-    .hero-scroll{margin-top:40px;font-size:13px;color:var(--gray400);display:flex;flex-direction:column;align-items:center;justify-content:center}
-    .hero-scroll i{display:block;margin:8px auto 0;width:20px;height:20px;animation:bounce 2s infinite}
-    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:140px 24px 100px;background:linear-gradient(180deg,#fff 0%,#f8fafc 100%)}
+    .hero-inner{max-width:900px;width:100%}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:var(--blue-light);border-radius:50px;font-size:14px;font-weight:700;color:var(--blue);margin-bottom:32px}
+    .hero-badge i{font-size:14px}
+    .hero-title{font-size:clamp(32px,7vw,72px);font-weight:800;line-height:1.15;margin-bottom:28px;letter-spacing:-2px;color:var(--black)}
+    .hero-title .highlight{color:var(--blue)}
+    .hero-desc{font-size:clamp(17px,4vw,24px);color:var(--gray600);line-height:1.7;margin-bottom:48px}
+    .hero-cta{display:inline-flex;align-items:center;gap:12px;padding:20px 40px;background:var(--blue);color:#fff;border-radius:16px;font-size:20px;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 4px 24px rgba(37,99,235,.3)}
+    .hero-cta:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,99,235,.4)}
+    .hero-cta i{font-size:18px}
+    .hero-scroll{margin-top:60px;font-size:14px;color:var(--gray400);display:flex;flex-direction:column;align-items:center;gap:8px}
+    .hero-scroll i{font-size:20px;animation:bounce 2s infinite}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
 
     /* STATS */
-    .stats{padding:60px 16px;background:linear-gradient(180deg, #eef4ff 0%, #e0ebff 100%);border-top:none;border-bottom:none}
-    .stats-inner{max-width:800px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .stat{text-align:center;padding:20px 8px;min-width:0}
-    .stat-label{font-size:12px;color:var(--gray400);margin-bottom:8px;letter-spacing:0.3px;font-weight:600;white-space:nowrap}
-    .stat-value{font-size:clamp(32px,8vw,56px);font-weight:800;letter-spacing:-1px;line-height:1;white-space:nowrap}
-    .stat-value.blue{color:var(--primary)}
-    .stat-value.green{color:var(--green)}
-    .stat-value.orange{color:var(--orange)}
+    .stats{padding:80px 24px;background:var(--navy);color:#fff}
+    .stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .stat{text-align:center;padding:24px 16px}
+    .stat-icon{font-size:32px;margin-bottom:16px}
+    .stat-icon.blue{color:#60a5fa}
+    .stat-icon.green{color:#34d399}
+    .stat-icon.orange{color:#fb923c}
+    .stat-value{font-size:clamp(40px,10vw,64px);font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:8px}
+    .stat-label{font-size:15px;color:rgba(255,255,255,.7);font-weight:600}
 
     /* SECTION COMMON */
-    section{padding:80px 16px}
-    .section-inner{max-width:1200px;margin:0 auto;width:100%}
-    .section-eyebrow{font-size:12px;color:var(--primary);font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
-    .section-title{font-size:clamp(24px,5vw,40px);font-weight:800;margin-bottom:16px;letter-spacing:-0.5px;line-height:1.3}
-    .section-desc{font-size:16px;color:var(--gray600);margin-bottom:40px;max-width:600px;font-weight:500}
+    section{padding:100px 24px}
+    .section-inner{max-width:1100px;margin:0 auto;width:100%}
+    .section-header{text-align:center;margin-bottom:60px}
+    .section-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:var(--blue-light);border-radius:50px;font-size:13px;font-weight:700;color:var(--blue);margin-bottom:20px}
+    .section-title{font-size:clamp(28px,6vw,52px);font-weight:800;margin-bottom:20px;letter-spacing:-1px;line-height:1.2}
+    .section-title .highlight{color:var(--blue)}
+    .section-desc{font-size:clamp(16px,4vw,20px);color:var(--gray600);max-width:700px;margin:0 auto}
 
     /* EXPLAIN */
-    .explain{background:#fff;position:relative}
-    .explain::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(180deg, transparent 0%, #1e293b 100%);pointer-events:none}
-    .explain-block{margin-bottom:80px}
+    .explain{background:var(--white)}
+    .explain-block{margin-bottom:120px}
     .explain-block:last-child{margin-bottom:0}
-    .explain-header{text-align:center;margin-bottom:40px}
-    .explain-num{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;background:var(--primary);color:#fff;border-radius:50%;font-size:16px;font-weight:700;margin-bottom:16px}
-    .explain-title{font-size:clamp(22px,4vw,32px);font-weight:800;margin-bottom:10px;letter-spacing:-0.5px}
-    .explain-desc{font-size:15px;color:var(--gray600);font-weight:500}
-    .explain-grid{display:grid;gap:30px;align-items:center}
+    .explain-header{text-align:center;margin-bottom:50px}
+    .explain-num{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;border-radius:50%;font-size:24px;font-weight:800;margin-bottom:20px;box-shadow:0 4px 20px rgba(37,99,235,.3)}
+    .explain-title{font-size:clamp(24px,5vw,40px);font-weight:800;margin-bottom:16px;letter-spacing:-1px}
+    .explain-title .highlight{color:var(--blue)}
+    .explain-desc{font-size:clamp(15px,4vw,18px);color:var(--gray600)}
+    .explain-grid{display:grid;gap:40px;align-items:center}
 
     .phone-wrap{display:flex;justify-content:center}
-    .phone{width:min(260px,70vw);background:#1a1a1a;border-radius:32px;padding:10px;box-shadow:0 25px 60px rgba(0,0,0,.15)}
-    .phone-screen{background:#fff;border-radius:24px;overflow:hidden}
-    .phone-header{background:linear-gradient(135deg,#405de6,#833ab4,#c13584,#e1306c);padding:12px 16px;display:flex;align-items:center;gap:12px}
-    .phone-avatar{width:32px;height:32px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .phone-avatar i{width:16px;height:16px;color:#333}
+    .phone{width:min(280px,75vw);background:linear-gradient(145deg,#1a1a1a,#2d2d2d);border-radius:36px;padding:12px;box-shadow:0 30px 80px rgba(0,0,0,.25)}
+    .phone-screen{background:#fff;border-radius:28px;overflow:hidden}
+    .phone-header{background:linear-gradient(135deg,#405de6,#833ab4,#c13584,#e1306c);padding:16px 18px;display:flex;align-items:center;gap:14px}
+    .phone-avatar{width:40px;height:40px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .phone-avatar i{font-size:18px;color:#333}
     .phone-info{color:#fff;min-width:0}
-    .phone-name{font-size:13px;font-weight:700}
-    .phone-sponsored{font-size:10px;opacity:.8}
-    .phone-body{padding:14px}
-    .phone-img{height:140px;background:linear-gradient(135deg,#f0f0f0,#e0e0e0);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-    .phone-img i{width:40px;height:40px;color:#bbb}
-    .phone-actions{display:flex;gap:16px;margin-bottom:10px}
-    .phone-actions i{width:20px;height:20px;color:#333}
-    .phone-caption{font-size:12px;color:#333}
+    .phone-name{font-size:15px;font-weight:700}
+    .phone-sponsored{font-size:11px;opacity:.8}
+    .phone-body{padding:18px}
+    .phone-img{height:160px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+    .phone-img i{font-size:48px;color:rgba(255,255,255,.5)}
+    .phone-actions{display:flex;gap:18px;margin-bottom:12px;font-size:22px;color:#333}
+    .phone-caption{font-size:14px;color:#333;line-height:1.5}
+    .phone-caption strong{font-weight:700}
 
-    .flow{display:flex;flex-direction:column;gap:12px}
-    .flow-step{display:flex;align-items:center;gap:14px;padding:16px;background:var(--gray50);border-radius:14px;border:1px solid var(--gray100)}
-    .flow-icon{width:44px;height:44px;background:var(--white);border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.04);flex-shrink:0}
-    .flow-icon i{width:20px;height:20px;color:var(--primary)}
-    .flow-text{min-width:0}
-    .flow-text h4{font-size:15px;font-weight:700;margin-bottom:3px}
-    .flow-text p{font-size:13px;color:var(--gray600)}
+    .flow{display:flex;flex-direction:column;gap:16px}
+    .flow-step{display:flex;align-items:center;gap:18px;padding:24px;background:var(--gray100);border-radius:20px;transition:all .2s}
+    .flow-step:hover{transform:translateX(8px);box-shadow:0 4px 20px rgba(0,0,0,.08)}
+    .flow-icon{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:24px;color:#fff}
+    .flow-icon.blue{background:linear-gradient(135deg,#3b82f6,#2563eb)}
+    .flow-icon.purple{background:linear-gradient(135deg,#8b5cf6,#7c3aed)}
+    .flow-icon.green{background:linear-gradient(135deg,#10b981,#059669)}
+    .flow-icon.orange{background:linear-gradient(135deg,#f97316,#ea580c)}
+    .flow-icon.pink{background:linear-gradient(135deg,#ec4899,#db2777)}
+    .flow-icon.red{background:linear-gradient(135deg,#ef4444,#dc2626)}
+    .flow-text h4{font-size:18px;font-weight:700;margin-bottom:4px;color:var(--black)}
+    .flow-text p{font-size:15px;color:var(--gray600)}
 
     .target-visual{display:flex;justify-content:center}
-    .target-map{position:relative;width:min(220px,50vw);height:min(220px,50vw)}
-    .target-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2}
-    .target-center i{width:24px;height:24px;color:#fff}
-    .target-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:2px dashed var(--gray200);border-radius:50%;opacity:.5}
-    .target-ring:nth-child(2){width:45%;height:45%;animation:pulse-ring 2s infinite}
-    .target-ring:nth-child(3){width:70%;height:70%;animation:pulse-ring 2s infinite .5s}
-    .target-ring:nth-child(4){width:100%;height:100%;animation:pulse-ring 2s infinite 1s}
-    .target-person{position:absolute;width:28px;height:28px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center}
-    .target-person i{width:14px;height:14px;color:#fff}
+    .target-map{position:relative;width:min(260px,60vw);height:min(260px,60vw)}
+    .target-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 4px 20px rgba(37,99,235,.4);font-size:28px;color:#fff}
+    .target-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:3px dashed var(--blue);border-radius:50%;opacity:.3}
+    .target-ring:nth-child(2){width:50%;height:50%;animation:pulse-ring 2.5s infinite}
+    .target-ring:nth-child(3){width:75%;height:75%;animation:pulse-ring 2.5s infinite .5s}
+    .target-ring:nth-child(4){width:100%;height:100%;animation:pulse-ring 2.5s infinite 1s}
+    .target-person{position:absolute;width:36px;height:36px;background:linear-gradient(135deg,var(--green),#047857);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;box-shadow:0 2px 10px rgba(5,150,105,.4)}
     .target-person:nth-child(5){top:5%;left:50%;transform:translateX(-50%)}
     .target-person:nth-child(6){top:40%;right:0}
-    .target-person:nth-child(7){bottom:10%;left:10%}
+    .target-person:nth-child(7){bottom:8%;left:12%}
     .target-person:nth-child(8){top:55%;left:0}
-    .target-label{text-align:center;margin-top:20px;font-size:14px;font-weight:700;color:var(--gray800)}
+    .target-label{text-align:center;margin-top:28px;font-size:17px;font-weight:700;color:var(--gray800)}
+    @keyframes pulse-ring{0%,100%{opacity:.2;transform:translate(-50%,-50%) scale(1)}50%{opacity:.5;transform:translate(-50%,-50%) scale(1.05)}}
 
-    .timeline{position:relative;padding-left:28px}
-    .timeline::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--gray200)}
-    .timeline-item{position:relative;padding:16px;background:var(--white);border:1px solid var(--gray200);border-radius:14px;margin-bottom:14px}
+    .timeline{position:relative;padding-left:36px}
+    .timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--blue),var(--green))}
+    .timeline-item{position:relative;padding:24px;background:var(--white);border:2px solid var(--gray200);border-radius:20px;margin-bottom:20px;transition:all .2s}
+    .timeline-item:hover{border-color:var(--blue);box-shadow:0 4px 20px rgba(0,0,0,.08)}
     .timeline-item:last-child{margin-bottom:0}
-    .timeline-item::before{content:'';position:absolute;left:-25px;top:20px;width:10px;height:10px;background:var(--green);border-radius:50%}
-    .timeline-platform{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--gray600);margin-bottom:5px}
-    .timeline-platform i{width:11px;height:11px}
-    .timeline-title{font-size:14px;font-weight:700;margin-bottom:3px}
-    .timeline-desc{font-size:12px;color:var(--gray600)}
+    .timeline-item::before{content:'';position:absolute;left:-32px;top:28px;width:16px;height:16px;border-radius:50%}
+    .timeline-item:nth-child(1)::before{background:var(--green)}
+    .timeline-item:nth-child(2)::before{background:var(--pink)}
+    .timeline-item:nth-child(3)::before{background:var(--blue)}
+    .timeline-platform{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;margin-bottom:8px;padding:4px 12px;border-radius:20px}
+    .timeline-platform.naver{background:#03c75a20;color:#03c75a}
+    .timeline-platform.insta{background:#e1306c20;color:#e1306c}
+    .timeline-platform.facebook{background:#1877f220;color:#1877f2}
+    .timeline-title{font-size:17px;font-weight:700;margin-bottom:4px;color:var(--black)}
+    .timeline-desc{font-size:14px;color:var(--gray600)}
     
-    /* 365일 리타겟팅 박스 - 가운데 정렬 */
-    .result-box{background:linear-gradient(135deg,#ecfdf5,#d1fae5);padding:24px;border-radius:16px;text-align:center;margin-top:24px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-    .result-box i{width:32px;height:32px;color:var(--green);margin-bottom:8px}
-    .result-box h4{font-size:18px;font-weight:700;margin-bottom:5px}
-    .result-box p{font-size:13px;color:var(--gray600)}
+    .result-box{background:linear-gradient(135deg,#ecfdf5,#d1fae5);padding:36px;border-radius:24px;text-align:center;margin-top:32px;border:2px solid #a7f3d0}
+    .result-box-icon{width:72px;height:72px;background:linear-gradient(135deg,var(--green),#047857);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:32px;color:#fff;box-shadow:0 4px 20px rgba(5,150,105,.3)}
+    .result-box h4{font-size:24px;font-weight:800;margin-bottom:8px;color:var(--black)}
+    .result-box p{font-size:16px;color:var(--gray600)}
 
-    /* PROBLEM - 모바일 줄바꿈 개선 */
-    .problem{background:var(--gray800);color:#fff}
-    .problem .section-eyebrow{color:var(--orange)}
+    /* PROBLEM */
+    .problem{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+    .problem::before{content:'';position:absolute;top:0;left:0;right:0;height:100px;background:linear-gradient(180deg,var(--white),transparent);pointer-events:none}
+    .problem .section-badge{background:rgba(251,146,60,.2);color:#fb923c}
     .problem .section-title{color:#fff}
-    .problem .section-desc{color:var(--gray400)}
-    .problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    .problem-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:20px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;min-width:0}
-    .problem-icon{width:44px;height:44px;background:rgba(239,68,68,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;flex-shrink:0}
-    .problem-icon i{width:20px;height:20px;color:#fca5a5}
-    .problem-text{min-width:0;width:100%}
-    .problem-text h3{font-size:14px;font-weight:700;margin-bottom:5px;word-break:keep-all}
-    .problem-text p{font-size:12px;color:var(--gray400);line-height:1.5;word-break:keep-all}
+    .problem .section-desc{color:rgba(255,255,255,.7)}
+    .problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .problem-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:32px 20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:24px;transition:all .3s}
+    .problem-card:hover{background:rgba(255,255,255,.1);transform:translateY(-4px)}
+    .problem-icon{width:64px;height:64px;border-radius:20px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:28px}
+    .problem-icon.red{background:linear-gradient(135deg,#fca5a5,#f87171);color:#991b1b}
+    .problem-icon.orange{background:linear-gradient(135deg,#fed7aa,#fdba74);color:#9a3412}
+    .problem-icon.yellow{background:linear-gradient(135deg,#fef08a,#fde047);color:#854d0e}
+    .problem-icon.gray{background:linear-gradient(135deg,#e5e5e5,#d4d4d4);color:#525252}
+    .problem-text h3{font-size:18px;font-weight:700;margin-bottom:10px}
+    .problem-text p{font-size:14px;color:rgba(255,255,255,.6);line-height:1.6}
 
-    /* SOLUTION - 모바일 줄바꿈 개선 */
-    .solution{background:linear-gradient(180deg, #eef4ff 0%, #e8f1ff 100%)}
-    .solution-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-    .solution-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 16px;background:var(--gray50);border:1px solid var(--gray100);border-radius:16px;min-width:0}
-    .solution-card:nth-child(3){grid-column:1/-1}
-    .solution-icon{width:48px;height:48px;background:var(--white);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);flex-shrink:0}
-    .solution-icon i{width:22px;height:22px;color:var(--primary)}
-    .solution-card h3{font-size:16px;font-weight:700;margin-bottom:8px;word-break:keep-all}
-    .solution-card p{font-size:13px;color:var(--gray600);line-height:1.5;word-break:keep-all}
+    /* SOLUTION */
+    .solution{background:linear-gradient(180deg,#f0f9ff,#e0f2fe)}
+    .solution-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .solution-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:40px 28px;background:var(--white);border-radius:28px;box-shadow:0 4px 24px rgba(0,0,0,.06);transition:all .3s}
+    .solution-card:hover{transform:translateY(-8px);box-shadow:0 12px 40px rgba(0,0,0,.12)}
+    .solution-icon{width:80px;height:80px;border-radius:24px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;font-size:36px;color:#fff}
+    .solution-icon.blue{background:linear-gradient(135deg,#3b82f6,#2563eb)}
+    .solution-icon.purple{background:linear-gradient(135deg,#8b5cf6,#7c3aed)}
+    .solution-icon.green{background:linear-gradient(135deg,#10b981,#059669)}
+    .solution-card h3{font-size:22px;font-weight:800;margin-bottom:12px;color:var(--black)}
+    .solution-card p{font-size:16px;color:var(--gray600);line-height:1.6}
 
-    /* COMPARE - 줄바꿈 개선 */
-    .compare{background:linear-gradient(180deg, #fffcf5 0%, #fef8eb 100%)}
-    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .compare-card{padding:20px 14px;border-radius:16px;min-width:0}
-    .compare-card.bad{background:#fef2f2;border:1px solid #fecaca}
-    .compare-card.good{background:#f0fdf4;border:1px solid #bbf7d0}
-    .compare-header{margin-bottom:14px}
-    .compare-badge{display:inline-block;padding:4px 10px;border-radius:6px;font-size:10px;font-weight:700;margin-bottom:8px}
+    /* COMPARE */
+    .compare{background:var(--white)}
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .compare-card{padding:36px 28px;border-radius:28px}
+    .compare-card.bad{background:linear-gradient(180deg,#fef2f2,#fee2e2);border:2px solid #fecaca}
+    .compare-card.good{background:linear-gradient(180deg,#f0fdf4,#dcfce7);border:2px solid #bbf7d0}
+    .compare-header{margin-bottom:24px;text-align:center}
+    .compare-badge{display:inline-block;padding:8px 20px;border-radius:50px;font-size:13px;font-weight:800;margin-bottom:12px}
     .compare-card.bad .compare-badge{background:#fee2e2;color:#dc2626}
     .compare-card.good .compare-badge{background:#dcfce7;color:#16a34a}
-    .compare-title{font-size:14px;font-weight:700}
+    .compare-title{font-size:20px;font-weight:800}
     .compare-list{list-style:none}
-    .compare-list li{display:flex;align-items:flex-start;gap:8px;padding:8px 0;font-size:12px;border-bottom:1px solid rgba(0,0,0,.05);line-height:1.4;word-break:keep-all}
+    .compare-list li{display:flex;align-items:flex-start;gap:12px;padding:14px 0;font-size:15px;border-bottom:1px solid rgba(0,0,0,.06);line-height:1.5;font-weight:500}
     .compare-list li:last-child{border:none}
-    .compare-list li i{width:16px;height:16px;flex-shrink:0;margin-top:1px}
+    .compare-list li i{font-size:18px;margin-top:2px;flex-shrink:0}
     .compare-card.bad li i{color:#ef4444}
     .compare-card.good li i{color:#22c55e}
     
-    /* 비교 섹션 안내 박스 - 줄바꿈 개선 */
-    .compare-notice{margin-top:40px;padding:32px 24px;background:var(--white);border:1px solid var(--gray200);border-radius:20px;text-align:center}
-    .notice-intro{font-size:15px;color:var(--gray600);margin-bottom:14px;word-break:keep-all}
-    .notice-quote{font-size:16px;color:var(--gray800);font-weight:500;line-height:1.7;margin-bottom:24px;word-break:keep-all}
-    .notice-divider{width:50px;height:2px;background:var(--gray200);margin:0 auto 24px}
-    .notice-explain{font-size:15px;color:var(--gray600);line-height:1.7;margin-bottom:24px;word-break:keep-all}
-    .notice-explain strong{color:var(--primary);font-weight:700}
-    .notice-hook{font-size:20px;font-weight:800;color:var(--black);line-height:1.6;word-break:keep-all}
-    .notice-hook strong{color:var(--primary)}
+    .compare-notice{margin-top:60px;padding:48px 36px;background:linear-gradient(135deg,#fefce8,#fef9c3);border:2px solid #fde047;border-radius:32px;text-align:center}
+    .notice-intro{font-size:17px;color:var(--gray600);margin-bottom:20px}
+    .notice-quote{font-size:20px;color:var(--gray800);font-weight:600;line-height:1.8;margin-bottom:32px}
+    .notice-divider{width:60px;height:4px;background:var(--orange);margin:0 auto 32px;border-radius:2px}
+    .notice-explain{font-size:18px;color:var(--gray600);line-height:1.8;margin-bottom:32px}
+    .notice-explain strong{color:var(--blue);font-weight:700}
+    .notice-hook{font-size:26px;font-weight:800;color:var(--black);line-height:1.5}
+    .notice-hook strong{color:var(--blue)}
 
-    /* REVIEWS - 제목 가운데 정렬, 줄바꿈 개선 */
-    .reviews{background:linear-gradient(180deg, #f0f7ff 0%, #e8f1ff 100%);overflow:hidden}
-    .reviews .section-inner{text-align:center}
-    .reviews .section-desc{margin-left:auto;margin-right:auto}
-    .reviews-track-wrap{overflow:hidden;margin:0 -16px;padding:0 16px}
-    .reviews-track{display:flex;gap:14px;transition:transform .4s ease}
-    .review-card{flex:0 0 280px;padding:24px;background:var(--gray50);border:1px solid var(--gray100);border-radius:16px;user-select:none;min-width:0;text-align:left}
-    .review-text{font-size:14px;color:var(--gray800);line-height:1.6;margin-bottom:18px;min-height:75px;word-break:keep-all}
-    .review-author{display:flex;align-items:center;gap:12px}
-    .review-avatar{width:40px;height:40px;background:linear-gradient(135deg,var(--primary),#60a5fa);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-shrink:0}
-    .review-info{min-width:0}
-    .review-info h4{font-size:14px;font-weight:700}
-    .review-info span{font-size:12px;color:var(--gray600)}
-    .reviews-dots{display:flex;justify-content:center;gap:8px;margin-top:24px}
-    .reviews-dot{width:10px;height:10px;background:var(--gray200);border-radius:50%;cursor:pointer;transition:all .2s}
-    .reviews-dot.active{width:24px;border-radius:5px;background:var(--primary)}
+    /* REVIEWS */
+    .reviews{background:linear-gradient(180deg,#faf5ff,#f3e8ff);overflow:hidden}
+    .reviews .section-header{text-align:center}
+    .reviews .section-badge{background:#ede9fe;color:#7c3aed}
+    .reviews-track-wrap{overflow:hidden;margin:0 -24px;padding:0 24px}
+    .reviews-track{display:flex;gap:20px;transition:transform .4s ease}
+    .review-card{flex:0 0 320px;padding:32px;background:var(--white);border-radius:24px;box-shadow:0 4px 24px rgba(0,0,0,.06);user-select:none}
+    .review-text{font-size:16px;color:var(--gray800);line-height:1.7;margin-bottom:24px;min-height:85px}
+    .review-author{display:flex;align-items:center;gap:16px}
+    .review-avatar{width:52px;height:52px;background:linear-gradient(135deg,var(--purple),#6d28d9);border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;flex-shrink:0}
+    .review-info h4{font-size:16px;font-weight:700;color:var(--black)}
+    .review-info span{font-size:14px;color:var(--gray600)}
+    .reviews-dots{display:flex;justify-content:center;gap:10px;margin-top:32px}
+    .reviews-dot{width:12px;height:12px;background:var(--gray200);border-radius:50%;cursor:pointer;transition:all .2s}
+    .reviews-dot.active{width:32px;border-radius:6px;background:var(--purple)}
 
-    /* PRICING - 포트폴리오 삭제, 가격만 가운데 */
-    .pricing{background:#fff}
-    .pricing-inner{max-width:500px;margin:0 auto;text-align:center}
-    .pricing-card{background:var(--white);border:2px solid var(--primary);border-radius:16px;padding:32px 24px;text-align:center;position:relative}
-    .pricing-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;padding:6px 16px;border-radius:50px;font-size:11px;font-weight:700;white-space:nowrap}
-    .pricing-amount{font-size:clamp(36px,8vw,48px);font-weight:800;margin:16px 0 4px;letter-spacing:-2px}
-    .pricing-period{font-size:14px;color:var(--gray600);margin-bottom:24px}
-    .pricing-features{list-style:none;text-align:left;margin-bottom:0}
-    .pricing-features li{display:flex;align-items:center;gap:10px;padding:10px 0;font-size:14px;border-bottom:1px solid var(--gray100)}
+    /* PRICING */
+    .pricing{background:var(--white)}
+    .pricing-inner{max-width:520px;margin:0 auto;text-align:center}
+    .pricing-card{background:linear-gradient(180deg,#fff,#f8fafc);border:3px solid var(--blue);border-radius:32px;padding:48px 36px;position:relative;box-shadow:0 8px 40px rgba(37,99,235,.15)}
+    .pricing-tag{position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;padding:10px 28px;border-radius:50px;font-size:14px;font-weight:700;white-space:nowrap;box-shadow:0 4px 16px rgba(37,99,235,.3)}
+    .pricing-amount{font-size:clamp(52px,12vw,72px);font-weight:800;margin:24px 0 8px;letter-spacing:-3px;color:var(--black)}
+    .pricing-period{font-size:18px;color:var(--gray600);margin-bottom:32px}
+    .pricing-features{list-style:none;text-align:left}
+    .pricing-features li{display:flex;align-items:center;gap:14px;padding:16px 0;font-size:17px;font-weight:600;border-bottom:1px solid var(--gray100)}
     .pricing-features li:last-child{border:none}
-    .pricing-features li i{width:18px;height:18px;color:var(--green);flex-shrink:0}
+    .pricing-features li i{font-size:20px;color:var(--green)}
 
     /* CTA */
-    .cta{padding:80px 16px;text-align:center;background:linear-gradient(180deg, #eef4ff 0%, #dbeafe 100%)}
-    .cta-title{font-size:clamp(24px,5vw,36px);font-weight:800;margin-bottom:12px}
-    .cta-desc{font-size:15px;color:var(--gray600);margin-bottom:20px;font-weight:500}
-    .cta-notice{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:#fef3c7;border:1px solid #fcd34d;border-radius:10px;font-size:14px;font-weight:600;color:#92400e;margin-bottom:28px;word-break:keep-all}
-    .cta-notice i{width:18px;height:18px;flex-shrink:0}
-    .cta-form{max-width:400px;margin:0 auto}
-    .form-group{margin-bottom:14px}
-    .form-group input{width:100%;padding:16px 18px;border:1px solid var(--gray200);border-radius:12px;font-size:16px;font-family:inherit;transition:border-color .2s}
-    .form-group input:focus{outline:none;border-color:var(--primary)}
+    .cta{padding:120px 24px;text-align:center;background:linear-gradient(180deg,#eff6ff,#dbeafe)}
+    .cta-title{font-size:clamp(28px,6vw,48px);font-weight:800;margin-bottom:16px;letter-spacing:-1px}
+    .cta-desc{font-size:18px;color:var(--gray600);margin-bottom:28px}
+    .cta-notice{display:inline-flex;align-items:center;gap:12px;padding:16px 28px;background:#fef3c7;border:2px solid #fcd34d;border-radius:16px;font-size:16px;font-weight:700;color:#92400e;margin-bottom:40px}
+    .cta-notice i{font-size:20px}
+    .cta-form{max-width:440px;margin:0 auto}
+    .form-group{margin-bottom:16px}
+    .form-group input{width:100%;padding:20px 24px;border:2px solid var(--gray200);border-radius:16px;font-size:17px;font-family:inherit;font-weight:500;transition:all .2s}
+    .form-group input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(37,99,235,.1)}
     .form-group input::placeholder{color:var(--gray400)}
-    .form-submit{width:100%;padding:18px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-size:17px;font-weight:700;font-family:inherit;cursor:pointer;transition:background .2s}
-    .form-submit:hover{background:var(--primary-dark)}
-    .form-success{max-width:400px;margin:0 auto;padding:36px 24px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:16px}
-    .form-success i{width:52px;height:52px;color:var(--green);margin-bottom:14px}
-    .form-success p{font-size:16px;color:var(--gray800);line-height:1.6}
+    .form-submit{width:100%;padding:22px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;border:none;border-radius:16px;font-size:20px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .2s;box-shadow:0 4px 20px rgba(37,99,235,.3)}
+    .form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,99,235,.4)}
+    .form-success{max-width:440px;margin:0 auto;padding:48px 32px;background:#f0fdf4;border:2px solid #bbf7d0;border-radius:24px}
+    .form-success i{font-size:64px;color:var(--green);margin-bottom:20px}
+    .form-success p{font-size:18px;color:var(--gray800);line-height:1.7}
 
-    .footer{padding:40px 16px;text-align:center;border-top:1px solid var(--gray200);background:var(--gray50)}
-    .footer-text{font-size:13px;color:var(--gray600)}
+    .footer{padding:48px 24px;text-align:center;border-top:1px solid var(--gray200);background:var(--gray100)}
+    .footer-text{font-size:14px;color:var(--gray600)}
 
-    @keyframes pulse-ring{0%,100%{opacity:.3}50%{opacity:.6}}
-
-    /* 스크롤 애니메이션 */
-    .fade-up{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease, transform 0.7s ease}
+    /* ANIMATIONS */
+    .fade-up{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease, transform 0.8s ease}
     .fade-up.visible{opacity:1;transform:translateY(0)}
-    
-    /* 섹션 배경색 강화 */
-    .section-light{background:#fff}
-    .section-blue{background:linear-gradient(180deg, #eef4ff 0%, #e0ebff 100%)}
-    .section-cream{background:linear-gradient(180deg, #fefcf8 0%, #faf5eb 100%)}
-    .section-dark{background:linear-gradient(180deg, #1e293b 0%, #0f172a 100%)}
 
-    /* 반응형 - PC */
+    /* RESPONSIVE - PC */
     @media(min-width:768px){
-      section{padding:100px 24px}
-      .explain-grid{grid-template-columns:1fr 1fr}
+      .nav{padding:20px 40px}
+      .nav-logo{font-size:30px}
+      .hero{padding:180px 40px 140px}
+      .stats{padding:100px 40px}
+      .stats-inner{max-width:1100px}
+      section{padding:140px 40px}
+      .section-header{margin-bottom:80px}
+      .explain-block{margin-bottom:160px}
+      .explain-grid{grid-template-columns:1fr 1fr;gap:60px}
       .explain-grid.reverse{direction:rtl}
       .explain-grid.reverse>*{direction:ltr}
-      .problem-grid{grid-template-columns:repeat(4,1fr);gap:16px}
-      .problem-card{flex-direction:row;align-items:flex-start;text-align:left;padding:20px}
-      .problem-icon{margin-bottom:0;margin-right:14px}
-      .solution-grid{grid-template-columns:repeat(3,1fr);gap:18px}
-      .solution-card:nth-child(3){grid-column:auto}
-      .compare-grid{gap:20px}
-      .review-card{flex:0 0 320px}
-    }
-    
-    /* 모바일 전용 */
-    @media(max-width:767px){
-      .problem-grid{grid-template-columns:1fr 1fr;gap:10px}
-      .problem-card{padding:16px 12px}
-      .problem-text h3{font-size:13px}
-      .problem-text p{font-size:11px}
-      
-      .solution-grid{grid-template-columns:1fr;gap:12px}
-      .solution-card:nth-child(3){grid-column:auto}
-      
-      /* 모바일 비교표 2열 유지 + 자세하게 */
-      .compare-grid{grid-template-columns:1fr 1fr;gap:10px}
-      .compare-card{padding:16px 12px}
-      .compare-header{margin-bottom:12px}
-      .compare-badge{font-size:9px;padding:3px 8px}
-      .compare-title{font-size:12px}
-      .compare-list li{font-size:11px;padding:6px 0;gap:6px}
-      .compare-list li i{width:14px;height:14px}
-      
-      .notice-quote{font-size:14px}
-      .notice-explain{font-size:14px}
-      .notice-hook{font-size:18px}
-      
-      .review-card{flex:0 0 260px}
-      .review-text{font-size:13px;min-height:auto}
-    }
-    
-    @media(min-width:1024px){
-      section{padding:120px 32px}
-    }
-    
-    /* PC 대화면 - 시원하게 */
-    @media(min-width:768px){
-      /* 네비게이션 */
-      .nav{padding:20px 40px}
-      .nav-logo{font-size:28px}
-      
-      /* 히어로 */
-      .hero{padding:160px 40px 120px}
-      .hero-inner{max-width:900px}
-      .hero-badge{font-size:15px;padding:12px 24px}
-      .hero-eyebrow{font-size:20px}
-      .hero-title{font-size:clamp(40px,6vw,64px)}
-      .hero-desc{font-size:20px}
-      
-      /* 스탯 */
-      .stats{padding:70px 40px}
-      .stats-inner{max-width:1000px}
-      .stat-label{font-size:15px}
-      .stat-value{font-size:clamp(48px,8vw,72px)}
-      
-      /* 섹션 공통 */
-      section{padding:120px 40px}
-      .section-eyebrow{font-size:14px;margin-bottom:12px}
-      .section-title{font-size:clamp(32px,5vw,52px);margin-bottom:24px}
-      .section-desc{font-size:20px;margin-bottom:60px;max-width:700px}
-      
-      /* Explain 섹션 */
-      .explain-block{margin-bottom:120px}
-      .explain-num{width:52px;height:52px;font-size:20px}
-      .explain-title{font-size:clamp(28px,4vw,42px)}
-      .explain-desc{font-size:18px}
-      .phone{width:300px}
-      .flow-step{padding:24px}
-      .flow-icon{width:56px;height:56px}
-      .flow-icon i{width:26px;height:26px}
-      .flow-text h4{font-size:18px}
-      .flow-text p{font-size:15px}
-      .target-map{width:280px;height:280px}
-      .target-label{font-size:17px;margin-top:28px}
-      .timeline-item{padding:24px}
-      .timeline-title{font-size:17px}
-      .timeline-desc{font-size:14px}
-      .result-box{padding:36px}
-      .result-box i{width:44px;height:44px}
-      .result-box h4{font-size:24px}
-      .result-box p{font-size:16px}
-      
-      /* Problem 섹션 */
-      .problem-card{padding:28px}
-      .problem-icon{width:56px;height:56px;margin-right:18px}
-      .problem-icon i{width:26px;height:26px}
-      .problem-text h3{font-size:18px}
-      .problem-text p{font-size:15px}
-      
-      /* Solution 섹션 */
-      .solution-card{padding:36px 28px}
-      .solution-icon{width:64px;height:64px}
-      .solution-icon i{width:30px;height:30px}
-      .solution-card h3{font-size:22px;margin-bottom:12px}
-      .solution-card p{font-size:16px}
-      
-      /* Compare 섹션 */
+      .problem-grid{grid-template-columns:repeat(4,1fr);gap:24px}
+      .problem-card{padding:40px 24px}
+      .solution-grid{gap:32px}
       .compare-grid{gap:32px}
-      .compare-card{padding:36px 28px;border-radius:20px}
-      .compare-badge{font-size:12px;padding:6px 14px}
-      .compare-title{font-size:20px}
-      .compare-list li{font-size:16px;padding:14px 0}
-      .compare-list li i{width:22px;height:22px}
-      .compare-notice{margin-top:60px;padding:48px 40px;border-radius:24px}
-      .notice-intro{font-size:18px}
-      .notice-quote{font-size:20px}
-      .notice-explain{font-size:18px}
-      .notice-hook{font-size:26px}
+      .compare-card{padding:48px 36px}
+      .review-card{flex:0 0 380px;padding:40px}
+      .cta{padding:160px 40px}
+    }
+    
+    /* RESPONSIVE - MOBILE */
+    @media(max-width:767px){
+      .problem-grid{grid-template-columns:1fr 1fr;gap:12px}
+      .problem-card{padding:24px 16px}
+      .problem-icon{width:52px;height:52px;font-size:24px;margin-bottom:16px}
+      .problem-text h3{font-size:15px}
+      .problem-text p{font-size:13px}
       
-      /* Reviews 섹션 */
-      .review-card{flex:0 0 380px;padding:32px}
-      .review-text{font-size:17px;min-height:90px}
-      .review-avatar{width:52px;height:52px;font-size:18px}
-      .review-info h4{font-size:17px}
-      .review-info span{font-size:14px}
+      .solution-grid{grid-template-columns:1fr;gap:16px}
+      .solution-card{padding:32px 24px}
+      .solution-icon{width:64px;height:64px;font-size:28px}
       
-      /* Pricing 섹션 */
-      .pricing-inner{max-width:550px}
-      .pricing-card{padding:48px 36px;border-radius:24px}
-      .pricing-tag{font-size:13px;padding:8px 20px}
-      .pricing-amount{font-size:clamp(48px,8vw,64px)}
-      .pricing-period{font-size:17px;margin-bottom:32px}
-      .pricing-features li{font-size:17px;padding:14px 0}
-      .pricing-features li i{width:22px;height:22px}
+      .compare-grid{grid-template-columns:1fr 1fr;gap:12px}
+      .compare-card{padding:24px 16px;border-radius:20px}
+      .compare-badge{font-size:11px;padding:6px 14px}
+      .compare-title{font-size:15px}
+      .compare-list li{font-size:13px;padding:10px 0;gap:8px}
+      .compare-list li i{font-size:16px}
       
-      /* CTA 섹션 */
-      .cta{padding:120px 40px}
-      .cta-title{font-size:clamp(32px,5vw,48px)}
-      .cta-desc{font-size:18px}
-      .cta-notice{font-size:16px;padding:16px 28px}
-      .cta-form{max-width:480px}
-      .form-group input{padding:20px 22px;font-size:17px}
-      .form-submit{padding:22px;font-size:19px}
+      .compare-notice{padding:32px 20px;border-radius:24px;margin-top:40px}
+      .notice-quote{font-size:16px}
+      .notice-explain{font-size:15px}
+      .notice-hook{font-size:20px}
       
-      /* Footer */
-      .footer{padding:60px 40px}
-      .footer-text{font-size:15px}
+      .review-card{flex:0 0 280px;padding:28px}
+      .review-text{font-size:15px;min-height:auto}
     }
   </style>
 </head>
 <body>
   <nav class="nav"><div class="nav-inner">
-    <a href="#" class="nav-logo">REVRUN</a>
+    <a href="#" class="nav-logo">REV<span>RUN</span></a>
   </div></nav>
 
   <section class="hero">
     <div class="hero-inner">
-      <div class="hero-badge"><span class="hero-badge-dot"></span> META 공식 파트너</div>
-      <p class="hero-eyebrow">인스타·페이스북 AI 광고 대행</p>
-      <h1 class="hero-title">사장님은 장사만 하세요.<br>손님은 AI가 데려옵니다.</h1>
+      <div class="hero-badge"><i class="fa-solid fa-circle-check"></i> META 공식 비즈니스 파트너</div>
+      <h1 class="hero-title">사장님은 장사만 하세요.<br><span class="highlight">손님은 AI가</span> 데려옵니다.</h1>
       <p class="hero-desc">복잡한 광고 설정, 타겟팅, 최적화까지<br>전부 맡기시고 매출에만 집중하세요.</p>
-      <div class="hero-scroll">아래로 스크롤<i data-lucide="chevron-down"></i></div>
+      <a href="#contact" class="hero-cta"><i class="fa-solid fa-paper-plane"></i> 무료 상담 신청</a>
+      <div class="hero-scroll">아래로 스크롤<i class="fa-solid fa-chevron-down"></i></div>
     </div>
   </section>
 
   <section class="stats fade-up">
     <div class="stats-inner">
-      <div class="stat"><div class="stat-label">정밀 타겟팅</div><div class="stat-value blue">1km~</div></div>
-      <div class="stat"><div class="stat-label">자진 연장률</div><div class="stat-value green">82%</div></div>
-      <div class="stat"><div class="stat-label">전환율 상승</div><div class="stat-value orange">+63%</div></div>
+      <div class="stat">
+        <div class="stat-icon blue"><i class="fa-solid fa-location-crosshairs"></i></div>
+        <div class="stat-value">1km~</div>
+        <div class="stat-label">정밀 타겟팅</div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon green"><i class="fa-solid fa-arrow-rotate-right"></i></div>
+        <div class="stat-value">82%</div>
+        <div class="stat-label">자진 연장률</div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon orange"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="stat-value">+63%</div>
+        <div class="stat-label">전환율 상승</div>
+      </div>
     </div>
   </section>
 
@@ -409,27 +362,27 @@
       <div class="explain-block">
         <div class="explain-header">
           <div class="explain-num">1</div>
-          <h2 class="explain-title">검색하는 고객에게 실시간 노출</h2>
+          <h2 class="explain-title">검색하는 고객에게 <span class="highlight">실시간 노출</span></h2>
           <p class="explain-desc">고객이 찾기 전에, AI가 먼저 찾아갑니다.</p>
         </div>
         <div class="explain-grid">
           <div class="phone-wrap">
             <div class="phone"><div class="phone-screen">
               <div class="phone-header">
-                <div class="phone-avatar"><i data-lucide="store"></i></div>
+                <div class="phone-avatar"><i class="fa-solid fa-store"></i></div>
                 <div class="phone-info"><div class="phone-name">우리가게</div><div class="phone-sponsored">Sponsored</div></div>
               </div>
               <div class="phone-body">
-                <div class="phone-img"><i data-lucide="image"></i></div>
-                <div class="phone-actions"><i data-lucide="heart"></i><i data-lucide="message-circle"></i><i data-lucide="send"></i></div>
+                <div class="phone-img"><i class="fa-solid fa-image"></i></div>
+                <div class="phone-actions"><i class="fa-regular fa-heart"></i><i class="fa-regular fa-comment"></i><i class="fa-regular fa-paper-plane"></i></div>
                 <p class="phone-caption"><strong>우리가게</strong> 동네 맛집! 지금 방문하면 10% 할인</p>
               </div>
             </div></div>
           </div>
           <div class="flow">
-            <div class="flow-step"><div class="flow-icon"><i data-lucide="search"></i></div><div class="flow-text"><h4>고객이 검색</h4><p>"근처 맛집" 검색하면.</p></div></div>
-            <div class="flow-step"><div class="flow-icon"><i data-lucide="cpu"></i></div><div class="flow-text"><h4>AI가 감지</h4><p>관심사 + 위치 분석.</p></div></div>
-            <div class="flow-step"><div class="flow-icon"><i data-lucide="smartphone"></i></div><div class="flow-text"><h4>즉시 노출</h4><p>인스타 피드에 광고 노출.</p></div></div>
+            <div class="flow-step"><div class="flow-icon blue"><i class="fa-solid fa-magnifying-glass"></i></div><div class="flow-text"><h4>고객이 검색</h4><p>"근처 맛집" 검색하면.</p></div></div>
+            <div class="flow-step"><div class="flow-icon purple"><i class="fa-solid fa-microchip"></i></div><div class="flow-text"><h4>AI가 감지</h4><p>관심사 + 위치 분석.</p></div></div>
+            <div class="flow-step"><div class="flow-icon green"><i class="fa-solid fa-mobile-screen"></i></div><div class="flow-text"><h4>즉시 노출</h4><p>인스타 피드에 광고 노출.</p></div></div>
           </div>
         </div>
       </div>
@@ -437,27 +390,27 @@
       <div class="explain-block">
         <div class="explain-header">
           <div class="explain-num">2</div>
-          <h2 class="explain-title">1km부터 해외까지 정밀 타겟팅</h2>
+          <h2 class="explain-title">1km부터 해외까지 <span class="highlight">정밀 타겟팅</span></h2>
           <p class="explain-desc">원하는 지역의 고객에게만 광고비를 씁니다.</p>
         </div>
         <div class="explain-grid reverse">
           <div>
             <div class="target-visual">
               <div class="target-map">
-                <div class="target-center"><i data-lucide="store"></i></div>
+                <div class="target-center"><i class="fa-solid fa-store"></i></div>
                 <div class="target-ring"></div><div class="target-ring"></div><div class="target-ring"></div>
-                <div class="target-person"><i data-lucide="user"></i></div>
-                <div class="target-person"><i data-lucide="user"></i></div>
-                <div class="target-person"><i data-lucide="user"></i></div>
-                <div class="target-person"><i data-lucide="user"></i></div>
+                <div class="target-person"><i class="fa-solid fa-user"></i></div>
+                <div class="target-person"><i class="fa-solid fa-user"></i></div>
+                <div class="target-person"><i class="fa-solid fa-user"></i></div>
+                <div class="target-person"><i class="fa-solid fa-user"></i></div>
               </div>
             </div>
             <p class="target-label">반경 1km ~ 해외까지 설정 가능.</p>
           </div>
           <div class="flow">
-            <div class="flow-step"><div class="flow-icon"><i data-lucide="map-pin"></i></div><div class="flow-text"><h4>위치 설정</h4><p>매장 반경 1km부터 해외까지.</p></div></div>
-            <div class="flow-step"><div class="flow-icon"><i data-lucide="users"></i></div><div class="flow-text"><h4>관심사 필터</h4><p>업종 관련 관심사만 타겟팅.</p></div></div>
-            <div class="flow-step"><div class="flow-icon"><i data-lucide="clock"></i></div><div class="flow-text"><h4>시간대 설정</h4><p>영업시간에 집중 노출.</p></div></div>
+            <div class="flow-step"><div class="flow-icon red"><i class="fa-solid fa-location-dot"></i></div><div class="flow-text"><h4>위치 설정</h4><p>매장 반경 1km부터 해외까지.</p></div></div>
+            <div class="flow-step"><div class="flow-icon orange"><i class="fa-solid fa-users"></i></div><div class="flow-text"><h4>관심사 필터</h4><p>업종 관련 관심사만 타겟팅.</p></div></div>
+            <div class="flow-step"><div class="flow-icon pink"><i class="fa-solid fa-clock"></i></div><div class="flow-text"><h4>시간대 설정</h4><p>영업시간에 집중 노출.</p></div></div>
           </div>
         </div>
       </div>
@@ -465,29 +418,29 @@
       <div class="explain-block">
         <div class="explain-header">
           <div class="explain-num">3</div>
-          <h2 class="explain-title">한 번 본 고객, 끝까지 따라갑니다</h2>
+          <h2 class="explain-title">한 번 본 고객, <span class="highlight">끝까지 따라갑니다</span></h2>
           <p class="explain-desc">네이버에서 검색한 고객, 인스타에서 다시 만납니다.</p>
         </div>
         <div class="explain-grid">
           <div class="timeline">
             <div class="timeline-item">
-              <div class="timeline-platform"><i data-lucide="search"></i> 네이버</div>
+              <div class="timeline-platform naver"><i class="fa-solid fa-n"></i> 네이버</div>
               <h4 class="timeline-title">고객이 "강남 맛집" 검색</h4>
               <p class="timeline-desc">우리 가게에 관심을 보임.</p>
             </div>
             <div class="timeline-item">
-              <div class="timeline-platform"><i data-lucide="instagram"></i> 인스타그램</div>
+              <div class="timeline-platform insta"><i class="fa-brands fa-instagram"></i> 인스타그램</div>
               <h4 class="timeline-title">피드에서 우리 광고 발견</h4>
               <p class="timeline-desc">AI가 관심 고객에게 재노출.</p>
             </div>
             <div class="timeline-item">
-              <div class="timeline-platform"><i data-lucide="facebook"></i> 페이스북</div>
+              <div class="timeline-platform facebook"><i class="fa-brands fa-facebook-f"></i> 페이스북</div>
               <h4 class="timeline-title">또 한번 리마인드</h4>
               <p class="timeline-desc">결국 방문 또는 예약!</p>
             </div>
           </div>
           <div class="result-box">
-            <i data-lucide="refresh-cw"></i>
+            <div class="result-box-icon"><i class="fa-solid fa-rotate"></i></div>
             <h4>365일 리타겟팅</h4>
             <p>관심 보인 고객을 끝까지 따라갑니다.</p>
           </div>
@@ -498,57 +451,87 @@
 
   <section class="problem fade-up">
     <div class="section-inner">
-      <p class="section-eyebrow">지금 이 순간에도</p>
-      <h2 class="section-title">경쟁 업체에 고객을 뺏기고 있습니다</h2>
-      <p class="section-desc">사장님만 광고 안 하고 계신 거 아니죠?</p>
+      <div class="section-header">
+        <div class="section-badge"><i class="fa-solid fa-triangle-exclamation"></i> 지금 이 순간에도</div>
+        <h2 class="section-title">경쟁 업체에 <span class="highlight">고객을 뺏기고</span> 있습니다</h2>
+        <p class="section-desc">사장님만 광고 안 하고 계신 거 아니죠?</p>
+      </div>
       <div class="problem-grid">
-        <div class="problem-card"><div class="problem-icon"><i data-lucide="help-circle"></i></div><div class="problem-text"><h3>광고 설정이 어려워요</h3><p>복잡한 시스템,<br>뭘 해야 할지 모르겠어요</p></div></div>
-        <div class="problem-card"><div class="problem-icon"><i data-lucide="wallet"></i></div><div class="problem-text"><h3>돈만 날리는 것 같아요</h3><p>광고비는 나가는데<br>효과를 모르겠어요</p></div></div>
-        <div class="problem-card"><div class="problem-icon"><i data-lucide="clock"></i></div><div class="problem-text"><h3>시간이 없어요</h3><p>가게 운영하기도<br>바쁜데요</p></div></div>
-        <div class="problem-card"><div class="problem-icon"><i data-lucide="trending-down"></i></div><div class="problem-text"><h3>손님이 줄었어요</h3><p>예전만큼 안 오는데<br>어쩌죠</p></div></div>
+        <div class="problem-card">
+          <div class="problem-icon red"><i class="fa-solid fa-circle-question"></i></div>
+          <div class="problem-text"><h3>광고 설정이 어려워요</h3><p>복잡한 시스템,<br>뭘 해야 할지 모르겠어요.</p></div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon orange"><i class="fa-solid fa-money-bill-wave"></i></div>
+          <div class="problem-text"><h3>돈만 날리는 것 같아요</h3><p>광고비는 나가는데<br>효과를 모르겠어요.</p></div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon yellow"><i class="fa-solid fa-hourglass-half"></i></div>
+          <div class="problem-text"><h3>시간이 없어요</h3><p>가게 운영하기도<br>바쁜데요.</p></div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon gray"><i class="fa-solid fa-arrow-trend-down"></i></div>
+          <div class="problem-text"><h3>손님이 줄었어요</h3><p>예전만큼 안 오는데<br>어쩌죠.</p></div>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="solution fade-up">
     <div class="section-inner">
-      <p class="section-eyebrow">Solution</p>
-      <h2 class="section-title">레브런이 전부 해결해 드립니다</h2>
-      <p class="section-desc">META AI가 관심 있는 고객을 자동으로 찾아 광고합니다.</p>
+      <div class="section-header">
+        <div class="section-badge"><i class="fa-solid fa-lightbulb"></i> Solution</div>
+        <h2 class="section-title">레브런이 <span class="highlight">전부 해결</span>해 드립니다</h2>
+        <p class="section-desc">META AI가 관심 있는 고객을 자동으로 찾아 광고합니다.</p>
+      </div>
       <div class="solution-grid">
-        <div class="solution-card"><div class="solution-icon"><i data-lucide="target"></i></div><h3>정밀 타겟팅</h3><p>반경 1km~해외까지 설정 가능.<br>원하는 지역 고객만 공략합니다.</p></div>
-        <div class="solution-card"><div class="solution-icon"><i data-lucide="cpu"></i></div><h3>AI 자동 최적화</h3><p>구매 확률 높은 고객을<br>AI가 자동으로 발굴합니다.</p></div>
-        <div class="solution-card"><div class="solution-icon"><i data-lucide="refresh-cw"></i></div><h3>365일 리타겟팅</h3><p>한 번 관심 보인 고객에게<br>지속적으로 재노출합니다.</p></div>
+        <div class="solution-card">
+          <div class="solution-icon blue"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>정밀 타겟팅</h3>
+          <p>반경 1km~해외까지 설정 가능.<br>원하는 지역 고객만 공략합니다.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon purple"><i class="fa-solid fa-robot"></i></div>
+          <h3>AI 자동 최적화</h3>
+          <p>구매 확률 높은 고객을<br>AI가 자동으로 발굴합니다.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon green"><i class="fa-solid fa-arrows-rotate"></i></div>
+          <h3>365일 리타겟팅</h3>
+          <p>한 번 관심 보인 고객에게<br>지속적으로 재노출합니다.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="compare fade-up">
     <div class="section-inner">
-      <p class="section-eyebrow">Compare</p>
-      <h2 class="section-title">직접 운영 vs 레브런</h2>
-      <p class="section-desc">전문가에게 맡기면 이렇게 달라집니다.</p>
+      <div class="section-header">
+        <div class="section-badge"><i class="fa-solid fa-scale-balanced"></i> Compare</div>
+        <h2 class="section-title">직접 운영 vs <span class="highlight">레브런</span></h2>
+        <p class="section-desc">전문가에게 맡기면 이렇게 달라집니다.</p>
+      </div>
       <div class="compare-grid">
         <div class="compare-card bad">
           <div class="compare-header"><span class="compare-badge">직접 운영</span><div class="compare-title">인스타 앱으로 할 때</div></div>
           <ul class="compare-list">
-            <li><i data-lucide="x"></i> 지역 설정이 '시' 단위만 가능</li>
-            <li><i data-lucide="x"></i> 관심사 기반 타겟팅 불가</li>
-            <li><i data-lucide="x"></i> 방문자 리타겟팅 기능 없음</li>
-            <li><i data-lucide="x"></i> 유사 고객 자동 발굴 불가</li>
-            <li><i data-lucide="x"></i> 시간대/요일 설정 불가</li>
-            <li><i data-lucide="x"></i> 상세 성과 분석 제한적</li>
+            <li><i class="fa-solid fa-xmark"></i> 지역 설정이 '시' 단위만 가능.</li>
+            <li><i class="fa-solid fa-xmark"></i> 관심사 기반 타겟팅 불가.</li>
+            <li><i class="fa-solid fa-xmark"></i> 방문자 리타겟팅 기능 없음.</li>
+            <li><i class="fa-solid fa-xmark"></i> 유사 고객 자동 발굴 불가.</li>
+            <li><i class="fa-solid fa-xmark"></i> 시간대/요일 설정 불가.</li>
+            <li><i class="fa-solid fa-xmark"></i> 상세 성과 분석 제한적.</li>
           </ul>
         </div>
         <div class="compare-card good">
           <div class="compare-header"><span class="compare-badge">REVRUN</span><div class="compare-title">레브런에 맡기면</div></div>
           <ul class="compare-list">
-            <li><i data-lucide="check"></i> 반경 1km ~ 해외까지 설정</li>
-            <li><i data-lucide="check"></i> 관심사 기반 정밀 타겟팅</li>
-            <li><i data-lucide="check"></i> 365일 자동 리타겟팅</li>
-            <li><i data-lucide="check"></i> AI가 유사 고객 자동 발굴</li>
-            <li><i data-lucide="check"></i> 시간/요일 자유롭게 설정</li>
-            <li><i data-lucide="check"></i> 실시간 리포트 무료 제공</li>
+            <li><i class="fa-solid fa-check"></i> 반경 1km ~ 해외까지 설정.</li>
+            <li><i class="fa-solid fa-check"></i> 관심사 기반 정밀 타겟팅.</li>
+            <li><i class="fa-solid fa-check"></i> 365일 자동 리타겟팅.</li>
+            <li><i class="fa-solid fa-check"></i> AI가 유사 고객 자동 발굴.</li>
+            <li><i class="fa-solid fa-check"></i> 시간/요일 자유롭게 설정.</li>
+            <li><i class="fa-solid fa-check"></i> 실시간 리포트 무료 제공.</li>
           </ul>
         </div>
       </div>
@@ -564,9 +547,11 @@
 
   <section class="reviews fade-up">
     <div class="section-inner">
-      <p class="section-eyebrow">Reviews</p>
-      <h2 class="section-title">82%가 자진 연장하는 이유</h2>
-      <p class="section-desc">실제 사장님들의 솔직한 후기입니다.</p>
+      <div class="section-header">
+        <div class="section-badge"><i class="fa-solid fa-star"></i> Reviews</div>
+        <h2 class="section-title">82%가 <span class="highlight">자진 연장</span>하는 이유</h2>
+        <p class="section-desc">실제 사장님들의 솔직한 후기입니다.</p>
+      </div>
       <div class="reviews-track-wrap">
         <div class="reviews-track" id="reviewsTrack">
           <div class="review-card"><p class="review-text">"처음엔 반신반의했어요. 근데 두 달차부터 인스타 DM 예약 문의가 확실히 늘었습니다."</p><div class="review-author"><div class="review-avatar">김</div><div class="review-info"><h4>김** 대표님</h4><span>수원 피부관리실</span></div></div></div>
@@ -589,36 +574,38 @@
 
   <section class="pricing fade-up">
     <div class="section-inner pricing-inner">
-      <p class="section-eyebrow">Pricing</p>
-      <h2 class="section-title">단순하고 투명한 가격</h2>
-      <p class="section-desc">숨겨진 비용 없이 월 정액으로 운영합니다.</p>
+      <div class="section-header">
+        <div class="section-badge"><i class="fa-solid fa-tag"></i> Pricing</div>
+        <h2 class="section-title">단순하고 <span class="highlight">투명한 가격</span></h2>
+        <p class="section-desc">숨겨진 비용 없이 월 정액으로 운영합니다.</p>
+      </div>
       <div class="pricing-card">
-        <div class="pricing-tag">ALL INCLUSIVE</div>
+        <div class="pricing-tag"><i class="fa-solid fa-gift"></i> ALL INCLUSIVE</div>
         <div class="pricing-amount">20만원</div>
         <div class="pricing-period">월 / 부가세 별도</div>
         <ul class="pricing-features">
-          <li><i data-lucide="check"></i> 광고비 포함</li>
-          <li><i data-lucide="check"></i> 콘텐츠 제작비 포함</li>
-          <li><i data-lucide="check"></i> 릴스 제작비 지원</li>
-          <li><i data-lucide="check"></i> 실시간 리포트 제공</li>
-          <li><i data-lucide="check"></i> 전담 매니저 1:1 케어</li>
+          <li><i class="fa-solid fa-circle-check"></i> 광고비 포함</li>
+          <li><i class="fa-solid fa-circle-check"></i> 콘텐츠 제작비 포함</li>
+          <li><i class="fa-solid fa-circle-check"></i> 릴스 제작비 지원</li>
+          <li><i class="fa-solid fa-circle-check"></i> 실시간 리포트 제공</li>
+          <li><i class="fa-solid fa-circle-check"></i> 전담 매니저 1:1 케어</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section class="cta fade-up">
+  <section class="cta fade-up" id="contact">
     <h2 class="cta-title">무료 상담 신청</h2>
-    <p class="cta-desc">정보 남겨주시면 담당자가 연락드립니다</p>
-    <div class="cta-notice"><i data-lucide="shield-check"></i> 반경 3km 이내 동일 업종은 받지 않습니다</div>
+    <p class="cta-desc">정보 남겨주시면 담당자가 연락드립니다.</p>
+    <div class="cta-notice"><i class="fa-solid fa-shield-halved"></i> 반경 3km 이내 동일 업종은 받지 않습니다.</div>
     <form class="cta-form" id="contactForm">
       <div class="form-group"><input type="text" name="storeName" placeholder="업체명" required></div>
       <div class="form-group"><input type="text" name="ownerName" placeholder="이름" required></div>
       <div class="form-group"><input type="tel" name="phone" placeholder="전화번호" required></div>
-      <button type="submit" class="form-submit">상담 신청하기</button>
+      <button type="submit" class="form-submit"><i class="fa-solid fa-paper-plane"></i> 상담 신청하기</button>
     </form>
     <div class="form-success" id="formSuccess" style="display:none;">
-      <i data-lucide="check-circle"></i>
+      <i class="fa-solid fa-circle-check"></i>
       <p>접수가 완료되었습니다.<br>담당자 배정 후 빠르게 연락드리겠습니다.</p>
     </div>
   </section>
@@ -626,19 +613,18 @@
   <footer class="footer"><p class="footer-text">© 2025 REVRUN. All rights reserved.</p></footer>
 
   <script>
-    lucide.createIcons();
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       this.style.display = 'none';
       document.getElementById('formSuccess').style.display = 'block';
-      lucide.createIcons();
     });
+    
     const track=document.getElementById('reviewsTrack'),dotsWrap=document.getElementById('reviewsDots'),cards=track.querySelectorAll('.review-card');
     let idx=0,startX=0,autoSlide;
-    function getVisible(){return Math.floor(track.parentElement.offsetWidth/(cards[0].offsetWidth+14))||1}
+    function getVisible(){return Math.floor(track.parentElement.offsetWidth/(cards[0].offsetWidth+20))||1}
     function makeDots(){dotsWrap.innerHTML='';const total=Math.ceil(cards.length/getVisible());for(let i=0;i<Math.min(total,8);i++){const dot=document.createElement('div');dot.className='reviews-dot'+(i===0?' active':'');dot.onclick=()=>goTo(i);dotsWrap.appendChild(dot)}}
     function updateDots(){dotsWrap.querySelectorAll('.reviews-dot').forEach((d,i)=>d.classList.toggle('active',i===Math.min(idx,dotsWrap.children.length-1)))}
-    function goTo(i){const cardW=cards[0].offsetWidth+14;idx=Math.max(0,Math.min(i,cards.length-getVisible()));track.style.transform='translateX(-'+(idx*cardW)+'px)';updateDots()}
+    function goTo(i){const cardW=cards[0].offsetWidth+20;idx=Math.max(0,Math.min(i,cards.length-getVisible()));track.style.transform='translateX(-'+(idx*cardW)+'px)';updateDots()}
     function next(){idx=idx>=cards.length-getVisible()?0:idx+1;goTo(idx)}
     function startAuto(){autoSlide=setInterval(next,4000)}
     function stopAuto(){clearInterval(autoSlide)}
@@ -657,7 +643,7 @@
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1 });
     fadeEls.forEach(el => observer.observe(el));
   </script>
 </body>
