@@ -252,7 +252,7 @@
     .cta-title{font-size:clamp(28px,6vw,48px);font-weight:800;margin-bottom:16px;letter-spacing:-1px}
     .cta-desc{font-size:18px;color:var(--gray600);margin-bottom:28px}
     .cta-notice{display:inline-flex;align-items:center;gap:12px;padding:16px 28px;background:#fef3c7;border:2px solid #fcd34d;border-radius:16px;font-size:16px;font-weight:700;color:#92400e;margin-bottom:40px}
-    .cta-notice i{font-size:20px}
+    .cta-notice i{font-size:20px;flex-shrink:0}
     .cta-form{max-width:440px;margin:0 auto}
     .form-group{margin-bottom:16px}
     .form-group input{width:100%;padding:20px 24px;border:2px solid var(--gray200);border-radius:16px;font-size:17px;font-family:inherit;font-weight:500;transition:all .2s}
@@ -295,6 +295,14 @@
     
     /* RESPONSIVE - MOBILE */
     @media(max-width:767px){
+      /* Stats 잘림 수정 */
+      .stats{padding:60px 16px}
+      .stats-inner{gap:8px}
+      .stat{padding:16px 4px}
+      .stat-icon{font-size:24px;margin-bottom:10px}
+      .stat-value{font-size:clamp(28px,8vw,40px)}
+      .stat-label{font-size:12px}
+      
       .problem-grid{grid-template-columns:1fr 1fr;gap:12px}
       .problem-card{padding:24px 16px}
       .problem-icon{width:52px;height:52px;font-size:24px;margin-bottom:16px}
@@ -319,6 +327,10 @@
       
       .review-card{flex:0 0 280px;padding:28px}
       .review-text{font-size:15px;min-height:auto}
+      
+      /* CTA 잘림 수정 */
+      .cta{padding:80px 20px}
+      .cta-notice{font-size:14px;padding:14px 20px}
     }
   </style>
 </head>
@@ -380,9 +392,9 @@
             </div></div>
           </div>
           <div class="flow">
-            <div class="flow-step"><div class="flow-icon blue"><i class="fa-solid fa-magnifying-glass"></i></div><div class="flow-text"><h4>고객이 검색</h4><p>"근처 맛집" 검색하면.</p></div></div>
-            <div class="flow-step"><div class="flow-icon purple"><i class="fa-solid fa-microchip"></i></div><div class="flow-text"><h4>AI가 감지</h4><p>관심사 + 위치 분석.</p></div></div>
-            <div class="flow-step"><div class="flow-icon green"><i class="fa-solid fa-mobile-screen"></i></div><div class="flow-text"><h4>즉시 노출</h4><p>인스타 피드에 광고 노출.</p></div></div>
+            <div class="flow-step"><div class="flow-icon blue"><i class="fa-solid fa-magnifying-glass"></i></div><div class="flow-text"><h4>고객이 검색</h4><p>"근처 맛집" 검색하면</p></div></div>
+            <div class="flow-step"><div class="flow-icon purple"><i class="fa-solid fa-microchip"></i></div><div class="flow-text"><h4>AI가 감지</h4><p>관심사 + 위치 분석</p></div></div>
+            <div class="flow-step"><div class="flow-icon green"><i class="fa-solid fa-mobile-screen"></i></div><div class="flow-text"><h4>즉시 노출</h4><p>인스타 피드에 광고 노출</p></div></div>
           </div>
         </div>
       </div>
@@ -405,12 +417,12 @@
                 <div class="target-person"><i class="fa-solid fa-user"></i></div>
               </div>
             </div>
-            <p class="target-label">반경 1km ~ 해외까지 설정 가능.</p>
+            <p class="target-label">반경 1km ~ 해외까지 설정 가능</p>
           </div>
           <div class="flow">
-            <div class="flow-step"><div class="flow-icon red"><i class="fa-solid fa-location-dot"></i></div><div class="flow-text"><h4>위치 설정</h4><p>매장 반경 1km부터 해외까지.</p></div></div>
-            <div class="flow-step"><div class="flow-icon orange"><i class="fa-solid fa-users"></i></div><div class="flow-text"><h4>관심사 필터</h4><p>업종 관련 관심사만 타겟팅.</p></div></div>
-            <div class="flow-step"><div class="flow-icon pink"><i class="fa-solid fa-clock"></i></div><div class="flow-text"><h4>시간대 설정</h4><p>영업시간에 집중 노출.</p></div></div>
+            <div class="flow-step"><div class="flow-icon red"><i class="fa-solid fa-location-dot"></i></div><div class="flow-text"><h4>위치 설정</h4><p>매장 반경 1km부터 해외까지</p></div></div>
+            <div class="flow-step"><div class="flow-icon orange"><i class="fa-solid fa-users"></i></div><div class="flow-text"><h4>관심사 필터</h4><p>업종 관련 관심사만 타겟팅</p></div></div>
+            <div class="flow-step"><div class="flow-icon pink"><i class="fa-solid fa-clock"></i></div><div class="flow-text"><h4>시간대 설정</h4><p>영업시간에 집중 노출</p></div></div>
           </div>
         </div>
       </div>
@@ -426,12 +438,12 @@
             <div class="timeline-item">
               <div class="timeline-platform naver"><i class="fa-solid fa-n"></i> 네이버</div>
               <h4 class="timeline-title">고객이 "강남 맛집" 검색</h4>
-              <p class="timeline-desc">우리 가게에 관심을 보임.</p>
+              <p class="timeline-desc">우리 가게에 관심을 보임</p>
             </div>
             <div class="timeline-item">
               <div class="timeline-platform insta"><i class="fa-brands fa-instagram"></i> 인스타그램</div>
               <h4 class="timeline-title">피드에서 우리 광고 발견</h4>
-              <p class="timeline-desc">AI가 관심 고객에게 재노출.</p>
+              <p class="timeline-desc">AI가 관심 고객에게 재노출</p>
             </div>
             <div class="timeline-item">
               <div class="timeline-platform facebook"><i class="fa-brands fa-facebook-f"></i> 페이스북</div>
@@ -454,7 +466,7 @@
       <div class="section-header">
         <div class="section-badge"><i class="fa-solid fa-triangle-exclamation"></i> 지금 이 순간에도</div>
         <h2 class="section-title">경쟁 업체에 <span class="highlight">고객을 뺏기고</span> 있습니다</h2>
-        <p class="section-desc">사장님만 광고 안 하고 계신 거 아니죠?</p>
+        <p class="section-desc">사장님만 광고 안하고 계신 거 아니죠?</p>
       </div>
       <div class="problem-grid">
         <div class="problem-card">
@@ -471,7 +483,7 @@
         </div>
         <div class="problem-card">
           <div class="problem-icon gray"><i class="fa-solid fa-arrow-trend-down"></i></div>
-          <div class="problem-text"><h3>손님이 줄었어요</h3><p>예전만큼 안 오는데<br>어쩌죠.</p></div>
+          <div class="problem-text"><h3>손님이 줄었어요</h3><p>예전만큼 안 오는데<br>어쩌죠?</p></div>
         </div>
       </div>
     </div>
@@ -537,10 +549,10 @@
       </div>
       <div class="compare-notice">
         <p class="notice-intro">간혹 이런 사장님들이 계십니다.</p>
-        <p class="notice-quote">"저 그거 다 할 줄 알아요."<br>"하루에 5천명, 2만명 도 봐요.<br>플레이스도 몇천명 들어오는데요?"</p>
+        <p class="notice-quote">"저 그거 다 할 줄 알아요."<br>"하루에 5천명, 2만명도 봐요.<br>플레이스도 몇천명 들어오는데요?"</p>
         <div class="notice-divider"></div>
         <p class="notice-explain">사장님이 하시는 방식은<br><strong>사장님 업체가 필요 없는 사람들</strong>에게까지<br>전부 보여지는 겁니다.<br><br>레브런이 하는 방식은<br><strong>정말 필요로 하는 사람들</strong>에게만<br>보여지는 겁니다.</p>
-        <p class="notice-hook">"노출 100만 vs 구매 0명"<br>"노출 1만 vs 실제 방문 10명"<br><strong>뭐가 더 나을까요?</strong></p>
+        <p class="notice-hook">"노출 100만 vs 실제방문 0명"<br>"노출 1만 vs 실제방문 10명"<br><strong>뭐가 더 나을까요?</strong></p>
       </div>
     </div>
   </section>
