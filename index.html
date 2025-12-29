@@ -1,795 +1,564 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>REVRUN - META 퍼포먼스 마케팅</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Noto Sans KR', sans-serif; background: #fff; color: #1F2937; line-height: 1.7; }
-        
-        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
-        @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
-        @keyframes gradientBG { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-        @keyframes glow { 0%,100%{box-shadow:0 0 20px rgba(79,70,229,0.3)} 50%{box-shadow:0 0 40px rgba(79,70,229,0.6)} }
-        @keyframes slideIn { from{opacity:0;transform:translateX(-30px)} to{opacity:1;transform:translateX(0)} }
-        @keyframes scaleIn { from{opacity:0;transform:scale(0.8)} to{opacity:1;transform:scale(1)} }
-        @keyframes rotateIn { from{opacity:0;transform:rotate(-10deg) scale(0.9)} to{opacity:1;transform:rotate(0) scale(1)} }
-        @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
-        @keyframes borderGlow { 0%,100%{border-color:rgba(79,70,229,0.3)} 50%{border-color:rgba(79,70,229,0.8)} }
-        @keyframes iconPulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.15);opacity:0.8} }
-        @keyframes ripple { 0%{transform:scale(1);opacity:0.4} 100%{transform:scale(2.5);opacity:0} }
-        
-        .animate { opacity:0; transform:translateY(25px); transition:all 0.7s ease; }
-        .animate.visible { opacity:1; transform:translateY(0); }
-        .delay-1{transition-delay:0.1s} .delay-2{transition-delay:0.2s} .delay-3{transition-delay:0.3s} .delay-4{transition-delay:0.4s}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REVRUN | AI가 손님을 데려옵니다</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--bg:#fafafa;--white:#fff;--gray50:#f8f8f8;--gray100:#f0f0f0;--gray200:#e4e4e4;--gray400:#a0a0a0;--gray600:#666;--gray800:#333;--black:#111;--primary:#2563eb;--primary-dark:#1d4ed8;--green:#10b981;--orange:#f59e0b}
+    html{scroll-behavior:smooth}
+    body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--bg);color:var(--black);line-height:1.6;overflow-x:hidden;word-break:keep-all}
 
-        /* 히어로 */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
-            background-size: 200% 200%;
-            animation: gradientBG 12s ease infinite;
-            padding: 80px 24px;
-            position: relative;
-        }
-        .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        .hero-text { color: #fff; }
-        .brand { margin-bottom: 20px; }
-        .brand-en { font-family:'Poppins',sans-serif; font-size:44px; font-weight:900; letter-spacing:3px; }
-        .brand-kr { font-size:14px; letter-spacing:6px; opacity:0.85; margin-top:2px; }
-        .badge { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; background:rgba(255,255,255,0.2); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25); border-radius:50px; font-size:13px; font-weight:600; margin-bottom:24px; }
-        .badge .dot { width:8px; height:8px; background:#10B981; border-radius:50%; animation:pulse 2s infinite; }
-        .hero-title { font-size:46px; font-weight:800; line-height:1.3; margin-bottom:20px; }
-        .hero-title .hl { background:rgba(255,255,255,0.15); padding:0px 6px; border-radius:4px; }
-        .hero-desc { font-size:17px; line-height:1.8; opacity:0.95; margin-bottom:32px; }
-        .hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
-        .btn { display:inline-flex; align-items:center; gap:8px; padding:16px 32px; border-radius:14px; font-size:16px; font-weight:700; text-decoration:none; transition:all 0.3s; border:none; cursor:pointer; }
-        .btn-w { background:#fff; color:#4F46E5; box-shadow:0 15px 35px rgba(0,0,0,0.15); }
-        .btn-w:hover { transform:translateY(-3px); box-shadow:0 20px 45px rgba(0,0,0,0.2); }
-        .btn-g { background:rgba(255,255,255,0.15); color:#fff; border:1px solid rgba(255,255,255,0.3); backdrop-filter:blur(5px); }
-        .btn-g:hover { background:rgba(255,255,255,0.25); }
-        
-        .hero-visual { position:relative; display:flex; justify-content:center; }
-        .phone { max-width:300px; background:linear-gradient(145deg,#2a2a3a,#1a1a28); border-radius:40px; padding:12px; box-shadow:0 50px 100px rgba(0,0,0,0.35); }
-        .phone-screen { background:#f8f9ff; border-radius:32px; overflow:hidden; }
-        .phone-notch { width:90px; height:26px; background:#2a2a3a; border-radius:0 0 16px 16px; margin:0 auto; }
-        .phone-body { padding:16px; }
-        .ig-post { background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,0.06); }
-        .ig-head { display:flex; align-items:center; gap:10px; padding:12px 14px; border-bottom:1px solid #f0f0f0; }
-        .ig-av { width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,#667eea,#764ba2); display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px; font-weight:700; }
-        .ig-name { font-size:12px; font-weight:700; color:#111; }
-        .ig-sp { font-size:10px; color:#888; }
-        .ig-img { aspect-ratio:1; background:linear-gradient(135deg,#667eea,#764ba2,#f093fb); display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; text-align:center; padding:24px; }
-        .ig-icon { width:60px; height:60px; background:rgba(255,255,255,0.2); border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:28px; margin-bottom:12px; }
-        .ig-img h4 { font-size:15px; margin-bottom:4px; }
-        .ig-img p { font-size:11px; opacity:0.9; }
-        .ig-act { display:flex; gap:12px; padding:12px 14px; font-size:20px; }
-        
-        .float-card { position:absolute; background:#fff; border-radius:16px; padding:14px 20px; box-shadow:0 15px 40px rgba(0,0,0,0.15); display:flex; align-items:center; gap:12px; animation:float 5s ease-in-out infinite; }
-        .float-card .ic { width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; }
-        .float-card strong { display:block; font-size:13px; color:#1f2937; }
-        .float-card span { font-size:11px; color:#6b7280; }
-        .fc1 { top:10%; right:0; }
-        .fc1 .ic { background:linear-gradient(135deg,#fee2e2,#fecaca); }
-        .fc2 { bottom:15%; left:0; animation-delay:2s; }
-        .fc2 .ic { background:linear-gradient(135deg,#d1fae5,#a7f3d0); }
+    /* 네비게이션 */
+    .nav{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);z-index:1000;padding:14px 20px;border-bottom:1px solid var(--gray200)}
+    .nav-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .nav-logo{font-size:20px;font-weight:800;color:var(--black);text-decoration:none;letter-spacing:-0.5px}
+    .nav-cta{padding:10px 20px;background:var(--primary);color:#fff;text-decoration:none;border-radius:8px;font-size:14px;font-weight:600;transition:background .2s}
+    .nav-cta:hover{background:var(--primary-dark)}
 
-        /* 섹션 공통 */
-        section { padding: 100px 24px; }
-        .container { max-width: 1100px; margin: 0 auto; }
-        .sec-head { text-align:center; margin-bottom:60px; }
-        .sec-label { display:inline-block; padding:8px 18px; background:linear-gradient(135deg,rgba(79,70,229,0.1),rgba(6,182,212,0.1)); border-radius:50px; font-size:13px; font-weight:700; color:#4F46E5; letter-spacing:1px; margin-bottom:14px; }
-        .sec-title { font-size:36px; font-weight:800; color:#111827; margin-bottom:16px; line-height:1.35; word-break:keep-all; }
-        .sec-title .gr { background:linear-gradient(135deg,#4F46E5,#06B6D4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-        .sec-desc { font-size:16px; color:#6B7280; max-width:500px; margin:0 auto; }
+    /* 히어로 */
+    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 20px 80px;background:linear-gradient(180deg,#fff 0%,var(--gray50) 100%)}
+    .hero-inner{max-width:700px}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--white);border:1px solid var(--gray200);border-radius:50px;font-size:13px;font-weight:600;color:var(--gray600);margin-bottom:28px}
+    .hero-badge-dot{width:6px;height:6px;background:var(--green);border-radius:50%}
+    .hero-eyebrow{font-size:15px;color:var(--primary);font-weight:600;margin-bottom:12px;letter-spacing:-0.3px}
+    .hero-title{font-size:clamp(32px,7vw,56px);font-weight:800;line-height:1.2;margin-bottom:20px;letter-spacing:-1.5px;color:var(--black)}
+    .hero-desc{font-size:17px;color:var(--gray600);margin-bottom:36px;line-height:1.7}
+    .hero-cta{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;background:var(--primary);color:#fff;text-decoration:none;border-radius:12px;font-size:16px;font-weight:700;transition:all .2s;box-shadow:0 4px 14px rgba(37,99,235,.25)}
+    .hero-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,99,235,.3)}
+    .hero-cta i{width:18px;height:18px}
+    .hero-sub-link{display:block;margin-top:16px;font-size:14px;color:var(--gray400);text-decoration:underline}
 
-        /* 후킹 섹션 - 프리미엄 모션그래픽 스타일 */
-        .hooking { 
-            background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%); 
-            padding: 120px 24px;
-            position: relative;
-            overflow: hidden;
-        }
-        .hooking::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(79,70,229,0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(236,72,153,0.15) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(6,182,212,0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-        .hook-grid { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 20px;
-            position: relative;
-            z-index: 1;
-            margin-bottom: 20px;
-        }
-        .hook-card { 
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 24px; 
-            padding: 36px 28px; 
-            position: relative; 
-            overflow: hidden; 
-            transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
-        }
-        .hook-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-        }
-        .hook-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(79,70,229,0.1) 0%, transparent 60%);
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-        .hook-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(79,70,229,0.3);
-            box-shadow: 0 30px 80px rgba(79,70,229,0.2);
-        }
-        .hook-card:hover::after { opacity: 1; }
-        
-        .hook-bottom {
-            display: block;
-            position: relative;
-            z-index: 1;
-        }
-        .hook-card.highlight { 
-            background: linear-gradient(135deg, rgba(79,70,229,0.2), rgba(236,72,153,0.2));
-            border-color: rgba(255,255,255,0.15);
-            text-align: center;
-            padding: 48px 40px;
-            border-radius: 24px;
-        }
-        
-        .hook-icon-wrap {
-            position: relative;
-            width: 72px;
-            height: 72px;
-            margin-bottom: 24px;
-        }
-        .hook-card.highlight .hook-icon-wrap {
-            margin: 0 auto 28px;
-        }
-        .hook-icon-wrap::before {
-            content: '';
-            position: absolute;
-            inset: -6px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #4F46E5, #EC4899);
-            opacity: 0.2;
-            animation: iconPulse 3s ease-in-out infinite;
-        }
-        .hook-icon-wrap::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #4F46E5, #06B6D4);
-            animation: ripple 2s ease-out infinite;
-        }
-        .hook-icon { 
-            position: relative;
-            z-index: 1;
-            width: 72px; 
-            height: 72px; 
-            border-radius: 50%;
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 32px;
-            background: linear-gradient(135deg, #4F46E5, #7C3AED);
-            box-shadow: 0 16px 32px rgba(79,70,229,0.4);
-        }
-        .hook-card:nth-child(2) .hook-icon { background: linear-gradient(135deg, #06B6D4, #3B82F6); box-shadow: 0 16px 32px rgba(6,182,212,0.4); }
-        .hook-card:nth-child(3) .hook-icon { background: linear-gradient(135deg, #10B981, #059669); box-shadow: 0 16px 32px rgba(16,185,129,0.4); }
-        .hook-card.highlight .hook-icon { 
-            background: linear-gradient(135deg, #EC4899, #F59E0B); 
-            box-shadow: 0 16px 32px rgba(236,72,153,0.4);
-            width: 80px;
-            height: 80px;
-            font-size: 36px;
-        }
-        .hook-card.highlight .hook-icon-wrap {
-            width: 80px;
-            height: 80px;
-        }
-        
-        .hook-stat { 
-            font-family: 'Poppins', sans-serif; 
-            font-size: 42px; 
-            font-weight: 800; 
-            background: linear-gradient(135deg, #fff, rgba(255,255,255,0.8));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px; 
-            line-height: 1;
-            letter-spacing: -1px;
-        }
-        .hook-title { 
-            font-size: 17px; 
-            font-weight: 700; 
-            color: #fff;
-            margin-bottom: 12px; 
-            line-height: 1.5;
-            letter-spacing: -0.3px;
-        }
-        .hook-desc { 
-            font-size: 13px; 
-            color: rgba(255,255,255,0.55);
-            line-height: 1.6;
-        }
-        .hook-note { 
-            font-size: 10px; 
-            color: rgba(255,255,255,0.3);
-            margin-top: 14px;
-        }
-        .hook-card.highlight .hook-title {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 16px;
-        }
-        .hook-quote { 
-            font-size: 28px; 
-            font-weight: 800;
-            background: linear-gradient(135deg, #F59E0B, #EC4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
-        }
+    /* 통계 */
+    .stats{padding:60px 20px;background:var(--white);border-top:1px solid var(--gray100);border-bottom:1px solid var(--gray100)}
+    .stats-inner{max-width:800px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .stat{text-align:center;padding:24px 16px}
+    .stat-label{font-size:13px;color:var(--gray400);margin-bottom:8px;letter-spacing:0.5px}
+    .stat-value{font-size:clamp(36px,8vw,52px);font-weight:800;letter-spacing:-2px;line-height:1}
+    .stat-value.blue{color:var(--primary)}
+    .stat-value.green{color:var(--green)}
+    .stat-value.orange{color:var(--orange)}
 
-        /* 신뢰 지표 */
-        .trust { background:linear-gradient(180deg,#f9fafb,#fff); }
-        .trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
-        .trust-card { background:#fff; border-radius:20px; padding:36px 24px; text-align:center; border:1px solid #f3f4f6; box-shadow:0 4px 20px rgba(0,0,0,0.03); transition:all 0.35s; }
-        .trust-card:hover { transform:translateY(-8px); box-shadow:0 20px 50px rgba(79,70,229,0.1); }
-        .trust-icon { width:64px; height:64px; margin:0 auto 16px; border-radius:18px; display:flex; align-items:center; justify-content:center; font-size:28px; }
-        .trust-icon.p { background:linear-gradient(135deg,#ede9fe,#ddd6fe); }
-        .trust-icon.b { background:linear-gradient(135deg,#dbeafe,#bfdbfe); }
-        .trust-icon.g { background:linear-gradient(135deg,#d1fae5,#a7f3d0); }
-        .trust-icon.o { background:linear-gradient(135deg,#fef3c7,#fde68a); }
-        .trust-num { font-family:'Poppins',sans-serif; font-size:40px; font-weight:800; background:linear-gradient(135deg,#4F46E5,#06B6D4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-        .trust-label { font-size:14px; font-weight:600; color:#4b5563; margin-top:4px; }
+    /* 공통 섹션 */
+    section{padding:80px 20px}
+    .section-inner{max-width:1000px;margin:0 auto}
+    .section-eyebrow{font-size:13px;color:var(--primary);font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+    .section-title{font-size:clamp(24px,5vw,36px);font-weight:800;margin-bottom:16px;letter-spacing:-1px;line-height:1.3}
+    .section-desc{font-size:16px;color:var(--gray600);margin-bottom:48px;max-width:600px}
 
-        /* AI 작동원리 */
-        .how-it-works { background:#f9fafb; }
-        .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; position:relative; }
-        .steps::before { content:''; position:absolute; top:50px; left:10%; right:10%; height:3px; background:linear-gradient(90deg,#4F46E5,#06B6D4); border-radius:2px; z-index:0; }
-        .step { background:#fff; border-radius:20px; padding:32px 24px; text-align:center; position:relative; z-index:1; box-shadow:0 4px 20px rgba(0,0,0,0.04); transition:all 0.3s; }
-        .step:hover { transform:translateY(-6px); box-shadow:0 15px 40px rgba(79,70,229,0.1); }
-        .step-num { width:50px; height:50px; margin:0 auto 16px; background:linear-gradient(135deg,#4F46E5,#764ba2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:20px; font-weight:800; color:#fff; }
-        .step h4 { font-size:17px; font-weight:700; color:#111827; margin-bottom:8px; }
-        .step p { font-size:13px; color:#6b7280; line-height:1.6; }
+    /* AI 설명 섹션 */
+    .explain{background:var(--white)}
+    .explain-block{margin-bottom:80px}
+    .explain-block:last-child{margin-bottom:0}
+    .explain-header{text-align:center;margin-bottom:40px}
+    .explain-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--primary);color:#fff;border-radius:50%;font-size:15px;font-weight:700;margin-bottom:16px}
+    .explain-title{font-size:clamp(22px,4vw,30px);font-weight:800;margin-bottom:10px;letter-spacing:-0.5px}
+    .explain-desc{font-size:15px;color:var(--gray600)}
+    .explain-grid{display:grid;gap:32px;align-items:center}
+    
+    /* 폰 목업 */
+    .phone-wrap{display:flex;justify-content:center}
+    .phone{width:240px;background:#1a1a1a;border-radius:28px;padding:8px;box-shadow:0 20px 50px rgba(0,0,0,.15)}
+    .phone-screen{background:#fff;border-radius:22px;overflow:hidden}
+    .phone-header{background:linear-gradient(135deg,#405de6,#833ab4,#c13584,#e1306c);padding:10px 14px;display:flex;align-items:center;gap:10px}
+    .phone-avatar{width:28px;height:28px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .phone-avatar i{width:14px;height:14px;color:#333}
+    .phone-info{color:#fff}
+    .phone-name{font-size:12px;font-weight:700}
+    .phone-sponsored{font-size:9px;opacity:.8}
+    .phone-body{padding:12px}
+    .phone-img{height:140px;background:linear-gradient(135deg,#f0f0f0,#e0e0e0);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+    .phone-img i{width:36px;height:36px;color:#bbb}
+    .phone-actions{display:flex;gap:14px;margin-bottom:8px}
+    .phone-actions i{width:18px;height:18px;color:#333}
+    .phone-caption{font-size:11px;color:#333}
 
-        /* 솔루션 */
-        .solution { background:#fff; }
-        .sol-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-        .sol-card { background:#f9fafb; border:1px solid #f3f4f6; border-radius:24px; padding:40px 28px; text-align:center; transition:all 0.4s; }
-        .sol-card:hover { transform:translateY(-10px); box-shadow:0 25px 60px rgba(79,70,229,0.12); background:#fff; }
-        .sol-icon { width:80px; height:80px; margin:0 auto 20px; border-radius:22px; display:flex; align-items:center; justify-content:center; font-size:36px; }
-        .sol-icon.p { background:linear-gradient(135deg,#ede9fe,#c4b5fd); }
-        .sol-icon.b { background:linear-gradient(135deg,#cffafe,#67e8f9); }
-        .sol-icon.y { background:linear-gradient(135deg,#fef3c7,#fcd34d); }
-        .sol-card h3 { font-size:19px; font-weight:800; color:#111827; margin-bottom:12px; }
-        .sol-card p { font-size:14px; color:#6b7280; line-height:1.7; }
+    /* 플로우 스텝 */
+    .flow{display:flex;flex-direction:column;gap:12px}
+    .flow-step{display:flex;align-items:center;gap:14px;padding:16px;background:var(--gray50);border-radius:12px;border:1px solid var(--gray100)}
+    .flow-icon{width:44px;height:44px;background:var(--white);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+    .flow-icon i{width:20px;height:20px;color:var(--primary)}
+    .flow-text h4{font-size:15px;font-weight:700;margin-bottom:2px}
+    .flow-text p{font-size:13px;color:var(--gray600)}
 
-        /* 후기 슬라이더 */
-        .reviews { background:#f9fafb; overflow:hidden; }
-        .review-slider { position:relative; max-width:700px; margin:0 auto; }
-        .review-track { display:flex; transition:transform 0.5s ease; }
-        .review-card { min-width:100%; padding:36px; background:#fff; border-radius:24px; border:1px solid #f3f4f6; box-shadow:0 4px 20px rgba(0,0,0,0.03); }
-        .review-content { font-size:15px; color:#374151; line-height:1.85; margin-bottom:20px; position:relative; padding-left:20px; }
-        .review-content::before { content:'"'; position:absolute; left:0; top:-8px; font-size:40px; color:#4F46E5; opacity:0.3; font-family:Georgia,serif; }
-        .review-author { display:flex; align-items:center; gap:12px; }
-        .review-avatar { width:46px; height:46px; border-radius:50%; background:linear-gradient(135deg,#667eea,#764ba2); display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px; font-weight:700; }
-        .review-info h5 { font-size:14px; font-weight:700; color:#111827; }
-        .review-info span { font-size:12px; color:#6b7280; }
-        .review-nav { display:flex; justify-content:center; gap:6px; margin-top:28px; flex-wrap:wrap; }
-        .review-dot { width:8px; height:8px; border-radius:50%; background:#e5e7eb; cursor:pointer; transition:all 0.3s; }
-        .review-dot.active { background:linear-gradient(135deg,#4F46E5,#764ba2); width:24px; border-radius:4px; }
-        .review-arrows { display:flex; justify-content:center; gap:12px; margin-top:16px; }
-        .review-arrow { width:40px; height:40px; border-radius:50%; background:#fff; border:1px solid #e5e7eb; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.3s; font-size:16px; }
-        .review-arrow:hover { background:#4F46E5; color:#fff; border-color:#4F46E5; }
+    /* 타겟팅 비주얼 */
+    .target-visual{display:flex;justify-content:center}
+    .target-map{position:relative;width:200px;height:200px}
+    .target-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2}
+    .target-center i{width:22px;height:22px;color:#fff}
+    .target-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:2px dashed var(--gray300);border-radius:50%;opacity:.5}
+    .target-ring:nth-child(2){width:90px;height:90px;animation:pulse-ring 2s infinite}
+    .target-ring:nth-child(3){width:140px;height:140px;animation:pulse-ring 2s infinite .5s}
+    .target-ring:nth-child(4){width:200px;height:200px;animation:pulse-ring 2s infinite 1s}
+    .target-person{position:absolute;width:28px;height:28px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .target-person i{width:14px;height:14px;color:#fff}
+    .target-person:nth-child(5){top:10px;left:50%;transform:translateX(-50%)}
+    .target-person:nth-child(6){top:45%;right:0}
+    .target-person:nth-child(7){bottom:20px;left:20px}
+    .target-person:nth-child(8){top:60%;left:5px}
+    .target-label{text-align:center;margin-top:20px;font-size:14px;font-weight:600;color:var(--gray800)}
 
-        /* 비교 */
-        .compare { background:linear-gradient(135deg,#667eea,#764ba2); padding:100px 24px; }
-        .compare .sec-label { background:rgba(255,255,255,0.2); color:#fff; }
-        .compare .sec-title { color:#fff; }
-        .compare .sec-desc { color:rgba(255,255,255,0.85); }
-        .comp-wrap { display:grid; grid-template-columns:1fr 60px 1fr; align-items:stretch; }
-        .comp-col { background:#fff; border-radius:24px; padding:40px 32px; box-shadow:0 20px 50px rgba(0,0,0,0.2); }
-        .comp-col.after { position:relative; overflow:hidden; }
-        .comp-col.after::before { content:'추천'; position:absolute; top:18px; right:-28px; background:linear-gradient(135deg,#F59E0B,#F97316); color:#fff; font-size:10px; font-weight:700; padding:4px 32px; transform:rotate(45deg); }
-        .comp-vs { display:flex; align-items:center; justify-content:center; }
-        .vs { width:52px; height:52px; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:14px; font-weight:800; color:#4F46E5; box-shadow:0 10px 30px rgba(0,0,0,0.2); }
-        .comp-head { text-align:center; padding-bottom:20px; margin-bottom:20px; border-bottom:2px solid #f3f4f6; }
-        .comp-head .em { font-size:40px; display:block; margin-bottom:10px; }
-        .comp-head h3 { font-size:17px; font-weight:800; color:#111827; margin-bottom:4px; }
-        .comp-head p { font-size:12px; color:#6b7280; }
-        .comp-list { list-style:none; }
-        .comp-list li { display:flex; align-items:flex-start; gap:10px; padding:12px 0; font-size:13px; color:#374151; border-bottom:1px solid #f3f4f6; }
-        .comp-list li:last-child { border-bottom:none; }
-        .comp-list .ck { width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; flex-shrink:0; }
-        .comp-col.before .ck { background:#fee2e2; color:#ef4444; }
-        .comp-col.after .ck { background:#d1fae5; color:#10b981; }
+    /* 리타겟팅 타임라인 */
+    .timeline{position:relative;padding-left:28px}
+    .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--gray200)}
+    .timeline-item{position:relative;padding:16px;background:var(--white);border:1px solid var(--gray200);border-radius:12px;margin-bottom:16px}
+    .timeline-item:last-child{margin-bottom:0}
+    .timeline-item::before{content:'';position:absolute;left:-24px;top:20px;width:10px;height:10px;background:var(--green);border-radius:50%}
+    .timeline-platform{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--gray600);margin-bottom:6px}
+    .timeline-platform i{width:12px;height:12px}
+    .timeline-title{font-size:14px;font-weight:700;margin-bottom:2px}
+    .timeline-desc{font-size:12px;color:var(--gray600)}
+    .result-box{background:linear-gradient(135deg,#ecfdf5,#d1fae5);padding:24px;border-radius:16px;text-align:center;margin-top:24px}
+    .result-box i{width:32px;height:32px;color:var(--green);margin-bottom:8px}
+    .result-box h4{font-size:18px;font-weight:700;margin-bottom:4px}
+    .result-box p{font-size:13px;color:var(--gray600)}
 
-        /* 가격 */
-        .pricing { background:linear-gradient(180deg,#fff,#f9fafb); }
-        .price-card { max-width:440px; margin:0 auto; background:#fff; border-radius:28px; padding:48px 40px; text-align:center; box-shadow:0 20px 60px rgba(79,70,229,0.1); border:1px solid #f3f4f6; position:relative; overflow:hidden; }
-        .price-card::before { content:''; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg,#4F46E5,#06B6D4); }
-        .price-badge { display:inline-block; padding:8px 18px; background:linear-gradient(135deg,#F59E0B,#F97316); border-radius:50px; font-size:12px; font-weight:700; color:#fff; margin-bottom:24px; }
-        .price-amt { margin-bottom:32px; }
-        .price-amt .num { font-family:'Poppins',sans-serif; font-size:64px; font-weight:800; background:linear-gradient(135deg,#4F46E5,#06B6D4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-        .price-amt .unit { font-size:20px; color:#6b7280; font-weight:600; }
-        .price-list { list-style:none; text-align:left; margin-bottom:32px; }
-        .price-list li { display:flex; align-items:center; gap:12px; padding:12px 0; font-size:14px; color:#374151; border-bottom:1px solid #f3f4f6; }
-        .price-list li:last-child { border-bottom:none; }
-        .price-list .ck { width:22px; height:22px; background:linear-gradient(135deg,#d1fae5,#a7f3d0); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#10b981; font-size:11px; flex-shrink:0; }
-        .btn-gr { width:100%; background:linear-gradient(135deg,#4F46E5,#3730A3); color:#fff; box-shadow:0 10px 30px rgba(79,70,229,0.3); }
-        .btn-gr:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(79,70,229,0.4); }
+    /* 문제 섹션 */
+    .problem{background:var(--gray800);color:#fff}
+    .problem .section-eyebrow{color:var(--orange)}
+    .problem .section-title{color:#fff}
+    .problem .section-desc{color:var(--gray400)}
+    .problem-grid{display:grid;gap:12px}
+    .problem-card{display:flex;align-items:flex-start;gap:14px;padding:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px}
+    .problem-icon{width:44px;height:44px;background:rgba(239,68,68,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .problem-icon i{width:20px;height:20px;color:#fca5a5}
+    .problem-text h3{font-size:15px;font-weight:700;margin-bottom:4px}
+    .problem-text p{font-size:13px;color:var(--gray400);line-height:1.5}
 
-        /* CTA */
-        .cta { background:linear-gradient(135deg,#667eea,#764ba2); text-align:center; padding:100px 24px; }
-        .cta h2 { font-size:34px; font-weight:800; color:#fff; margin-bottom:14px; word-break:keep-all; }
-        .cta > .container > p { font-size:16px; color:rgba(255,255,255,0.85); margin-bottom:40px; }
-        .contact-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; max-width:600px; margin:0 auto; }
-        .contact-card { background:#fff; border-radius:20px; padding:32px 24px; box-shadow:0 15px 45px rgba(0,0,0,0.15); transition:all 0.3s; }
-        .contact-card:hover { transform:translateY(-5px); }
-        .contact-role { font-size:12px; color:#4F46E5; font-weight:700; margin-bottom:6px; }
-        .contact-num { font-family:'Poppins',sans-serif; font-size:20px; font-weight:700; color:#111827; margin-bottom:18px; }
-        .contact-btns { display:flex; gap:10px; }
-        .c-btn { flex:1; padding:12px 14px; border-radius:10px; font-size:13px; font-weight:700; text-decoration:none; text-align:center; transition:all 0.3s; }
-        .c-btn.call { background:#4F46E5; color:#fff; }
-        .c-btn.kakao { background:#FEE500; color:#3C1E1E; }
-        .c-btn:hover { transform:translateY(-2px); }
+    /* 솔루션 */
+    .solution{background:var(--white)}
+    .solution-grid{display:grid;gap:16px}
+    .solution-card{padding:28px;background:var(--gray50);border:1px solid var(--gray100);border-radius:16px}
+    .solution-icon{width:52px;height:52px;background:var(--white);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+    .solution-icon i{width:24px;height:24px;color:var(--primary)}
+    .solution-card h3{font-size:18px;font-weight:700;margin-bottom:8px}
+    .solution-card p{font-size:14px;color:var(--gray600);line-height:1.6}
 
-        /* 푸터 */
-        .footer { background:#111827; padding:40px 24px; text-align:center; }
-        .footer-brand { font-family:'Poppins',sans-serif; font-size:24px; font-weight:900; letter-spacing:3px; background:linear-gradient(135deg,#818CF8,#06B6D4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:10px; }
-        .footer p { font-size:13px; color:#6b7280; }
+    /* 비교 */
+    .compare{background:var(--gray50)}
+    .compare-grid{display:grid;gap:16px}
+    .compare-card{padding:28px;border-radius:16px}
+    .compare-card.bad{background:#fef2f2;border:1px solid #fecaca}
+    .compare-card.good{background:#f0fdf4;border:1px solid #bbf7d0}
+    .compare-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+    .compare-badge{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700}
+    .compare-card.bad .compare-badge{background:#fee2e2;color:#dc2626}
+    .compare-card.good .compare-badge{background:#dcfce7;color:#16a34a}
+    .compare-title{font-size:17px;font-weight:700}
+    .compare-list{list-style:none}
+    .compare-list li{display:flex;align-items:flex-start;gap:10px;padding:10px 0;font-size:14px;border-bottom:1px solid rgba(0,0,0,.05)}
+    .compare-list li:last-child{border:none}
+    .compare-list li i{width:18px;height:18px;flex-shrink:0;margin-top:1px}
+    .compare-card.bad li i{color:#ef4444}
+    .compare-card.good li i{color:#22c55e}
 
-        /* 반응형 */
-        @media (max-width:1024px) {
-            .hero-inner { grid-template-columns:1fr; text-align:center; }
-            .hero-visual { margin-top:40px; }
-            .hero-btns { justify-content:center; }
-            .float-card { display:none; }
-            .trust-grid { grid-template-columns:repeat(2,1fr); }
-            .hook-grid { grid-template-columns:1fr; }
-            .steps { grid-template-columns:repeat(2,1fr); }
-            .steps::before { display:none; }
-            .sol-grid { grid-template-columns:1fr; }
-            .comp-wrap { grid-template-columns:1fr; gap:16px; }
-            .comp-vs { display:none; }
-        }
-        @media (max-width:640px) {
-            section { padding:70px 20px; }
-            .hero { padding:60px 20px; }
-            .brand-en { font-size:36px; }
-            .hero-title { font-size:32px; }
-            .hero-btns { flex-direction:column; }
-            .btn { width:100%; justify-content:center; }
-            .trust-grid { grid-template-columns:1fr; }
-            .steps { grid-template-columns:1fr; }
-            .sec-title { font-size:28px; }
-            .hook-stat { font-size:40px; }
-            .hook-title { font-size:18px; }
-            .hook-quote { font-size:22px; }
-            .hook-card { padding:32px 24px; }
-            .hook-card.highlight { padding:40px 28px; }
-            .hook-icon-wrap { width:70px; height:70px; }
-            .hook-icon { width:70px; height:70px; font-size:28px; }
-            .hook-card.highlight .hook-icon { width:80px; height:80px; font-size:34px; }
-            .price-card { padding:36px 24px; }
-            .price-amt .num { font-size:52px; }
-            .contact-grid { grid-template-columns:1fr; }
-            .review-card { padding:28px 20px; }
-            .review-content { font-size:14px; }
-            .hooking { padding:80px 20px; }
-        }
-    </style>
+    /* 후기 */
+    .reviews{background:var(--white);overflow:hidden}
+    .reviews-track-wrap{overflow:hidden;margin:0 -20px;padding:0 20px}
+    .reviews-track{display:flex;gap:16px;transition:transform .4s ease}
+    .review-card{flex:0 0 280px;padding:24px;background:var(--gray50);border:1px solid var(--gray100);border-radius:16px;user-select:none}
+    .review-text{font-size:14px;color:var(--gray800);line-height:1.7;margin-bottom:20px;min-height:80px}
+    .review-author{display:flex;align-items:center;gap:12px}
+    .review-avatar{width:40px;height:40px;background:linear-gradient(135deg,var(--primary),#60a5fa);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px}
+    .review-info h4{font-size:14px;font-weight:700}
+    .review-info span{font-size:12px;color:var(--gray600)}
+    .reviews-dots{display:flex;justify-content:center;gap:6px;margin-top:24px}
+    .reviews-dot{width:8px;height:8px;background:var(--gray200);border-radius:50%;cursor:pointer;transition:all .2s}
+    .reviews-dot.active{width:24px;border-radius:4px;background:var(--primary)}
+
+    /* 가격 */
+    .pricing{background:var(--gray50)}
+    .pricing-card{max-width:420px;margin:0 auto;background:var(--white);border:2px solid var(--primary);border-radius:20px;padding:40px 28px;text-align:center;position:relative}
+    .pricing-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;padding:6px 20px;border-radius:50px;font-size:12px;font-weight:700}
+    .pricing-amount{font-size:48px;font-weight:800;margin:20px 0 4px;letter-spacing:-2px}
+    .pricing-period{font-size:15px;color:var(--gray600);margin-bottom:28px}
+    .pricing-features{list-style:none;text-align:left;margin-bottom:28px}
+    .pricing-features li{display:flex;align-items:center;gap:12px;padding:12px 0;font-size:15px;border-bottom:1px solid var(--gray100)}
+    .pricing-features li:last-child{border:none}
+    .pricing-features li i{width:20px;height:20px;color:var(--green)}
+    .pricing-cta{display:block;width:100%;padding:16px;background:var(--primary);color:#fff;text-decoration:none;border-radius:12px;font-size:16px;font-weight:700;transition:background .2s}
+    .pricing-cta:hover{background:var(--primary-dark)}
+
+    /* CTA */
+    .cta{padding:80px 20px;text-align:center}
+    .cta-title{font-size:clamp(24px,5vw,32px);font-weight:800;margin-bottom:12px;letter-spacing:-0.5px}
+    .cta-desc{font-size:15px;color:var(--gray600);margin-bottom:32px}
+    .cta-buttons{display:flex;flex-direction:column;gap:10px;max-width:360px;margin:0 auto}
+    .cta-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:16px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;transition:all .2s}
+    .cta-btn i{width:18px;height:18px}
+    .cta-btn.primary{background:var(--primary);color:#fff}
+    .cta-btn.primary:hover{background:var(--primary-dark)}
+    .cta-btn.secondary{background:var(--gray100);color:var(--black)}
+    .cta-contacts{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:400px;margin:32px auto 0}
+    .cta-contact{padding:20px;background:var(--white);border:1px solid var(--gray200);border-radius:12px}
+    .cta-contact-label{font-size:12px;color:var(--gray600);margin-bottom:4px}
+    .cta-contact-num{font-size:18px;font-weight:700}
+
+    .footer{padding:40px 20px;text-align:center;border-top:1px solid var(--gray200);background:var(--white)}
+    .footer-text{font-size:13px;color:var(--gray600)}
+
+    @keyframes pulse-ring{0%,100%{opacity:.3}50%{opacity:.6}}
+
+    @media(min-width:768px){
+      .explain-grid{grid-template-columns:1fr 1fr}
+      .explain-grid.reverse{direction:rtl}
+      .explain-grid.reverse>*{direction:ltr}
+      .problem-grid{grid-template-columns:repeat(2,1fr)}
+      .solution-grid{grid-template-columns:repeat(3,1fr)}
+      .compare-grid{grid-template-columns:repeat(2,1fr)}
+      .cta-buttons{flex-direction:row}
+      .cta-btn{flex:1}
+    }
+    @media(min-width:1024px){
+      .problem-grid{grid-template-columns:repeat(4,1fr)}
+    }
+  </style>
 </head>
 <body>
-    <!-- 히어로 -->
-    <section class="hero">
-        <div class="hero-inner">
-            <div class="hero-text">
-                <div class="brand">
-                    <span class="brand-en">REVRUN</span>
-                    <span class="brand-kr">레브런</span>
-                </div>
-                <div class="badge"><span class="dot"></span> META 공식 파트너</div>
-                <h1 class="hero-title">손님 찾아주는<br><span class="hl">AI 마케팅</span></h1>
-                <p class="hero-desc">인스타그램 · 페이스북 <strong>스폰서 광고</strong>로<br>매장 근처 고객에게 <strong>실시간</strong> 노출하세요</p>
-                <div class="hero-btns">
-                    <a href="https://open.kakao.com/o/g603Kp8h" target="_blank" class="btn btn-w">무료 상담받기 →</a>
-                    <a href="#features" class="btn btn-g">서비스 알아보기</a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="phone">
-                    <div class="phone-screen">
-                        <div class="phone-notch"></div>
-                        <div class="phone-body">
-                            <div class="ig-post">
-                                <div class="ig-head">
-                                    <div class="ig-av">R</div>
-                                    <div><div class="ig-name">our_store</div><div class="ig-sp">Sponsored · 스폰서</div></div>
-                                </div>
-                                <div class="ig-img">
-                                    <div class="ig-icon">🎯</div>
-                                    <h4>반경 1km 타겟팅</h4>
-                                    <p>근처 고객에게만 노출</p>
-                                </div>
-                                <div class="ig-act">❤️ 💬 📤</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="float-card fc1"><div class="ic">🎯</div><div><strong>정밀 타겟팅</strong><span>반경 1km부터</span></div></div>
-                <div class="float-card fc2"><div class="ic">📈</div><div><strong>연장률 82%</strong><span>만족도 최상</span></div></div>
-            </div>
+  <nav class="nav"><div class="nav-inner">
+    <a href="#" class="nav-logo">REVRUN</a>
+    <a href="https://open.kakao.com/o/g603Kp8h" class="nav-cta" target="_blank">무료 상담</a>
+  </div></nav>
+
+  <!-- 히어로 -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> META 공식 파트너</div>
+      <p class="hero-eyebrow">인스타·페이스북 AI 광고 대행</p>
+      <h1 class="hero-title">사장님은 장사만 하세요.<br>손님은 AI가 데려옵니다.</h1>
+      <p class="hero-desc">복잡한 광고 설정, 타겟팅, 최적화까지<br>전부 맡기시고 매출에만 집중하세요.</p>
+      <a href="https://open.kakao.com/o/g603Kp8h" class="hero-cta" target="_blank">무료 상담 신청하기 <i data-lucide="arrow-right"></i></a>
+      <a href="#how" class="hero-sub-link">어떻게 작동하나요?</a>
+    </div>
+  </section>
+
+  <!-- 통계 -->
+  <section class="stats">
+    <div class="stats-inner">
+      <div class="stat">
+        <div class="stat-label">정밀 타겟팅</div>
+        <div class="stat-value blue">1km~</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">자진 연장률</div>
+        <div class="stat-value green">82%</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">전환율 상승</div>
+        <div class="stat-value orange">+63%</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI 작동 원리 -->
+  <section class="explain" id="how">
+    <div class="section-inner">
+      <div class="explain-block">
+        <div class="explain-header">
+          <div class="explain-num">1</div>
+          <h2 class="explain-title">검색하는 고객에게 실시간 노출</h2>
+          <p class="explain-desc">고객이 찾기 전에, AI가 먼저 찾아갑니다</p>
         </div>
-    </section>
-
-    <!-- 후킹 섹션 -->
-    <section class="hooking">
-        <div class="container">
-            <div class="hook-grid">
-                <div class="hook-card animate">
-                    <div class="hook-icon-wrap"><div class="hook-icon">📈</div></div>
-                    <div class="hook-stat">76%↑</div>
-                    <div class="hook-title">보기만 하던 사람 → 결제하는 고객으로</div>
-                    <div class="hook-desc">관심만 있던 사람이 실제 구매 고객이 됩니다</div>
-                    <div class="hook-note">*실제 Meta 광고 컨설팅 진행 업체 사례</div>
-                </div>
-                <div class="hook-card animate delay-1">
-                    <div class="hook-icon-wrap"><div class="hook-icon">⚡</div></div>
-                    <div class="hook-stat">FIRST</div>
-                    <div class="hook-title">고객이 찾기 전에, 먼저 찾아갑니다</div>
-                    <div class="hook-desc">검색하기도 전에 이미 고객 앞에 노출됩니다</div>
-                </div>
-                <div class="hook-card animate delay-2">
-                    <div class="hook-icon-wrap"><div class="hook-icon">🔄</div></div>
-                    <div class="hook-stat">365일</div>
-                    <div class="hook-title">네이버에서 검색한 그 고객,<br>인스타에서 다시 만납니다</div>
-                    <div class="hook-desc">한 번 관심 보인 고객을 끝까지 따라갑니다</div>
-                </div>
-            </div>
-            <div class="hook-bottom">
-                <div class="hook-card highlight animate delay-3">
-                    <div class="hook-icon-wrap"><div class="hook-icon">🚨</div></div>
-                    <div class="hook-title">고객을 뺏기고 있습니다</div>
-                    <div class="hook-quote">" 지금 이 순간에도 "</div>
-                </div>
-            </div>
+        <div class="explain-grid">
+          <div class="phone-wrap">
+            <div class="phone"><div class="phone-screen">
+              <div class="phone-header">
+                <div class="phone-avatar"><i data-lucide="store"></i></div>
+                <div class="phone-info"><div class="phone-name">우리가게</div><div class="phone-sponsored">Sponsored · 스폰서</div></div>
+              </div>
+              <div class="phone-body">
+                <div class="phone-img"><i data-lucide="image"></i></div>
+                <div class="phone-actions"><i data-lucide="heart"></i><i data-lucide="message-circle"></i><i data-lucide="send"></i></div>
+                <p class="phone-caption"><strong>우리가게</strong> 동네 맛집! 지금 방문하면 10% 할인</p>
+              </div>
+            </div></div>
+          </div>
+          <div class="flow">
+            <div class="flow-step"><div class="flow-icon"><i data-lucide="search"></i></div><div class="flow-text"><h4>고객이 검색</h4><p>"근처 맛집" 검색하면</p></div></div>
+            <div class="flow-step"><div class="flow-icon"><i data-lucide="cpu"></i></div><div class="flow-text"><h4>AI가 감지</h4><p>관심사 + 위치 분석</p></div></div>
+            <div class="flow-step"><div class="flow-icon"><i data-lucide="smartphone"></i></div><div class="flow-text"><h4>즉시 노출</h4><p>인스타 피드에 광고 노출</p></div></div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- 신뢰 지표 -->
-    <section class="trust">
-        <div class="container">
-            <div class="trust-grid">
-                <div class="trust-card animate"><div class="trust-icon p">🎯</div><div class="trust-num">1km</div><div class="trust-label">정밀 타겟팅</div></div>
-                <div class="trust-card animate delay-1"><div class="trust-icon b">🤖</div><div class="trust-num">AI</div><div class="trust-label">자동 최적화</div></div>
-                <div class="trust-card animate delay-2"><div class="trust-icon g">🔄</div><div class="trust-num">365일</div><div class="trust-label">리타겟팅</div></div>
-                <div class="trust-card animate delay-3"><div class="trust-icon o">⭐</div><div class="trust-num">82%</div><div class="trust-label">자진 연장률</div></div>
-            </div>
+      <div class="explain-block">
+        <div class="explain-header">
+          <div class="explain-num">2</div>
+          <h2 class="explain-title">1km부터 해외까지 정밀 타겟팅</h2>
+          <p class="explain-desc">원하는 지역의 고객에게만 광고비를 씁니다</p>
         </div>
-    </section>
-
-    <!-- AI 작동원리 -->
-    <section class="how-it-works" id="features">
-        <div class="container">
-            <div class="sec-head animate">
-                <div class="sec-label">🤖 How it Works</div>
-                <h2 class="sec-title">AI 광고는 <span class="gr">이렇게</span> 작동합니다</h2>
-                <p class="sec-desc">복잡한 광고, 레브런이 알아서 다 해드립니다</p>
+        <div class="explain-grid reverse">
+          <div>
+            <div class="target-visual">
+              <div class="target-map">
+                <div class="target-center"><i data-lucide="store"></i></div>
+                <div class="target-ring"></div>
+                <div class="target-ring"></div>
+                <div class="target-ring"></div>
+                <div class="target-person"><i data-lucide="user"></i></div>
+                <div class="target-person"><i data-lucide="user"></i></div>
+                <div class="target-person"><i data-lucide="user"></i></div>
+                <div class="target-person"><i data-lucide="user"></i></div>
+              </div>
             </div>
-            <div class="steps">
-                <div class="step animate">
-                    <div class="step-num">1</div>
-                    <h4>매장 분석</h4>
-                    <p>업종, 위치, 타겟 고객<br>분석 후 전략 수립</p>
-                </div>
-                <div class="step animate delay-1">
-                    <div class="step-num">2</div>
-                    <h4>AI 최적화</h4>
-                    <p>AI가 반응 좋은<br>고객층 자동 분석</p>
-                </div>
-                <div class="step animate delay-2">
-                    <div class="step-num">3</div>
-                    <h4>정밀 노출</h4>
-                    <p>분석된 데이터로<br>최적 고객에게 노출</p>
-                </div>
-                <div class="step animate delay-3">
-                    <div class="step-num">4</div>
-                    <h4>성과 분석</h4>
-                    <p>실시간 리포트로<br>성과 확인</p>
-                </div>
-            </div>
+            <p class="target-label">반경 1km ~ 해외까지 설정 가능</p>
+          </div>
+          <div class="flow">
+            <div class="flow-step"><div class="flow-icon"><i data-lucide="map-pin"></i></div><div class="flow-text"><h4>위치 설정</h4><p>매장 반경 1km부터 해외까지</p></div></div>
+            <div class="flow-step"><div class="flow-icon"><i data-lucide="users"></i></div><div class="flow-text"><h4>관심사 필터</h4><p>업종 관련 관심사만 타겟팅</p></div></div>
+            <div class="flow-step"><div class="flow-icon"><i data-lucide="clock"></i></div><div class="flow-text"><h4>시간대 설정</h4><p>영업시간에 집중 노출</p></div></div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- 솔루션 -->
-    <section class="solution">
-        <div class="container">
-            <div class="sec-head animate">
-                <div class="sec-label">✨ Solution</div>
-                <h2 class="sec-title">레브런이 <span class="gr">해결</span>해 드립니다</h2>
-                <p class="sec-desc">META AI가 관심 가질 고객을 자동으로 찾아갑니다</p>
-            </div>
-            <div class="sol-grid">
-                <div class="sol-card animate"><div class="sol-icon p">🎯</div><h3>정밀 타겟팅</h3><p>반경 1km부터 설정 가능<br>원하는 지역 고객만 공략</p></div>
-                <div class="sol-card animate delay-1"><div class="sol-icon b">🤖</div><h3>AI 자동 최적화</h3><p>구매 확률 높은 고객을<br>AI가 자동으로 발굴</p></div>
-                <div class="sol-card animate delay-2"><div class="sol-icon y">🔄</div><h3>365일 리타겟팅</h3><p>관심 보인 고객에게<br>지속적으로 재노출</p></div>
-            </div>
+      <div class="explain-block">
+        <div class="explain-header">
+          <div class="explain-num">3</div>
+          <h2 class="explain-title">한 번 본 고객, 끝까지 따라갑니다</h2>
+          <p class="explain-desc">네이버에서 검색한 고객, 인스타에서 다시 만납니다</p>
         </div>
-    </section>
-
-    <!-- 후기 -->
-    <section class="reviews">
-        <div class="container">
-            <div class="sec-head animate">
-                <div class="sec-label">💬 Reviews</div>
-                <h2 class="sec-title">실제 <span class="gr">광고주</span> 후기</h2>
-                <p class="sec-desc">레브런과 함께한 사장님들의 솔직한 이야기</p>
+        <div class="explain-grid">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-platform"><i data-lucide="search"></i> 네이버</div>
+              <h4 class="timeline-title">고객이 "강남 맛집" 검색</h4>
+              <p class="timeline-desc">우리 가게에 관심을 보임</p>
             </div>
-            <div class="review-slider animate">
-                <div class="review-track" id="reviewTrack">
-                    <div class="review-card">
-                        <div class="review-content">처음엔 반신반의했어요.<br>근데 두 달차부터 인스타 DM 예약 문의가 확실히 늘었습니다.<br>이제 DM 확인하는 게 일상이 됐어요.</div>
-                        <div class="review-author"><div class="review-avatar">김</div><div class="review-info"><h5>김** 대표님</h5><span>수원 피부관리실</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">광고 세팅이나 관리에 신경 쓸 시간이 없었는데,<br>맡기고 나니까 편하더라고요.<br>리포트도 주기적으로 와서 좋았습니다.</div>
-                        <div class="review-author"><div class="review-avatar">이</div><div class="review-info"><h5>이** 원장님</h5><span>분당 필라테스</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">큰 기대 없이 시작했는데 재계약했습니다.<br>근처 고객한테만 노출되니까<br>실제 방문으로 이어지는 비율이 높아요.</div>
-                        <div class="review-author"><div class="review-avatar">박</div><div class="review-info"><h5>박** 대표님</h5><span>대구 네일샵</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">헤어샵은 단골이 중요한데,<br>광고로 온 신규 손님 중 단골 된 분들이 꽤 있어요.<br>계속 오시는 분들이 생기니까 뿌듯합니다.</div>
-                        <div class="review-author"><div class="review-avatar">최</div><div class="review-info"><h5>최** 실장님</h5><span>부산 헤어샵</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">시술 사진으로 광고 만들어주시니까<br>따로 준비할 것도 없었어요.<br>강남이라 경쟁 심한데도 문의가 꾸준합니다.</div>
-                        <div class="review-author"><div class="review-avatar">정</div><div class="review-info"><h5>정** 원장님</h5><span>강남 속눈썹</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">신규 고객 유치가 어려웠는데,<br>광고 시작하고 20대 고객이 많이 늘었어요.<br>인스타 보고 왔다는 분들이 확실히 많아졌습니다.</div>
-                        <div class="review-author"><div class="review-avatar">한</div><div class="review-info"><h5>한** 대표님</h5><span>인천 왁싱샵</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">PT샵은 가격대가 있어서 걱정했는데,<br>관심 있는 사람한테만 노출되니까<br>상담 전환율이 높아요. 헛돈 쓰는 느낌 없습니다.</div>
-                        <div class="review-author"><div class="review-avatar">강</div><div class="review-info"><h5>강** 트레이너</h5><span>일산 PT샵</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">골목 안쪽이라 홍보가 어려웠는데,<br>반경 타겟팅으로 동네 주민들한테 노출되니까<br>이제 위치 설명 안 해도 찾아오세요.</div>
-                        <div class="review-author"><div class="review-avatar">윤</div><div class="review-info"><h5>윤** 원장님</h5><span>대전 요가원</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">크로스핏은 마니아층이 있어서 타겟팅이 중요한데,<br>운동 관심사 타겟팅이 잘 맞았어요.<br>체험 신청이 늘고 등록률도 괜찮습니다.</div>
-                        <div class="review-author"><div class="review-avatar">조</div><div class="review-info"><h5>조** 코치님</h5><span>광주 크로스핏</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">골목에 있어서 유동인구가 적었는데,<br>인스타 광고 보고 일부러 찾아오시는 분들이 생겼어요.<br>예쁜 카페 찾는 분들한테 노출이 잘 되는 것 같아요.</div>
-                        <div class="review-author"><div class="review-avatar">서</div><div class="review-info"><h5>서** 사장님</h5><span>홍대 카페</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">음식 사진 잘 뽑아서 광고해주시니까 반응이 좋아요.<br>주말 예약이 늘었고,<br>인스타 태그하는 손님들도 많아졌습니다.</div>
-                        <div class="review-author"><div class="review-avatar">임</div><div class="review-info"><h5>임** 사장님</h5><span>이태원 맛집</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">술집은 저녁 시간대가 중요한데,<br>퇴근 시간에 집중 노출하니까 효율이 좋아요.<br>금요일 저녁 예약이 확실히 늘었습니다.</div>
-                        <div class="review-author"><div class="review-avatar">신</div><div class="review-info"><h5>신** 대표님</h5><span>강남 술집</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">동네 장사가 기본인데,<br>반경 2km 타겟팅 하니까 진짜 근처 분들만 오세요.<br>단골이 늘어나는 느낌이에요.</div>
-                        <div class="review-author"><div class="review-avatar">권</div><div class="review-info"><h5>권** 사장님</h5><span>판교 베이커리</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">기념일 수요가 많은데,<br>리타겟팅으로 한 번 본 사람한테 다시 노출되니까<br>기념일 때 생각나서 주문하시는 분들이 있어요.</div>
-                        <div class="review-author"><div class="review-avatar">오</div><div class="review-info"><h5>오** 대표님</h5><span>서울 꽃집</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">시험 시즌이 중요한데,<br>대학가 타겟팅으로 학생들한테 잘 노출되더라고요.<br>중간고사, 기말고사 시즌에 이용률이 확 올랐습니다.</div>
-                        <div class="review-author"><div class="review-avatar">장</div><div class="review-info"><h5>장** 대표님</h5><span>건대 스터디카페</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">동물병원은 신뢰가 중요한데,<br>꾸준히 노출되니까 동네에서 인지도가 생긴 것 같아요.<br>인스타에서 봤다고 하시는 분들이 많습니다.</div>
-                        <div class="review-author"><div class="review-avatar">유</div><div class="review-info"><h5>유** 원장님</h5><span>분당 동물병원</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">날씨 영향을 많이 받는데,<br>맑은 날 집중 노출 같은 세팅이 가능해서 좋았어요.<br>비 온 다음 날 예약이 많이 들어옵니다.</div>
-                        <div class="review-author"><div class="review-avatar">황</div><div class="review-info"><h5>황** 대표님</h5><span>용인 세차장</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">인테리어는 단가가 높아서<br>한 건만 성사돼도 광고비가 뽑히거든요.<br>3개월에 2건 계약, 충분히 만족합니다.</div>
-                        <div class="review-author"><div class="review-avatar">안</div><div class="review-info"><h5>안** 실장님</h5><span>서울 인테리어</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">사진관은 시즌이 있는데,<br>졸업 시즌 전에 미리 광고 돌리니까 예약이 빨리 찼어요.<br>타이밍 맞춰서 조절해주시는 것도 좋았습니다.</div>
-                        <div class="review-author"><div class="review-avatar">송</div><div class="review-info"><h5>송** 작가님</h5><span>부산 사진관</span></div></div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-content">학원은 학부모 타겟이 중요한데,<br>30~40대 학부모 타겟팅이 정확하더라고요.<br>상담 문의가 늘고 실제 등록도 많아졌습니다.</div>
-                        <div class="review-author"><div class="review-avatar">배</div><div class="review-info"><h5>배** 원장님</h5><span>대치동 학원</span></div></div>
-                    </div>
-                </div>
-                <div class="review-nav" id="reviewNav"></div>
-                <div class="review-arrows">
-                    <div class="review-arrow" onclick="prevReview()">←</div>
-                    <div class="review-arrow" onclick="nextReview()">→</div>
-                </div>
+            <div class="timeline-item">
+              <div class="timeline-platform"><i data-lucide="instagram"></i> 인스타그램</div>
+              <h4 class="timeline-title">피드에서 우리 광고 발견</h4>
+              <p class="timeline-desc">AI가 관심 고객에게 재노출</p>
             </div>
+            <div class="timeline-item">
+              <div class="timeline-platform"><i data-lucide="facebook"></i> 페이스북</div>
+              <h4 class="timeline-title">또 한번 리마인드</h4>
+              <p class="timeline-desc">결국 방문 또는 예약!</p>
+            </div>
+          </div>
+          <div class="result-box">
+            <i data-lucide="refresh-cw"></i>
+            <h4>365일 리타겟팅</h4>
+            <p>관심 보인 고객을 끝까지 따라갑니다</p>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- 비교 -->
-    <section class="compare">
-        <div class="container">
-            <div class="sec-head animate">
-                <div class="sec-label">⚡ Compare</div>
-                <h2 class="sec-title">직접 운영 vs 레브런 운영</h2>
-                <p class="sec-desc">전문가에게 맡기면 이렇게 달라집니다</p>
-            </div>
-            <div class="comp-wrap animate">
-                <div class="comp-col before">
-                    <div class="comp-head"><span class="em">😰</span><h3>직접 운영할 때</h3><p>인스타그램 앱으로 직접 운영</p></div>
-                    <ul class="comp-list">
-                        <li><span class="ck">✕</span> 지역 설정 '시' 단위만 가능</li>
-                        <li><span class="ck">✕</span> 관심사 타겟팅 불가</li>
-                        <li><span class="ck">✕</span> 리타겟팅 기능 없음</li>
-                        <li><span class="ck">✕</span> 유사 타겟 설정 불가</li>
-                        <li><span class="ck">✕</span> 시간/요일 설정 불가</li>
-                        <li><span class="ck">✕</span> 성과 분석 어려움</li>
-                    </ul>
-                </div>
-                <div class="comp-vs"><div class="vs">VS</div></div>
-                <div class="comp-col after">
-                    <div class="comp-head"><span class="em">😊</span><h3>레브런에 맡기면</h3><p>META 비즈니스 시스템 활용</p></div>
-                    <ul class="comp-list">
-                        <li><span class="ck">✓</span> <strong>반경 1km</strong>부터 정밀 설정</li>
-                        <li><span class="ck">✓</span> 매장 관련 <strong>관심사 타겟팅</strong></li>
-                        <li><span class="ck">✓</span> <strong>365일</strong> 맞춤 리타겟팅</li>
-                        <li><span class="ck">✓</span> <strong>유사 고객</strong> 자동 발굴</li>
-                        <li><span class="ck">✓</span> 원하는 <strong>시간/요일</strong> 설정</li>
-                        <li><span class="ck">✓</span> <strong>실시간</strong> 성과 리포트</li>
-                    </ul>
-                </div>
-            </div>
+  <!-- 문제 섹션 -->
+  <section class="problem">
+    <div class="section-inner">
+      <p class="section-eyebrow">지금 이 순간에도</p>
+      <h2 class="section-title">경쟁 업체에 고객을 뺏기고 있습니다</h2>
+      <p class="section-desc">사장님만 광고 안 하고 계신 거 아니죠?</p>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon"><i data-lucide="help-circle"></i></div>
+          <div class="problem-text"><h3>광고 설정이 어려워요</h3><p>복잡한 시스템, 뭘 어떻게 해야 할지 모르겠어요</p></div>
         </div>
-    </section>
-
-    <!-- 가격 -->
-    <section class="pricing">
-        <div class="container">
-            <div class="sec-head animate">
-                <div class="sec-label">💰 Pricing</div>
-                <h2 class="sec-title">투명한 <span class="gr">광고 비용</span></h2>
-                <p class="sec-desc">숨겨진 비용 없이 월 정액으로 운영합니다</p>
-            </div>
-            <div class="price-card animate">
-                <div class="price-badge">🔥 인기 플랜</div>
-                <div class="price-amt"><span class="num">20</span><span class="unit">만원 / 월</span></div>
-                <ul class="price-list">
-                    <li><span class="ck">✓</span> 광고비 포함</li>
-                    <li><span class="ck">✓</span> 콘텐츠 제작비 포함</li>
-                    <li><span class="ck">✓</span> 릴스 제작비 지원</li>
-                    <li><span class="ck">✓</span> 실시간 리포트 제공</li>
-                    <li><span class="ck">✓</span> 담당 매니저 1:1 케어</li>
-                </ul>
-                <a href="https://open.kakao.com/o/g603Kp8h" target="_blank" class="btn btn-gr">지금 시작하기</a>
-            </div>
+        <div class="problem-card">
+          <div class="problem-icon"><i data-lucide="wallet"></i></div>
+          <div class="problem-text"><h3>돈만 날리는 것 같아요</h3><p>광고비는 나가는데 효과가 있는지 모르겠어요</p></div>
         </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta">
-        <div class="container">
-            <h2 class="animate">지금 바로 상담받으세요</h2>
-            <p class="animate">전화 또는 카카오톡으로 편하게 문의해주세요</p>
-            <div class="contact-grid animate">
-                <div class="contact-card">
-                    <div class="contact-role">전문 마케터</div>
-                    <div class="contact-num">010-5118-1498</div>
-                    <div class="contact-btns">
-                        <a href="tel:010-5118-1498" class="c-btn call">📞 전화하기</a>
-                        <a href="https://open.kakao.com/o/g603Kp8h" target="_blank" class="c-btn kakao">💬 카톡상담</a>
-                    </div>
-                </div>
-                <div class="contact-card">
-                    <div class="contact-role">영상에 나온 담당자</div>
-                    <div class="contact-num">010-2494-2581</div>
-                    <div class="contact-btns">
-                        <a href="tel:010-2494-2581" class="c-btn call">📞 전화하기</a>
-                        <a href="https://open.kakao.com/o/g603Kp8h" target="_blank" class="c-btn kakao">💬 카톡상담</a>
-                    </div>
-                </div>
-            </div>
+        <div class="problem-card">
+          <div class="problem-icon"><i data-lucide="clock"></i></div>
+          <div class="problem-text"><h3>시간이 없어요</h3><p>가게 운영하기도 바빠서 신경 쓸 여유가 없어요</p></div>
         </div>
-    </section>
+        <div class="problem-card">
+          <div class="problem-icon"><i data-lucide="trending-down"></i></div>
+          <div class="problem-text"><h3>손님이 줄었어요</h3><p>예전만큼 안 오는데 뭘 해야 할지 모르겠어요</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- 푸터 -->
-    <footer class="footer">
-        <div class="footer-brand">REVRUN</div>
-        <p>© 2025 REVRUN. All rights reserved.</p>
-    </footer>
+  <!-- 솔루션 -->
+  <section class="solution">
+    <div class="section-inner">
+      <p class="section-eyebrow">Solution</p>
+      <h2 class="section-title">레브런이 전부 해결해 드립니다</h2>
+      <p class="section-desc">META AI가 관심 있는 고객을 자동으로 찾아 광고합니다</p>
+      <div class="solution-grid">
+        <div class="solution-card">
+          <div class="solution-icon"><i data-lucide="target"></i></div>
+          <h3>정밀 타겟팅</h3>
+          <p>반경 1km부터 해외까지 설정 가능. 원하는 지역 고객만 정확히 공략합니다.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon"><i data-lucide="cpu"></i></div>
+          <h3>AI 자동 최적화</h3>
+          <p>구매 확률 높은 고객을 AI가 자동으로 발굴하고 노출합니다.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon"><i data-lucide="refresh-cw"></i></div>
+          <h3>365일 리타겟팅</h3>
+          <p>한 번 관심 보인 고객에게 지속적으로 재노출합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+  <!-- 비교 -->
+  <section class="compare">
+    <div class="section-inner">
+      <p class="section-eyebrow">Compare</p>
+      <h2 class="section-title">직접 운영 vs 레브런</h2>
+      <p class="section-desc">전문가에게 맡기면 이렇게 달라집니다</p>
+      <div class="compare-grid">
+        <div class="compare-card bad">
+          <div class="compare-header">
+            <span class="compare-badge">직접 운영</span>
+            <span class="compare-title">인스타 앱으로 할 때</span>
+          </div>
+          <ul class="compare-list">
+            <li><i data-lucide="x"></i> 지역 설정 '시' 단위만 가능</li>
+            <li><i data-lucide="x"></i> 관심사 타겟팅 불가</li>
+            <li><i data-lucide="x"></i> 리타겟팅 기능 없음</li>
+            <li><i data-lucide="x"></i> 유사 타겟 설정 불가</li>
+            <li><i data-lucide="x"></i> 시간/요일 설정 불가</li>
+          </ul>
+        </div>
+        <div class="compare-card good">
+          <div class="compare-header">
+            <span class="compare-badge">REVRUN</span>
+            <span class="compare-title">레브런에 맡기면</span>
+          </div>
+          <ul class="compare-list">
+            <li><i data-lucide="check"></i> 반경 <strong>1km ~ 해외까지</strong></li>
+            <li><i data-lucide="check"></i> 매장 관련 <strong>관심사 타겟팅</strong></li>
+            <li><i data-lucide="check"></i> <strong>365일</strong> 맞춤 리타겟팅</li>
+            <li><i data-lucide="check"></i> <strong>유사 고객</strong> 자동 발굴</li>
+            <li><i data-lucide="check"></i> 원하는 <strong>시간/요일</strong> 설정</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        let currentReview = 0;
-        const totalReviews = 20;
-        const track = document.getElementById('reviewTrack');
-        const nav = document.getElementById('reviewNav');
+  <!-- 후기 -->
+  <section class="reviews">
+    <div class="section-inner">
+      <p class="section-eyebrow">Reviews</p>
+      <h2 class="section-title">82%가 자진 연장하는 이유</h2>
+      <p class="section-desc">실제 사장님들의 솔직한 후기입니다</p>
+      <div class="reviews-track-wrap">
+        <div class="reviews-track" id="reviewsTrack">
+          <div class="review-card"><p class="review-text">"처음엔 반신반의했어요. 근데 두 달차부터 인스타 DM 예약 문의가 확실히 늘었습니다."</p><div class="review-author"><div class="review-avatar">김</div><div class="review-info"><h4>김** 대표님</h4><span>수원 피부관리실</span></div></div></div>
+          <div class="review-card"><p class="review-text">"광고 세팅이나 관리에 신경 쓸 시간이 없었는데, 맡기고 나니까 진짜 편하더라고요."</p><div class="review-author"><div class="review-avatar">이</div><div class="review-info"><h4>이** 원장님</h4><span>분당 필라테스</span></div></div></div>
+          <div class="review-card"><p class="review-text">"큰 기대 없이 시작했는데 재계약했습니다. 근처 고객한테만 노출되니까 실제 방문이 높아요."</p><div class="review-author"><div class="review-avatar">박</div><div class="review-info"><h4>박** 대표님</h4><span>대구 네일샵</span></div></div></div>
+          <div class="review-card"><p class="review-text">"헤어샵은 단골이 중요한데, 광고로 온 신규 손님 중 단골 된 분들이 꽤 있어요."</p><div class="review-author"><div class="review-avatar">최</div><div class="review-info"><h4>최** 실장님</h4><span>부산 헤어샵</span></div></div></div>
+          <div class="review-card"><p class="review-text">"시술 사진으로 광고 만들어주시니까 따로 준비할 것도 없었어요. 문의가 꾸준합니다."</p><div class="review-author"><div class="review-avatar">정</div><div class="review-info"><h4>정** 원장님</h4><span>강남 속눈썹</span></div></div></div>
+          <div class="review-card"><p class="review-text">"신규 고객 유치가 어려웠는데, 광고 시작하고 20대 고객이 많이 늘었어요."</p><div class="review-author"><div class="review-avatar">한</div><div class="review-info"><h4>한** 대표님</h4><span>인천 왁싱샵</span></div></div></div>
+          <div class="review-card"><p class="review-text">"PT샵은 가격대가 있어서 걱정했는데, 관심 있는 사람한테만 노출되니까 전환율이 높아요."</p><div class="review-author"><div class="review-avatar">강</div><div class="review-info"><h4>강** 트레이너</h4><span>일산 PT샵</span></div></div></div>
+          <div class="review-card"><p class="review-text">"골목 안쪽이라 홍보가 어려웠는데, 반경 타겟팅으로 동네 주민들한테 노출되니까 좋아요."</p><div class="review-author"><div class="review-avatar">윤</div><div class="review-info"><h4>윤** 원장님</h4><span>대전 요가원</span></div></div></div>
+          <div class="review-card"><p class="review-text">"크로스핏은 마니아층이 있어서 타겟팅이 중요한데, 운동 관심사 타겟팅이 잘 맞았어요."</p><div class="review-author"><div class="review-avatar">조</div><div class="review-info"><h4>조** 코치님</h4><span>광주 크로스핏</span></div></div></div>
+          <div class="review-card"><p class="review-text">"골목에 있어서 유동인구가 적었는데, 인스타 광고 보고 일부러 찾아오시는 분들이 생겼어요."</p><div class="review-author"><div class="review-avatar">서</div><div class="review-info"><h4>서** 사장님</h4><span>홍대 카페</span></div></div></div>
+          <div class="review-card"><p class="review-text">"음식 사진 잘 뽑아서 광고해주시니까 반응이 좋아요. 주말 예약이 늘었습니다."</p><div class="review-author"><div class="review-avatar">임</div><div class="review-info"><h4>임** 사장님</h4><span>이태원 맛집</span></div></div></div>
+          <div class="review-card"><p class="review-text">"술집은 저녁 시간대가 중요한데, 퇴근 시간에 집중 노출하니까 효율이 좋아요."</p><div class="review-author"><div class="review-avatar">신</div><div class="review-info"><h4>신** 대표님</h4><span>강남 술집</span></div></div></div>
+        </div>
+      </div>
+      <div class="reviews-dots" id="reviewsDots"></div>
+    </div>
+  </section>
 
-        for(let i = 0; i < totalReviews; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'review-dot' + (i === 0 ? ' active' : '');
-            dot.onclick = () => goToReview(i);
-            nav.appendChild(dot);
-        }
+  <!-- 가격 -->
+  <section class="pricing">
+    <div class="section-inner">
+      <p class="section-eyebrow">Pricing</p>
+      <h2 class="section-title">단순하고 투명한 가격</h2>
+      <p class="section-desc">숨겨진 비용 없이 월 정액으로 운영합니다</p>
+      <div class="pricing-card">
+        <div class="pricing-tag">ALL INCLUSIVE</div>
+        <div class="pricing-amount">20만원</div>
+        <div class="pricing-period">월 / 부가세 별도</div>
+        <ul class="pricing-features">
+          <li><i data-lucide="check"></i> 광고비 포함</li>
+          <li><i data-lucide="check"></i> 콘텐츠 제작비 포함</li>
+          <li><i data-lucide="check"></i> 릴스 제작비 지원</li>
+          <li><i data-lucide="check"></i> 실시간 리포트 제공</li>
+          <li><i data-lucide="check"></i> 전담 매니저 1:1 케어</li>
+        </ul>
+        <a href="https://open.kakao.com/o/g603Kp8h" class="pricing-cta" target="_blank">지금 시작하기</a>
+      </div>
+    </div>
+  </section>
 
-        function updateSlider() {
-            track.style.transform = `translateX(-${currentReview * 100}%)`;
-            document.querySelectorAll('.review-dot').forEach((dot, i) => {
-                dot.className = 'review-dot' + (i === currentReview ? ' active' : '');
-            });
-        }
+  <!-- CTA -->
+  <section class="cta">
+    <h2 class="cta-title">아직 고민 중이신가요?</h2>
+    <p class="cta-desc">무료 상담 먼저 받아보세요. 부담 없습니다.</p>
+    <div class="cta-buttons">
+      <a href="tel:010-5118-1498" class="cta-btn secondary"><i data-lucide="phone"></i> 전화 상담</a>
+      <a href="https://open.kakao.com/o/g603Kp8h" class="cta-btn primary" target="_blank"><i data-lucide="message-circle"></i> 카톡 상담</a>
+    </div>
+    <div class="cta-contacts">
+      <div class="cta-contact"><div class="cta-contact-label">전문 마케터</div><div class="cta-contact-num">010-5118-1498</div></div>
+      <div class="cta-contact"><div class="cta-contact-label">영상 담당자</div><div class="cta-contact-num">010-2494-2581</div></div>
+    </div>
+  </section>
 
-        function nextReview() {
-            currentReview = (currentReview + 1) % totalReviews;
-            updateSlider();
-        }
+  <footer class="footer"><p class="footer-text">© 2025 REVRUN. All rights reserved.</p></footer>
 
-        function prevReview() {
-            currentReview = (currentReview - 1 + totalReviews) % totalReviews;
-            updateSlider();
-        }
-
-        function goToReview(index) {
-            currentReview = index;
-            updateSlider();
-        }
-
-        setInterval(nextReview, 5000);
-    </script>
-</body>
-</html>
+  <script>
+    lucide.createIcons();
+    
+    // 후기 슬라이더
+    const track = document.getElementById('reviewsTrack');
+    const dotsWrap = document.getElementById('reviewsDots');
+    const cards = track.querySelectorAll('.review-card');
+    let idx = 0, startX = 0, autoSlide;
+    
+    function getVisible() {
+      return Math.floor(track.parentElement.offsetWidth / (cards[0].offsetWidth + 16)) || 1;
+    }
+    function makeDots() {
+      dotsWrap.innerHTML = '';
+      const total = Math.ceil(cards.length / getVisible());
+      for (let i = 0; i < Math.min(total, 8); i++) {
+        const dot = document.createElement('div');
+        dot.className = 'reviews-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => goTo(i);
+        dotsWrap.appendChild(dot);
+      }
+    }
+    function updateDots() {
+      dotsWrap.querySelectorAll('.reviews-dot').forEach((d, i) => 
+        d.classList.toggle('active', i === Math.min(idx, dotsWrap.children.length - 1))
+      );
+    }
+    function goTo(i) {
+      const cardW = cards[0].offsetWidth + 16;
+      idx = Math.max(0, Math.min(i, cards.length - getVisible()));
+      track.style.transform = 'translateX(-' + (idx * cardW) + 'px)';
+      updateDots();
+    }
+    function next() {
+      idx = idx >= cards.length - getVisible() ? 0 : idx + 1;
+      goTo(idx);
+    }
+    function startAuto() { autoSlide = setInterval(next, 4000); }
+    function stopAuto() { clearInterval(autoSlide); }
+    
+    track.onmousedown = e => { startX = e.pageX; stopAuto(); };
+    track.onmouseup = e => { 
+      const diff = startX - e.pageX;
+      if (Math.abs(diff) > 50) diff > 0 ? next() : idx > 0 && goTo(idx - 1);
+      startAuto();
+    };
+    track.ontouchstart = e => { startX = e.touches[0].pageX; stopAuto(); };
+    track.ontouchend = e => {
+      const diff = startX - e.changedTouches[0].pageX;
+      if (Math.abs(diff) > 50) diff > 0 ? next() : idx > 0 && goTo(idx - 1);
+      startAuto();
+    };
+    
+    makeDots();
+    startAuto();
+    window.onresize = () => { makeDots(); goTo(idx); };
+  </script>
 </body>
 </html>
