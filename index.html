@@ -71,12 +71,8 @@
     .stats{padding:80px 24px;background:var(--navy);color:#fff}
     .stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
     .stat{text-align:center;padding:24px 16px}
-    .stat-icon{font-size:32px;margin-bottom:16px}
-    .stat-icon.blue{color:#60a5fa}
-    .stat-icon.green{color:#34d399}
-    .stat-icon.orange{color:#fb923c}
-    .stat-value{font-size:clamp(40px,10vw,64px);font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:8px}
-    .stat-label{font-size:15px;color:rgba(255,255,255,.7);font-weight:600}
+    .stat-label{font-size:15px;color:rgba(255,255,255,.7);font-weight:600;margin-bottom:12px}
+    .stat-value{font-size:clamp(40px,10vw,64px);font-weight:800;letter-spacing:-2px;line-height:1}
 
     /* SECTION COMMON */
     section{padding:100px 24px}
@@ -299,9 +295,8 @@
       .stats{padding:60px 16px}
       .stats-inner{gap:8px}
       .stat{padding:16px 4px}
-      .stat-icon{font-size:24px;margin-bottom:10px}
+      .stat-label{font-size:12px;margin-bottom:8px}
       .stat-value{font-size:clamp(28px,8vw,40px)}
-      .stat-label{font-size:12px}
       
       .problem-grid{grid-template-columns:1fr 1fr;gap:12px}
       .problem-card{padding:24px 16px}
@@ -352,19 +347,16 @@
   <section class="stats fade-up">
     <div class="stats-inner">
       <div class="stat">
-        <div class="stat-icon blue"><i class="fa-solid fa-location-crosshairs"></i></div>
-        <div class="stat-value">1km~</div>
         <div class="stat-label">정밀 타겟팅</div>
+        <div class="stat-value">1km~</div>
       </div>
       <div class="stat">
-        <div class="stat-icon green"><i class="fa-solid fa-arrow-rotate-right"></i></div>
-        <div class="stat-value">82%</div>
         <div class="stat-label">자진 연장률</div>
+        <div class="stat-value">82%</div>
       </div>
       <div class="stat">
-        <div class="stat-icon orange"><i class="fa-solid fa-chart-line"></i></div>
-        <div class="stat-value">+63%</div>
         <div class="stat-label">전환율 상승</div>
+        <div class="stat-value">+63%</div>
       </div>
     </div>
   </section>
